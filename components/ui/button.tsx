@@ -15,18 +15,18 @@ const buttonVariants = cva(
           'bg-gray-200 text-neutral-700 border-gray-400 border-2 border-b-4 active:border-b-2 hover:bg-gray-300 text-slate-500',
         primary:
           'bg-lime-400 text-neutral-700 hover:bg-lime-400/80 border-lime-500 border-b-4 active:border-b-0 font-semibold',
-
+        primaryOutline: 'text-lime-400 hover:text-lime-600',
         danger:
           'bg-rose-500 text-primary-foreground hover:bg-rose-500/90 border-rose-600 border-b-4 active:border-b-0',
 
         ghost:
-          'bg-transparent text-slate-500 border-transparent border-0 hover:bg-slate-100',
+          'bg-transparent text-slate-50 border-transparent border-0 hover:text-slate-400',
       },
 
       size: {
         default: 'h-11 px-4 py-2',
         sm: 'h-9 px-3',
-        lg: 'h-12 px-8',
+        lg: 'h-11 px-12',
         icon: 'h-10 w-10',
         rounded: 'rounded-full',
       },

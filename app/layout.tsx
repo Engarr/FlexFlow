@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Baloo_2 } from 'next/font/google';
 import './globals.css';
 import { ClerkProvider } from '@clerk/nextjs';
+import Header from './header';
+import Footer from './footer';
 
 const baloo = Baloo_2({ subsets: ['latin'] });
 
@@ -18,7 +20,13 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang='en' className='dark'>
-        <body className={baloo.className}>{children}</body>
+        <body className={baloo.className}>
+          <Header />
+          <main className='min-h-[calc(100vh-150px)] max-w-[1440px]  left-1/2 relative -translate-x-1/2'>
+            {children}
+          </main>
+          <Footer />
+        </body>
       </html>
     </ClerkProvider>
   );
