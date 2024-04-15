@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
-
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
@@ -12,12 +11,15 @@ const buttonVariants = cva(
         locked:
           'bg-neutral-200 text-primary-foreground hover:bg-neutral-200/90 border-neutral-400 border-b-4 active:border-b-0',
         default:
-          'bg-gray-200 text-neutral-700 border-gray-400 border-2 border-b-4 active:border-b-2 hover:bg-gray-300 text-slate-500',
+          'bg-gray-200 text-neutral-700 border-gray-400  border-b-4 active:border-b-2 hover:bg-gray-300 text-slate-500',
         primary:
           'bg-lime-400 text-neutral-700 hover:bg-lime-400/80 border-lime-500 border-b-4 active:border-b-0 font-semibold',
         primaryOutline: 'text-lime-400 hover:text-lime-600',
         danger:
           'bg-rose-500 text-primary-foreground hover:bg-rose-500/90 border-rose-600 border-b-4 active:border-b-0',
+
+        sidebarActive:
+          'bg-zinc-800 !text-white border-zinc-700 border-2  border-b-4 active:border-b-2 hover:bg-zinc-700 text-slate-500',
 
         ghost:
           'bg-transparent text-slate-50 border-transparent border-0 hover:text-slate-400',

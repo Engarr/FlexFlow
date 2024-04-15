@@ -12,10 +12,11 @@ import { Loader } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 const Header = () => {
   return (
-    <header className='h-20 w-full lg:max-w-[90%] border-b-2 border-neutral-600 px-4 lg:px-20 relative left-1/2 -translate-x-1/2'>
+    <header className='z-50 h-20 w-full lg:max-w-[90%] border-b-2 border-neutral-600 px-4 lg:px-20 fixed left-1/2 -translate-x-1/2'>
       <div className=' flex items-center justify-between h-full '>
         <SignedOut>
           <LogoButton href='/' />
@@ -33,7 +34,10 @@ const Header = () => {
             </div>
           </SignedIn>
           <SignedOut>
-            <SignInButton mode='modal' afterSignInUrl='/' afterSignUpUrl='/'>
+            <SignInButton
+              mode='modal'
+              afterSignInUrl='/home'
+              afterSignUpUrl='/home'>
               <Button
                 size='lg'
                 variant='ghost'
@@ -50,9 +54,23 @@ const Header = () => {
 
 export default Header;
 
-const LogoButton = ({ href }: { href: string }) => {
+export const LogoButton = ({
+  href,
+  style,
+  size,
+  styleImage,
+}: {
+  href: string;
+  style?: string;
+  styleImage?: string;
+  size?: 'default' | 'sm' | 'lg' | 'icon' | 'rounded' | null | undefined;
+}) => {
   return (
-    <div className='pt-8 pl-4 pb-7 flex items-center gap-x-3 relative'>
+    <div
+      className={cn(
+        ' pt-8 pl-4 pb-7 flex items-center gap-x-3 relative',
+        style
+      )}>
       <Link href={href}>
         <Image
           src='/fist-with-dumbbell-gym.svg'
@@ -60,9 +78,15 @@ const LogoButton = ({ href }: { href: string }) => {
           height={40}
           width={60}
           priority
-          className='rotate-[-45deg] absolute left-[-5%] top-[20%] w-[50px] h-[30px] lg:w-[60px] lg:h-[40px]'
+          className={cn(
+            'rotate-[-45deg] absolute left-[-15%] top-[20%] w-[50px] h-[30px] lg:w-[60px] lg:h-[40px]',
+            styleImage
+          )}
         />
-        <Button size='lg' variant='primary' className='max-sm:h-9 max-sm:px-3'>
+        <Button
+          size={size ? size : 'default'}
+          variant='primary'
+          className='max-sm:h-9 max-sm:px-3'>
           FlexFlow
         </Button>
       </Link>

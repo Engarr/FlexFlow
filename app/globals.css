@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --main-backgroudn: #e1e1e1;
+    --main-background: hsl(0, 0%, 88%);
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
@@ -37,8 +37,9 @@
   }
 
   .dark {
-    --main-backgroudn: #24272c;
-    --background: 222.2 84% 4.9%;
+    --main-background: rgb(37, 40, 45);
+    --second-background: #1e1e1e;
+    --background: 0% 0% 12%;
     --foreground: 210 40% 98%;
 
     --card: 222.2 84% 4.9%;
@@ -74,6 +75,11 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-color: var(--main-backgroudn);
+    background-color: var(--main-background);
   }
+}
+html,
+body,
+:root {
+  @apply h-full;
 }
