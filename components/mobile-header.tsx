@@ -4,7 +4,7 @@ import { LogoButton } from '@/app/(welcome)/header';
 
 const MobileHeader = () => {
   return (
-    <nav className='lg:hidden px-6 h-[60px] flex items-center justify-between  border-b-2 border-neutral-500/50 fixed top-0 w-full z-50 '>
+    <nav className='lg:hidden px-6 h-[60px] flex items-center justify-between  border-b-2 border-neutral-500/50 bg-zinc-800/90 fixed top-0 w-full z-50 '>
       <MobileSlidebar />
       <LogoButton
         href='/'

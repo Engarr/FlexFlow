@@ -18,7 +18,9 @@ export const SidebarItem = ({
   mobileNavHandler,
 }: Props) => {
   const pathname = usePathname();
-  const active = pathname === href;
+  const pathnameElements = pathname.split('/');
+  const active = '/' + pathnameElements[1].toString() === href;
+
   return (
     <Button
       variant={active ? 'sidebarActive' : 'default'}
