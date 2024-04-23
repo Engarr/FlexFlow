@@ -13,6 +13,7 @@ const planSchema = new Schema({
           seriesId: { type: Number, required: true },
           series: { type: Number, required: true },
           weight: { type: Number, required: true },
+          repetitions: { type: Number, required: true },
         },
       ],
     },

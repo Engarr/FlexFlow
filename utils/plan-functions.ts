@@ -7,6 +7,7 @@ type PlanDataType = {
       seriesId: number;
       series: number;
       weight: number;
+      repetitions: number;
     }[];
   }[];
 };
@@ -30,6 +31,7 @@ export const handleAddSeries = (
               seriesId: exercise.seriesData.length + 1,
               series: exercise.seriesData.length + 1,
               weight: 0,
+              repetitions: 10,
             },
           ],
         };
@@ -55,6 +57,7 @@ export const handleRemoveSeries = (
               series: sIdx + 1,
               seriesId: sIdx + 1,
               weight: series.weight,
+              repetitions: series.repetitions,
             })),
         };
       }
@@ -76,7 +79,7 @@ export const handleAddNewExersise = (
       {
         exercisesName: '',
         id: index + 1,
-        seriesData: [{ seriesId: 1, series: 1, weight: 0 }],
+        seriesData: [{ seriesId: 1, series: 1, weight: 0, repetitions: 10 }],
       },
     ],
   }));
@@ -117,6 +120,33 @@ export const onChangeSeriesWeight = (
     }),
   }));
 };
+export const onChangeSeriesRepetitions = (
+  value: string,
+  planId: number,
+  seriesId: number,
+  setPlanData: React.Dispatch<React.SetStateAction<PlanDataType>>
+) => {
+  setPlanData((prevData) => ({
+    ...prevData,
+    exercisesArr: prevData.exercisesArr.map((exercise) => {
+      if (exercise.id === planId) {
+        return {
+          ...exercise,
+          seriesData: exercise.seriesData.map((s) => {
+            if (s.seriesId === seriesId) {
+              return {
+                ...s,
+                repetitions: Number(value),
+              };
+            }
+            return s;
+          }),
+        };
+      }
+      return exercise;
+    }),
+  }));
+};
 export const onChangeExerciseName = (
   name: string,
   planId: number,
@@ -136,9 +166,11 @@ export const onChangeExerciseName = (
   }));
 };
 export const handleRemoveExersise = (
+  e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   exerciseId: number,
   setPlanData: React.Dispatch<React.SetStateAction<PlanDataType>>
 ) => {
+  e.preventDefault();
   setPlanData((prevData) => ({
     ...prevData,
     exercisesArr: prevData.exercisesArr
