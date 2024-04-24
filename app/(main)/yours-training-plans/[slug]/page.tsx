@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import SectionTitle from '@/components/section-title';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-
 import { Button } from '@/components/ui/button';
 import { Trash2 } from 'lucide-react';
 import {
@@ -15,7 +14,9 @@ import {
   onChangePlanName,
   onChangeSeriesRepetitions,
   onChangeSeriesWeight,
+  validateForm,
 } from '@/utils/plan-functions';
+import InputItem from './input-item';
 
 const Page = ({ params }: { params: { slug: string } }) => {
   const [planData, setPlanData] = useState({
@@ -28,9 +29,16 @@ const Page = ({ params }: { params: { slug: string } }) => {
       },
     ],
   });
+  const [errors, setErrors] = useState({
+    planName: '',
+    exercises: [{ exercisesName: '', series: '' }],
+  });
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!validateForm(planData, setErrors)) {
+      return;
+    }
 
     try {
       const response = await fetch('http://localhost:3000/api/add-plan', {
@@ -54,89 +62,103 @@ const Page = ({ params }: { params: { slug: string } }) => {
   return (
     <div className=''>
       <SectionTitle>Add New Plan</SectionTitle>
-      <form className='w-1/2 flex flex-col gap-3 pb-10' onSubmit={onSubmit}>
+      <form
+        className='lg:w-1/2 flex flex-col gap-3 pb-10 px-2 lg:px-0 '
+        onSubmit={onSubmit}>
         <InputItem
           id='planName'
           label='Plan Name:'
           type='text'
           value={planData.planName}
           onChange={(e) => onChangePlanName(e.target.value, setPlanData)}
-          style='mb-2'
+          style='mb-1 lg:mb-2'
+          error={errors.planName}
         />
 
         {planData.exercisesArr.map((plan, i) => (
           <div
             key={i}
-            className='my-2 border-2 border-slate-100/10 p-4 rounded-md'>
-            <div className='flex  items-start justify-between gap-2'>
+            className='my-1 lg:my-2 border-2 border-slate-100/10 p-2 lg:p-4 rounded-md'>
+            <div className='flex items-start justify-between gap-2'>
               <div className='w-full '>
-                <Label htmlFor='planName'>Exercise Name</Label>
-                <Input
+                <InputItem
                   id='planName'
-                  placeholder=''
+                  label='Exercise Name'
                   type='text'
                   value={plan.exercisesName}
                   onChange={(e) =>
                     onChangeExerciseName(e.target.value, plan.id, setPlanData)
                   }
-                  className='mb-2'
+                  style='mb-2'
+                  error={errors.exercises[i]?.exercisesName}
                 />
               </div>
               <Button
                 size='sm'
                 variant='ghost'
-                onClick={(e) => handleRemoveExersise(e, plan.id, setPlanData)}>
+                className='mt-4'
+                onClick={(e) =>
+                  handleRemoveExersise(e, plan.id, setPlanData, setErrors)
+                }>
                 <div>
                   <Trash2 />
                 </div>
               </Button>
             </div>
             <div className='flex flex-col gap-2  px-1  mb-3'>
+              {errors.exercises[i]?.series && (
+                <p className='text-xs text-red-500 w-full text-center mt-5'>
+                  {errors.exercises[i].series}
+                </p>
+              )}
               {planData.exercisesArr[i].seriesData.map(
                 (exercisesSeries, index) => (
                   <div
-                    className='flex gap-2 items-end justify-center'
+                    className='flex gap-2 items-start justify-center '
                     key={index}>
-                    <InputItem
-                      id='series'
-                      label='Series:'
-                      value={exercisesSeries.series}
-                      type='number'
-                      style='disabled:cursor-default disabled:opacity-100'
-                      disabled
-                    />
-                    <InputItem
-                      id='weight'
-                      label='Weight (kg):'
-                      value={exercisesSeries.weight}
-                      type='number'
-                      onChange={(e) =>
-                        onChangeSeriesWeight(
-                          e.target.value,
-                          plan.id,
-                          exercisesSeries.seriesId,
-                          setPlanData
-                        )
-                      }
-                    />
-                    <InputItem
-                      id='repetitions'
-                      label='Repetitions:'
-                      value={exercisesSeries.repetitions}
-                      type='number'
-                      onChange={(e) =>
-                        onChangeSeriesRepetitions(
-                          e.target.value,
-                          plan.id,
-                          exercisesSeries.seriesId,
-                          setPlanData
-                        )
-                      }
-                    />
+                    <div className='flex max-lg:flex-col w-full gap-2'>
+                      <InputItem
+                        id='series'
+                        label='Series:'
+                        value={exercisesSeries.series}
+                        type='number'
+                        style='disabled:cursor-default disabled:opacity-100'
+                        disabled
+                      />
+                      <InputItem
+                        id='weight'
+                        label='Weight (kg):'
+                        value={exercisesSeries.weight}
+                        type='number'
+                        onChange={(e) =>
+                          onChangeSeriesWeight(
+                            e.target.value,
+                            plan.id,
+                            exercisesSeries.seriesId,
+                            setPlanData
+                          )
+                        }
+                      />
+                      <InputItem
+                        id='repetitions'
+                        label='Repetitions:'
+                        value={exercisesSeries.repetitions}
+                        type='number'
+                        onChange={(e) =>
+                          onChangeSeriesRepetitions(
+                            e.target.value,
+                            plan.id,
+                            exercisesSeries.seriesId,
+                            setPlanData
+                          )
+                        }
+                      />
+                    </div>
 
                     <Button
                       size='sm'
                       variant='danger'
+                      className='mt-6 '
                       onClick={() =>
                         handleRemoveSeries(
                           plan.id,
@@ -175,37 +197,3 @@ const Page = ({ params }: { params: { slug: string } }) => {
 };
 
 export default Page;
-
-type inputItemType = {
-  label: string;
-  id: string;
-  value: string | number;
-  type: string;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  style?: string;
-  disabled?: boolean;
-};
-
-const InputItem = ({
-  label,
-  id,
-  value,
-  type,
-  onChange,
-  style,
-  disabled,
-}: inputItemType) => {
-  return (
-    <div>
-      <Label htmlFor={id}>{label}</Label>
-      <Input
-        id={id}
-        className={style}
-        type={type}
-        disabled={disabled}
-        value={value}
-        onChange={onChange}
-      />
-    </div>
-  );
-};

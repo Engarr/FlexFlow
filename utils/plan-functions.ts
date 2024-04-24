@@ -11,7 +11,13 @@ type PlanDataType = {
     }[];
   }[];
 };
-
+type ErrorsType = {
+  planName: string;
+  exercises: {
+    exercisesName: string;
+    series: string;
+  }[];
+};
 export const handleAddSeries = (
   e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   index: number,
@@ -168,7 +174,8 @@ export const onChangeExerciseName = (
 export const handleRemoveExersise = (
   e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   exerciseId: number,
-  setPlanData: React.Dispatch<React.SetStateAction<PlanDataType>>
+  setPlanData: React.Dispatch<React.SetStateAction<PlanDataType>>,
+  setErrors: React.Dispatch<React.SetStateAction<ErrorsType>>
 ) => {
   e.preventDefault();
   setPlanData((prevData) => ({
@@ -180,4 +187,51 @@ export const handleRemoveExersise = (
         id: idx + 1,
       })),
   }));
+  setErrors((prevData) => ({
+    ...prevData,
+    exercises: prevData.exercises.filter((_, idx) => idx + 1 !== exerciseId),
+  }));
+};
+
+export const validateForm = (
+  planData: PlanDataType,
+  setErrors: React.Dispatch<
+    React.SetStateAction<{
+      planName: string;
+      exercises: { exercisesName: string; series: string }[];
+    }>
+  >
+) => {
+  const newErrors = {
+    planName: '',
+    exercises: planData.exercisesArr.map(() => ({
+      exercisesName: '',
+      series: '',
+    })),
+  };
+
+  // Validate Plan Name
+  if (planData.planName.trim() === '') {
+    newErrors.planName = 'Plan Name Is Required';
+  }
+
+  // Validate Exercise Names
+  planData.exercisesArr.forEach((exercise, index) => {
+    if (exercise.exercisesName.trim() === '') {
+      newErrors.exercises[index].exercisesName = 'Exercise Name Is Required';
+    }
+  });
+
+  // Validate at least one Series for each Exercise
+  planData.exercisesArr.forEach((exercise, index) => {
+    if (exercise.seriesData.length === 0) {
+      newErrors.exercises[index].series = 'At least one series is required';
+    }
+  });
+  console.log(newErrors);
+  // Set errors
+  setErrors(newErrors);
+
+  // Check if there are any errors
+  return Object.values(newErrors).every((error) => error === '');
 };
