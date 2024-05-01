@@ -1,4 +1,4 @@
-type PlanDataType = {
+export type PlanDataType = {
   planName: string;
   exercisesArr: {
     exercisesName: string;
@@ -13,6 +13,7 @@ type PlanDataType = {
 };
 type ErrorsType = {
   planName: string;
+  exercisesArr: string;
   exercises: {
     exercisesName: string;
     series: string;
@@ -195,15 +196,11 @@ export const handleRemoveExersise = (
 
 export const validateForm = (
   planData: PlanDataType,
-  setErrors: React.Dispatch<
-    React.SetStateAction<{
-      planName: string;
-      exercises: { exercisesName: string; series: string }[];
-    }>
-  >
+  setErrors: React.Dispatch<React.SetStateAction<ErrorsType>>
 ) => {
   const newErrors = {
     planName: '',
+    exercisesArr: '',
     exercises: planData.exercisesArr.map(() => ({
       exercisesName: '',
       series: '',
@@ -213,6 +210,9 @@ export const validateForm = (
   // Validate Plan Name
   if (planData.planName.trim() === '') {
     newErrors.planName = 'Plan Name Is Required';
+  }
+  if (planData.exercisesArr.length >= 0) {
+    newErrors.exercisesArr = 'At least one exercise is required';
   }
 
   // Validate Exercise Names
@@ -228,10 +228,30 @@ export const validateForm = (
       newErrors.exercises[index].series = 'At least one series is required';
     }
   });
-  console.log(newErrors);
+
   // Set errors
   setErrors(newErrors);
+  console.log(newErrors);
 
-  // Check if there are any errors
-  return Object.values(newErrors).every((error) => error === '');
+  const hasErrors = Object.values(newErrors).some((error) => {
+    if (typeof error === 'string') {
+      return error.trim() !== ''; // Sprawdź, czy łańcuch jest niepusty
+    } else if (Array.isArray(error)) {
+      return error.some((item) => {
+        // Check if item exists and has non-empty exercisesName
+        return (
+          (typeof item === 'object' &&
+            item.exercisesName &&
+            typeof item.exercisesName === 'string' &&
+            item.exercisesName.trim() !== '') ||
+          (item.series &&
+            typeof item.series === 'string' &&
+            item.series.trim() !== '')
+        );
+      });
+    }
+    return false;
+  });
+
+  return hasErrors; // Zwróć true, jeśli istnieją błędy, w przeciwnym razie false
 };

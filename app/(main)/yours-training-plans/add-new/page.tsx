@@ -1,8 +1,6 @@
 'use client';
 import React, { useState } from 'react';
 import SectionTitle from '@/components/section-title';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Trash2 } from 'lucide-react';
 import {
@@ -10,15 +8,19 @@ import {
   handleAddSeries,
   handleRemoveExersise,
   handleRemoveSeries,
-  onChangeExerciseName,
   onChangePlanName,
   onChangeSeriesRepetitions,
   onChangeSeriesWeight,
   validateForm,
 } from '@/utils/plan-functions';
-import InputItem from './input-item';
 
-const Page = ({ params }: { params: { slug: string } }) => {
+import InputItem from './input-item';
+import ExerciseInput from './exercise-input';
+import { useToast } from '@/components/ui/use-toast';
+import ErrorMessage from '@/components/error-message';
+
+const AddNewPlan = () => {
+  const { toast } = useToast();
   const [planData, setPlanData] = useState({
     planName: '',
     exercisesArr: [
@@ -31,12 +33,18 @@ const Page = ({ params }: { params: { slug: string } }) => {
   });
   const [errors, setErrors] = useState({
     planName: '',
+    exercisesArr: '',
     exercises: [{ exercisesName: '', series: '' }],
   });
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validateForm(planData, setErrors)) {
+    if (validateForm(planData, setErrors)) {
+      toast({
+        title: 'Form Validation Error',
+        description: 'Correct Errors In The Form',
+        variant: 'destructive',
+      });
       return;
     }
 
@@ -50,12 +58,22 @@ const Page = ({ params }: { params: { slug: string } }) => {
       });
 
       if (!response.ok) {
+        toast({
+          title: 'Network Error',
+          description: 'Network response was not ok',
+          variant: 'destructive',
+        });
         throw new Error('Network response was not ok');
       }
-
-      console.log('Plan data submitted successfully');
+      toast({
+        title: 'Success!',
+        description: 'Plan Data Submitted Successfully',
+      });
     } catch (error) {
-      console.error('There was an error submitting plan data:', error);
+      toast({
+        title: 'Error',
+        description: `There was an error submitting plan data:${error}`,
+      });
     }
   };
 
@@ -63,7 +81,7 @@ const Page = ({ params }: { params: { slug: string } }) => {
     <div className=''>
       <SectionTitle>Add New Plan</SectionTitle>
       <form
-        className='lg:w-1/2 flex flex-col gap-3 pb-10 px-2 lg:px-0 '
+        className='lg:w-3/4 flex flex-col gap-3 pb-10 px-2 lg:px-0 '
         onSubmit={onSubmit}>
         <InputItem
           id='planName'
@@ -75,28 +93,34 @@ const Page = ({ params }: { params: { slug: string } }) => {
           error={errors.planName}
         />
 
+        {errors.exercisesArr && (
+          <ErrorMessage
+            message={errors.exercisesArr}
+            style='text-base lg:text-xl'
+          />
+        )}
         {planData.exercisesArr.map((plan, i) => (
           <div
             key={i}
-            className='my-1 lg:my-2 border-2 border-slate-100/10 p-2 lg:p-4 rounded-md'>
+            className='my-1 lg:my-2 border-2 border-slate-100/10 p-2 lg:p-4 rounded-md relative'>
+            <p className='absolute top-[-20px] left-[5px] bg-[var(--main-background)] border border-slate-100/10 p-1 rounded-md text-base'>
+              Exercise No.{' '}
+              <span className='text-lime-400 font-bold'>{i + 1}</span>
+            </p>
             <div className='flex items-start justify-between gap-2'>
-              <div className='w-full '>
-                <InputItem
-                  id='planName'
-                  label='Exercise Name'
-                  type='text'
-                  value={plan.exercisesName}
-                  onChange={(e) =>
-                    onChangeExerciseName(e.target.value, plan.id, setPlanData)
-                  }
-                  style='mb-2'
+              <div className='w-full my-2'>
+                <ExerciseInput
                   error={errors.exercises[i]?.exercisesName}
+                  planId={plan.id}
+                  setPlanData={setPlanData}
+                  value={planData.exercisesArr[i].exercisesName}
+                  searchExercise={planData.exercisesArr[i].exercisesName}
                 />
               </div>
               <Button
                 size='sm'
                 variant='ghost'
-                className='mt-4'
+                className='mt-6'
                 onClick={(e) =>
                   handleRemoveExersise(e, plan.id, setPlanData, setErrors)
                 }>
@@ -107,9 +131,7 @@ const Page = ({ params }: { params: { slug: string } }) => {
             </div>
             <div className='flex flex-col gap-2  px-1  mb-3'>
               {errors.exercises[i]?.series && (
-                <p className='text-xs text-red-500 w-full text-center mt-5'>
-                  {errors.exercises[i].series}
-                </p>
+                <ErrorMessage message={errors.exercises[i].series} />
               )}
               {planData.exercisesArr[i].seriesData.map(
                 (exercisesSeries, index) => (
@@ -196,4 +218,4 @@ const Page = ({ params }: { params: { slug: string } }) => {
   );
 };
 
-export default Page;
+export default AddNewPlan;

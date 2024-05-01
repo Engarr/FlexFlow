@@ -18,5 +18,6 @@ const planSchema = new Schema({
       ],
     },
   ],
+  isAppPlan: { type: Boolean, default: true },
 });
 export default mongoose.model('Plan', planSchema);
