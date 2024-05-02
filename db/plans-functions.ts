@@ -1,7 +1,7 @@
 import { PlanDataType } from '@/utils/plan-functions';
 export const QUERY_KEY_PLANS = 'PLANS';
 
-const url = 'http://localhost:3000/api/';
+const url = process.env.NEXT_PUBLIC_APP_API_URL;
 type PropsTypeFetchPlan = {
   userId: string | undefined;
 };
@@ -29,7 +29,7 @@ export async function deletePlan({
   userId: string;
 }) {
   const response = await fetch(
-    `http://localhost:3000/api/plans?planId=${planId}&creatorId=${userId}`,
+    `${url}/plans?planId=${planId}&creatorId=${userId}`,
     {
       method: 'DELETE',
     }
