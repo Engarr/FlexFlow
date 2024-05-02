@@ -23,13 +23,13 @@ const Page = () => {
   return (
     <div>
       <SectionTitle>Eddit Plan</SectionTitle>
-      <PlanForm
+      {/* <PlanForm
         errors={errors}
         onSubmit={onSubmit}
         planData={planData}
         setErrors={setErrors}
         setPlanData={setPlanData}
-      />
+      /> */}
     </div>
   );
 };
