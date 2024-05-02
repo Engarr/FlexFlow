@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { QUERY_KEY_PLANS, deletePlan } from '@/db/plans-functions';
 import { Pencil, Play, Trash2 } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useQueryClient, useMutation } from 'react-query';
 import { toast } from './ui/use-toast';
 import {
@@ -11,7 +11,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 type UserPlanBar = {
   planName: string;
@@ -57,42 +57,64 @@ export const PlanBar = ({ planName, planId, userId }: UserPlanBar) => {
           <p className=' lg:text-xl'>{planName}</p>
         </div>
         <div className='flex gap-2'>
-          <Button size='sm' variant='primary'>
-            <Play size='20px' />
-          </Button>
+          <Link href='/'>
+            <Button size='sm' variant='primary' tabIndex={-1}>
+              <Play size='20px' />
+            </Button>
+          </Link>
           {planId && (
             <Link href={`${pathname}/eddit/${planId}`}>
-              <Button size='sm' asChild>
-                <div>
-                  <Pencil size='20px' />
-                </div>
+              <Button size='sm' tabIndex={-1}>
+                <Pencil size='20px' />
               </Button>
             </Link>
           )}
           {userId && (
-            <Popover onOpenChange={setPopoverIsOpen} open={popoverIsOpen}>
-              <PopoverTrigger>
-                <Button size='sm' variant='danger'>
-                  <Trash2 size='20px' />
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className=' border-slate-100/50 shadow-none'>
-                <div className='flex items-center justify-center flex-col gap-2'>
-                  <p className='text-center'>
-                    Are you sure you want to delete the plan?
-                  </p>
-                  <div className='flex gap-3'>
-                    <Button onClick={removePlan} variant='danger'>
-                      Yes
-                    </Button>
-                    <Button onClick={() => setPopoverIsOpen(false)}>No</Button>
-                  </div>
-                </div>
-              </PopoverContent>
-            </Popover>
+            <DeletBtn
+              popoverIsOpen={popoverIsOpen}
+              setPopoverIsOpen={setPopoverIsOpen}
+              removePlan={removePlan}
+            />
           )}
         </div>
       </div>
     </>
+  );
+};
+
+type DeletBtnProps = {
+  setPopoverIsOpen: Dispatch<SetStateAction<boolean>>;
+  popoverIsOpen: boolean;
+  removePlan: () => Promise<void>;
+};
+
+export const DeletBtn = ({
+  setPopoverIsOpen,
+  popoverIsOpen,
+  removePlan,
+}: DeletBtnProps) => {
+  return (
+    <Popover onOpenChange={setPopoverIsOpen} open={popoverIsOpen}>
+      <PopoverTrigger>
+        <Button size='sm' variant='danger' asChild>
+          <div>
+            <Trash2 size='20px' />
+          </div>
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className=' border-slate-100/50 shadow-none'>
+        <div className='flex items-center justify-center flex-col gap-2'>
+          <p className='text-center'>
+            Are you sure you want to delete the plan?
+          </p>
+          <div className='flex gap-3'>
+            <Button onClick={removePlan} variant='danger'>
+              Yes
+            </Button>
+            <Button onClick={() => setPopoverIsOpen(false)}>No</Button>
+          </div>
+        </div>
+      </PopoverContent>
+    </Popover>
   );
 };
