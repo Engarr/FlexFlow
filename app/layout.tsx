@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     'Achieve, track, and perfect your workout results with FlexFlow!',
 };
 
+
 export default function RootLayout({
   children,
 }: Readonly<{

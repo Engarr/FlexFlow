@@ -1,5 +1,6 @@
 export type PlanDataType = {
   planName: string;
+  creator: string;
   exercisesArr: {
     exercisesName: string;
     id: number;
@@ -11,7 +12,7 @@ export type PlanDataType = {
     }[];
   }[];
 };
-type ErrorsType = {
+export type ErrorsType = {
   planName: string;
   exercisesArr: string;
   exercises: {
@@ -211,7 +212,9 @@ export const validateForm = (
   if (planData.planName.trim() === '') {
     newErrors.planName = 'Plan Name Is Required';
   }
-  if (planData.exercisesArr.length >= 0) {
+
+  // Validate available at least one exercise
+  if (planData.exercisesArr.length === 0) {
     newErrors.exercisesArr = 'At least one exercise is required';
   }
 

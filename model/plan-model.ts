@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 
 const planSchema = new Schema({
   planName: { type: String, required: true },
+  creator: { type: String, required: true },
   exercisesArr: [
     {
       exercisesName: { type: String, required: true },
@@ -20,4 +21,7 @@ const planSchema = new Schema({
   ],
   isAppPlan: { type: Boolean, default: true },
 });
-export default mongoose.model('Plan', planSchema);
+
+const Plan = mongoose.models.Plan || mongoose.model('Plan', planSchema);
+
+export default Plan;
