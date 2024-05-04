@@ -16,10 +16,12 @@ const PlansContent = ({ data }: PropsType) => {
   return (
     <div className='flex flex-col gap-3 mt-6'>
       {data.map((option, i) => (
-        <div className='w-1/2 flex items-center justify-between' key={i}>
-          <Button className='w-1/2'>
-            <Link href={option.href}>{option.title}</Link>
-          </Button>
+        <div
+          className='lg:w-1/2 flex items-center justify-between max-xl:px-3'
+          key={i}>
+          <Link href={option.href}>
+            <Button>{option.title}</Button>
+          </Link>
           <Popover>
             <PopoverTrigger>
               <Button size='sm' asChild className=' '>

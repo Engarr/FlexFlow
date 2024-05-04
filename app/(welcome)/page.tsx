@@ -18,7 +18,7 @@ export default function WelcomeSection() {
         <Image alt='hero' src='/gym.svg' fill />
       </div>
       <div className='flex flex-col items-center gap-y-8'>
-        <h1 className='text-xl lg:text-3xl font-bold text-slate-50 max-w-[480px] text-center'>
+        <h1 className='text-xl lg:text-3xl font-bold text-text max-w-[480px] text-center'>
           Achieve, track, and perfect your workout results with FlexFlow!{' '}
         </h1>
         <div className='flex flex-col items-center ga-y-3 max-w-[330px] w-full'>

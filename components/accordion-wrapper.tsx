@@ -14,7 +14,7 @@ type PropsType = {
 
 const AccordionWrapper = ({ children, title, style }: PropsType) => {
   return (
-    <Accordion type='single' collapsible className='w-full lg:w-1/2 mb-2'>
+    <Accordion type='single' collapsible className='w-full lg:w-1/2 mb-2 '>
       <AccordionItem value='item-1'>
         <AccordionTrigger>{title}</AccordionTrigger>
         <AccordionContent className={cn(`${poppins.className}`, style)}>

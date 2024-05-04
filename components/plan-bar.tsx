@@ -52,7 +52,7 @@ export const PlanBar = ({ planName, planId, userId }: UserPlanBar) => {
   };
   return (
     <>
-      <div className='bg-neutral-700 p-3 rounded-md flex lg:justify-between max-lg:flex-col items-center max-lg:gap-2'>
+      <div className='bg-card p-3 rounded-md flex lg:justify-between max-lg:flex-col items-center max-lg:gap-2 shadow-lg'>
         <div>
           <p className=' lg:text-xl'>{planName}</p>
         </div>

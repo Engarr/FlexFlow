@@ -24,7 +24,7 @@ const ExercisesListItem = ({
   return (
     <div
       key={exerciseName}
-      className='bg-zinc-700 px-2 py-3 flex justify-between items-start max-sm:gap-2 max-sm:flex-col'>
+      className='bg-card shadow-lg rounded-md px-2 py-3 flex justify-between max-sm:gap-2 max-sm:flex-col items-center last-of-type:mb-6'>
       <div>
         <Link href={pathname + '/' + link}>
           <Button size='lg' className='max-md:h-10 max-md:px-3'>
@@ -35,13 +35,15 @@ const ExercisesListItem = ({
       <div className='flex gap-2'>
         <Popover>
           <PopoverTrigger>
-            <Button size='sm' asChild className=' '>
+            <Button size='sm' asChild>
               <div>
                 <ImageIcon className='w-[20px]' />
               </div>
             </Button>
           </PopoverTrigger>
-          <PopoverContent className='bg-transparent border-none shadow-none'>
+          <PopoverContent
+            className='bg-transparent border-none shadow-none '
+            align='end'>
             <div className='relative w-[200px] h-[200px] lg:w-[300px] lg:h-[300px] rounded-md overflow-hidden'>
               <Image
                 src={imageUrl}
@@ -55,7 +57,7 @@ const ExercisesListItem = ({
             </div>
           </PopoverContent>
         </Popover>
-        <Button size='sm' className=' '>
+        <Button size='sm' className=' ' variant='primary'>
           <div>
             <Plus />
           </div>

@@ -5,13 +5,13 @@ import PlansContent from '@/components/plans-content';
 const PlansPage = () => {
   const plansData = [
     {
-      title: 'Choose your own plan',
+      title: 'Choose Your Own Plan',
       info: 'Option allows you to select and manage your plans',
       href: '/yours-training-plans',
     },
     {
-      title: 'Choose a training plan',
-      info: 'Choose a plan from the examples',
+      title: 'Choose A Training Plan',
+      info: 'Choose a plan from the app plans examples',
       href: '',
     },
   ];

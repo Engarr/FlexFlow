@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Baloo_2 } from 'next/font/google';
 import './globals.css';
 import { ClerkProvider } from '@clerk/nextjs';
+import { Providers } from './providers';
 
 const baloo = Baloo_2({ subsets: ['latin'] });
 
@@ -11,7 +12,6 @@ export const metadata: Metadata = {
     'Achieve, track, and perfect your workout results with FlexFlow!',
 };
 
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -19,8 +19,10 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang='en' className='dark'>
-        <body className={baloo.className}>{children}</body>
+      <html lang='en' suppressHydrationWarning>
+        <body className={baloo.className}>
+          <Providers>{children}</Providers>
+        </body>
       </html>
     </ClerkProvider>
   );
