@@ -1,9 +1,12 @@
 'use client';
+import React, { useState } from 'react';
 import PlanForm from '@/components/plan-form/plan-form';
 import SectionTitle from '@/components/section-title';
-import React, { useState } from 'react';
+import { useParams } from 'next/navigation';
 
-const Page = () => {
+const EdditPlan = () => {
+  const { id } = useParams();
+
   const [planData, setPlanData] = useState({
     planName: '',
     exercisesArr: [
@@ -34,4 +37,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default EdditPlan;

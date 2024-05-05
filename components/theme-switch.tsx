@@ -3,8 +3,13 @@ import { useTheme } from 'next-themes';
 
 import { Switch } from './ui/switch';
 import { Label } from './ui/label';
+import { cn } from '@/lib/utils';
 
-export default function ThemeSwitch() {
+type PropsType = {
+  style?: string;
+};
+
+export default function ThemeSwitch({ style }: PropsType) {
   const [mounted, setMounted] = useState(false);
   const { setTheme, resolvedTheme } = useTheme();
 
@@ -17,7 +22,7 @@ export default function ThemeSwitch() {
     }
   };
   return (
-    <div className='flex items-center space-x-2'>
+    <div className={cn('flex items-center space-x-2', style)}>
       <Switch id='theme-mode' onCheckedChange={switchTheme} />
       <Label htmlFor='theme-mode'>{resolvedTheme} mode</Label>
     </div>

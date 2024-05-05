@@ -14,7 +14,7 @@ const Sidebar = ({ className, mobileNavHandler }: Props) => {
   return (
     <div
       className={cn(
-        'flex  h-full lg:w-[256px] lg:fixed left-0 top-0 px-4 border-r-2 flex-col border-neutral-500/50 lg:min-h-[660px] ',
+        'flex  h-full lg:w-[256px] lg:fixed left-0 top-0 px-4 border-r-2 flex-col dark:border-neutral-500/50 border-neutral-200 lg:min-h-[660px] ',
         className
       )}>
       <div className='flex flex-col items-center justify-between h-full lg:pb-10 pb-2 '>
