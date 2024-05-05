@@ -8,13 +8,18 @@ import {
 } from '@/components/ui/popover';
 
 import ThemeSwitch from './theme-switch';
+import { cn } from '@/lib/utils';
+type PropsType = {
+  style?: string;
+};
 
-const AppOptions = () => {
+const AppOptions = ({ style }: PropsType) => {
   return (
-    <div className='absolute right-0 p-5 max-lg:top-12'>
+    <div
+      className={cn(' right-0 p-5 max-lg:top-12', style)}>
       <Popover>
         <PopoverTrigger>
-          <Button size='sm' asChild className='h-8 px-3'>
+          <Button size='sm' asChild className=''>
             <div>
               <Settings size='20px' className='cursor-pointer' />
             </div>

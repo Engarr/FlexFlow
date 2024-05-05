@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import Sidebar from '@/components/sidebar';
 import { Menu } from 'lucide-react';
+import AppOptions from './app-options';
 
 const MobileSlidebar = () => {
   const [newOpen, setNewOpen] = useState(false);
@@ -12,9 +13,12 @@ const MobileSlidebar = () => {
   };
   return (
     <Sheet open={newOpen} onOpenChange={(open) => onOpenHandler(open)}>
-      <SheetTrigger>
-        <Menu className='text-white w-[38px] h-[38px] ' />
-      </SheetTrigger>
+      <div className='flex '>
+        <SheetTrigger>
+          <Menu className='text-white w-[38px] h-[38px] ' />
+        </SheetTrigger>
+        <AppOptions style='lg:hidden' />
+      </div>
       <SheetContent className=' p-0 z-[100] ' side='left'>
         <Sidebar mobileNavHandler={onOpenHandler} />
       </SheetContent>
