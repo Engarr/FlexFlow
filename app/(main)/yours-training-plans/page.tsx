@@ -20,7 +20,7 @@ const Page = () => {
     redirect('/');
   }
 
-  const { data, isLoading, isError }: UseQueryResult<UserPlanType | []> =
+  const { data, isLoading, isError }: UseQueryResult<UserPlanType[] | []> =
     useQuery(QUERY_KEY_PLANS, () => fetchUserPlans({ userId: userId }), {
       refetchOnMount: true,
     });

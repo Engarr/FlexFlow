@@ -5,10 +5,11 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export const GET = async (req: NextRequest, { params }: Params) => {
   const { userId } = params;
+
   try {
     await connectMongoDB();
     const plans = await Plan.find({ creator: { $in: userId } });
-    return NextResponse.json( plans );
+    return NextResponse.json(plans);
   } catch (error) {
     console.error('Error processing the request:', error);
     return NextResponse.json(

@@ -15,7 +15,7 @@ import { cn } from '@/lib/utils';
 
 const Header = () => {
   return (
-    <header className='z-50 h-20 w-full lg:max-w-[90%] border-b-2 border-neutral-600 px-4 lg:px-20 fixed left-1/2 -translate-x-1/2'>
+    <header className='w-full max-w-[90%] lg:max-w-screen-2xl z-50 h-20 border-b-2 border-neutral-600 px-4 lg:px-20 fixed left-1/2 -translate-x-1/2'>
       <div className=' flex items-center justify-between h-full '>
         <SignedOut>
           <LogoButton href='/' />

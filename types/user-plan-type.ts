@@ -12,4 +12,4 @@ export type UserPlanType = {
       repetitions: number;
     }[];
   }[];
-}[];
+};

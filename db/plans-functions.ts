@@ -12,6 +12,19 @@ export async function fetchUserPlans({ userId }: PropsTypeFetchPlan) {
   return userPlans;
 }
 
+export async function fetchPlan({
+  userId,
+  planId,
+}: {
+  userId: string;
+  planId: string;
+}) {
+  const response = await fetch(`${url}/plan?userId=${userId}&planId=${planId}`);
+
+  const userPlans = await response.json();
+  return userPlans;
+}
+
 export async function addNewPlan(formData: PlanDataType) {
   await fetch(`${url}/plans'`, {
     method: 'POST',
@@ -19,6 +32,23 @@ export async function addNewPlan(formData: PlanDataType) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(formData),
+  });
+}
+export async function edditUserPlan({
+  userId,
+  planId,
+  newFormData,
+}: {
+  userId: string;
+  planId: string;
+  newFormData: PlanDataType;
+}) {
+  await fetch(`${url}/plan?userId=${userId}&planId=${planId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(newFormData),
   });
 }
 export async function deletePlan({

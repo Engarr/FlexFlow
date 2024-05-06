@@ -26,7 +26,7 @@ const AddNewPlan = () => {
         seriesData: [{ seriesId: 1, series: 1, weight: 0, repetitions: 10 }],
       },
     ],
-    creator: '',
+    creator: userId,
   });
   const [errors, setErrors] = useState({
     planName: '',
@@ -49,7 +49,6 @@ const AddNewPlan = () => {
     }
 
     try {
-      setPlanData((prevData) => ({ ...prevData, creator: userId }));
       await mutateAsync(planData);
       toast({
         title: 'Success!',
