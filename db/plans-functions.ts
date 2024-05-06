@@ -1,7 +1,7 @@
 import { PlanDataType } from '@/utils/plan-functions';
 export const QUERY_KEY_PLANS = 'PLANS';
 
-const url = process.env.NEXT_PUBLIC_APP_API_URL;
+const url = process.env.NEXT_PUBLIC_APP_API_URL|| '/api';
 console.log(url);
 type PropsTypeFetchPlan = {
   userId: string | undefined;
