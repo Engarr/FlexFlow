@@ -63,7 +63,7 @@ export const PlanBar = ({ planName, planId, userId }: UserPlanBar) => {
             </Button>
           </Link>
           {planId && (
-            <Link href={`${pathname}/eddit/${planId}`}>
+            <Link href={`${pathname}/edit/${planId}`}>
               <Button size='sm' tabIndex={-1}>
                 <Pencil size='20px' />
               </Button>

@@ -4,11 +4,7 @@ import PlanForm from '@/components/plan-form/plan-form';
 import SectionTitle from '@/components/section-title';
 import { useParams, useRouter } from 'next/navigation';
 import { UseQueryResult, useMutation, useQuery } from 'react-query';
-import {
-  QUERY_KEY_PLANS,
-  edditUserPlan,
-  fetchPlan,
-} from '@/db/plans-functions';
+import { QUERY_KEY_PLANS, editUserPlan, fetchPlan } from '@/db/plans-functions';
 import { useAuth } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
 import { UserPlanType } from '@/types/user-plan-type';
@@ -44,15 +40,14 @@ const EdditPlan = () => {
     isLoading: fetchingPlan,
     isError,
   }: UseQueryResult<UserPlanType> = useQuery(QUERY_KEY_PLANS, () =>
-    fetchPlan({ userId: userId, planId: planId.toString() })
+    fetchPlan({ planId: planId.toString() })
   );
-  const { mutateAsync, isLoading } = useMutation(
-    (newPlanData: PlanDataType) =>
-      edditUserPlan({
-        userId: userId.toString(),
-        planId: planId.toString(),
-        newFormData: newPlanData,
-      })
+  const { mutateAsync, isLoading } = useMutation((newPlanData: PlanDataType) =>
+    editUserPlan({
+      userId: userId.toString(),
+      planId: planId.toString(),
+      newFormData: newPlanData,
+    })
   );
 
   useEffect(() => {
@@ -96,10 +91,9 @@ const EdditPlan = () => {
     }
   };
 
- 
   return (
     <div>
-      <SectionTitle>Eddit Plan</SectionTitle>
+      <SectionTitle>Edit Plan</SectionTitle>
       {fetchingPlan && !isPlanDataChanged ? (
         <LoaderComponent />
       ) : isError ? (

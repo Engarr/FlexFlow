@@ -3,7 +3,7 @@ import Plan from '@/model/plan-model';
 import { NextRequest, NextResponse } from 'next/server';
 
 export const GET = async (req: NextRequest) => {
-  const userId = req.nextUrl.searchParams.get('userId');
+
   const planId = req.nextUrl.searchParams.get('planId');
 
   try {
