@@ -20,9 +20,10 @@ export async function fetchPlan({
   planId: string;
 }) {
   const response = await fetch(`${url}/plan?userId=${userId}&planId=${planId}`);
+  console.log(`${url}/plan?userId=${userId}&planId=${planId}`);
 
-  const userPlans = await response.json();
-  return userPlans;
+  const userPlan = await response.json();
+  return userPlan;
 }
 
 export async function addNewPlan(formData: PlanDataType) {
