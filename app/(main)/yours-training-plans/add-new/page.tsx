@@ -55,10 +55,10 @@ const AddNewPlan = () => {
         description: 'Plan Data Submitted Successfully',
       });
       router.push('/yours-training-plans');
-    } catch (error) {
+    } catch (err) {
       toast({
         title: 'Error',
-        description: `There was an error submitting plan data:${error}`,
+        description: `There was an error submitting plan data: ${err}`,
         variant: 'destructive',
       });
     }

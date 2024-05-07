@@ -58,7 +58,9 @@ const PlanForm = ({
             className='my-1 lg:my-2 border-2 dark:border-slate-100/10 p-2 lg:p-4 rounded-md relative '>
             <p className='absolute top-[-20px] left-[5px] bg-[var(--main-background)] border border-slate-100/10 p-1 rounded-md text-base'>
               Exercise No.{' '}
-              <span className='text-lime-400 font-bold'>{i + 1}</span>
+              <span className='dark:text-lime-400 text-lime-600 font-bold'>
+                {i + 1}
+              </span>
             </p>
             <div className='flex items-start justify-between gap-2  '>
               <div className='w-full my-2 '>

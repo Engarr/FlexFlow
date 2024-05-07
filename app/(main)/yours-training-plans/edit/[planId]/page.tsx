@@ -35,14 +35,11 @@ const EdditPlan = () => {
   };
   const [newPlanData, setNewPlanData] = useState(defaultValues);
 
-  const {
-    data,
-    isLoading: fetchingPlan,
-    isError,
-  }: UseQueryResult<UserPlanType> = useQuery(QUERY_KEY_PLANS, () =>
-    fetchPlan({ planId: planId.toString() })
+  const { data, isLoading, isError }: UseQueryResult<UserPlanType> = useQuery(
+    QUERY_KEY_PLANS,
+    () => fetchPlan({ planId: planId.toString() })
   );
-  const { mutateAsync, isLoading } = useMutation((newPlanData: PlanDataType) =>
+  const { mutateAsync } = useMutation((newPlanData: PlanDataType) =>
     editUserPlan({
       userId: userId.toString(),
       planId: planId.toString(),
@@ -93,8 +90,11 @@ const EdditPlan = () => {
 
   return (
     <div>
-      <SectionTitle>Edit Plan</SectionTitle>
-      {fetchingPlan && !isPlanDataChanged ? (
+      <SectionTitle>
+        Edit Plan ID:{' '}
+        <span className='dark:text-lime-400 text-lime-600'>{data?._id}</span>
+      </SectionTitle>
+      {isLoading && isPlanDataChanged ? (
         <LoaderComponent />
       ) : isError ? (
         <ErrorComponent message='Fetching Data Error' />

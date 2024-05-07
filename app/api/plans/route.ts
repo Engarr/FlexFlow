@@ -15,9 +15,10 @@ export const GET = async () => {
     );
   }
 };
-export async function POST(request: NextRequest) {
+export async function POST(req: NextRequest) {
+ 
   try {
-    const planData = await request.json();
+    const planData = await req.json();
     await connectMongoDB();
     await Plan.create(planData);
     return NextResponse.json(
