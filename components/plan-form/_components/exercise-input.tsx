@@ -2,9 +2,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { PlanDataType, onChangeExerciseName } from '@/utils/plan-functions';
+import { onChangeExerciseName } from '@/utils/plan-functions';
 import { exercises } from '@/lib/app-data';
 import ErrorMessage from '@/components/error-message';
+import { PlanDataType } from '@/types/user-plan-type';
 
 type ExerciseInputType = {
   value: string;

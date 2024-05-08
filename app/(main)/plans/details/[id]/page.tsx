@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/carousel';
 import Link from 'next/link';
 import { exercises } from '@/lib/app-data';
+import ErrorComponent from '@/components/error-component';
 
 const Page = ({ params }: { params: { id: string } }) => {
   const { id } = params;
@@ -21,8 +22,8 @@ const Page = ({ params }: { params: { id: string } }) => {
     ['plan', id],
     () => fetchPlan({ planId: id.toString() })
   );
-  if (data) {
-    console.log(data);
+  if (isError) {
+    return <ErrorComponent message='Failed fetch data' />;
   }
 
   return (
