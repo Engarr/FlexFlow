@@ -7,10 +7,10 @@ import { UseQueryResult, useMutation, useQuery } from 'react-query';
 import { QUERY_KEY_PLANS, editUserPlan, fetchPlan } from '@/db/plans-functions';
 import { useAuth } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
-import { UserPlanType } from '@/types/user-plan-type';
+import { PlanDataType, UserPlanType } from '@/types/user-plan-type';
 import LoaderComponent from '@/components/loader-component';
 import ErrorComponent from '@/components/error-component';
-import { PlanDataType, validateForm } from '@/utils/plan-functions';
+import { validateForm } from '@/utils/plan-functions';
 import { useToast } from '@/components/ui/use-toast';
 
 const EdditPlan = () => {
@@ -78,7 +78,7 @@ const EdditPlan = () => {
         title: 'Success!',
         description: 'The Plan Has Been Changed Successfully!',
       });
-      router.push('/yours-training-plans');
+      router.push('/plans/yours-training-plans');
     } catch (error) {
       toast({
         title: 'Error',
@@ -91,8 +91,7 @@ const EdditPlan = () => {
   return (
     <div>
       <SectionTitle>
-        Edit Plan ID:{' '}
-        <span className='dark:text-lime-400 text-lime-600'>{data?._id}</span>
+        Edit Plan ID: <span className='text-lime-theme'>{data?._id}</span>
       </SectionTitle>
       {isLoading && isPlanDataChanged ? (
         <LoaderComponent />

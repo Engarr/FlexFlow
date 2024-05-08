@@ -26,7 +26,7 @@ const ExercisesListItem = ({
       key={exerciseName}
       className='bg-card shadow-lg rounded-md px-2 py-3 flex justify-between max-sm:gap-2 max-sm:flex-col items-center last-of-type:mb-6'>
       <div>
-        <Link href={pathname + '/' + link}>
+        <Link href={`/exercise/${link}`}>
           <Button size='lg' className='max-md:h-10 max-md:px-3'>
             <p>{exerciseName}</p>
           </Button>

@@ -10,7 +10,11 @@ type PropsType = {
 const SectionTitle = ({ children, style, element = 'h2' }: PropsType) => {
   const Element = element;
   return (
-    <Element className={cn('text-3xl font-semibold mb-10 px-2 xl:px-0', style)}>
+    <Element
+      className={cn(
+        'text-xl xl:text-3xl font-semibold mb-10 px-2 xl:px-0',
+        style
+      )}>
       {children}
     </Element>
   );

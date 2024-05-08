@@ -1,25 +1,5 @@
-export type PlanDataType = {
-  planName: string;
-  creator: string;
-  exercisesArr: {
-    exercisesName: string;
-    id: number;
-    seriesData: {
-      seriesId: number;
-      series: number;
-      weight: number;
-      repetitions: number;
-    }[];
-  }[];
-};
-export type ErrorsType = {
-  planName: string;
-  exercisesArr: string;
-  exercises: {
-    exercisesName: string;
-    series: string;
-  }[];
-};
+import { ErrorsType, PlanDataType } from "@/types/user-plan-type";
+
 export const handleAddSeries = (
   e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   index: number,

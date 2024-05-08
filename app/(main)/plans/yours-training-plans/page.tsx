@@ -9,7 +9,7 @@ import { QUERY_KEY_PLANS, fetchUserPlans } from '@/db/plans-functions';
 import { useAuth } from '@clerk/nextjs';
 import LoaderComponent from '@/components/loader-component';
 import { UserPlanType } from '@/types/user-plan-type';
-import { PlanBar } from '../../../components/plan-bar';
+import { PlanBar } from '../../../../components/plan-bar';
 import ErrorComponent from '@/components/error-component';
 
 const Page = () => {
@@ -35,7 +35,9 @@ const Page = () => {
         <SectionTitle style='max-lg:mb-2'>Yours Training Plans</SectionTitle>
         {data && data.length > 0 && (
           <Link href={`${pathname}/add-new`}>
-            <Button tabIndex={-1}>Add New Plan</Button>
+            <Button tabIndex={-1} variant='primary'>
+              Add New Plan
+            </Button>
           </Link>
         )}
       </div>

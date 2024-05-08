@@ -126,7 +126,7 @@ export const exercises = [
       'https://www.youtube.com/embed/bmjHkNJr7O0',
       'https://www.youtube.com/embed/l9BBv5bU4ks',
     ],
-    link: 'barbell-bench-press',
+    link: 'barbell bench press',
   },
   {
     exerciseName: 'Barbell Bench Press (30-45° Incline)',
@@ -140,7 +140,7 @@ export const exercises = [
     ],
     muscle2: ['anterior serratus'],
     videoUrl: ['https://www.youtube.com/embed/LDxaLKO33TQ'],
-    link: 'barbell-bench-press-30-45-incline',
+    link: 'barbell bench press 30 45 incline',
   },
   {
     exerciseName: 'Dumbbell Bench Press',
@@ -159,7 +159,7 @@ export const exercises = [
     muscle1: ['pectoralis major clavicular part (upper)', 'anterior deltoid'],
     muscle2: ['triceps brachii'],
     videoUrl: ['https://www.youtube.com/embed/C06qMsCzjQ8'],
-    link: 'dumbbell-bench-press-30-45-incline',
+    link: 'dumbbell bench press 30 45 incline',
   },
   {
     exerciseName: 'Cable Flyes',
@@ -168,7 +168,7 @@ export const exercises = [
       'https://static.strengthlevel.com/images/illustrations/cable-fly-1000x1000.jpg',
     muscle1: ['pectoralis major', 'anterior deltoid'],
     videoUrl: ['https://www.youtube.com/embed/vM1Ovmiu71M'],
-    link: 'cable-flyes',
+    link: 'cable flyes',
   },
   // Back exercises
   {
@@ -181,7 +181,7 @@ export const exercises = [
       'https://www.youtube.com/embed/UvW6XnClK7A',
       'https://www.youtube.com/embed/YYbqPzlwY6c',
     ],
-    link: 'pull-ups-wide-grip',
+    link: 'pull ups wide grip',
   },
   {
     exerciseName: 'Bent Over Barbell Rows',
@@ -198,7 +198,7 @@ export const exercises = [
       'https://www.youtube.com/embed/MOlDmANU_4U',
       'https://www.youtube.com/embed/d6MZDg35qzc',
     ],
-    link: 'bent-over-barbell-rows',
+    link: 'bent overbarbellrows',
   },
   {
     exerciseName: 'Seated Cable Row',
@@ -214,7 +214,7 @@ export const exercises = [
     videoUrl: [
       'https://www.youtube.com/watch?v=sP_4vybjVJs&ab_channel=MindPumpTV',
     ],
-    link: 'seated-cable-row',
+    link: 'seated cable row',
   },
   // Quadriceps/Hamstrings exercises
   {
@@ -224,7 +224,7 @@ export const exercises = [
       'https://static.strengthlevel.com/images/illustrations/dumbbell-lunge-1000x1000.jpg',
     muscle1: ['quadriceps', 'hamstrings', 'gluteus maximus'],
     videoUrl: ['https://www.youtube.com/embed/M4THUsShZFA'],
-    link: 'dumbbell-lunges',
+    link: 'dumbbell lunges',
   },
   {
     exerciseName: 'Back Squats',
@@ -234,7 +234,7 @@ export const exercises = [
     muscle1: ['quadriceps'],
     muscle2: ['hamstrings', 'gluteus maximus'],
     videoUrl: ['https://www.youtube.com/embed/aX7aE0meWcY'],
-    link: 'back-squats',
+    link: 'back squats',
   },
   {
     exerciseName: 'Front Squats',
@@ -244,7 +244,7 @@ export const exercises = [
     muscle1: ['quadriceps'],
     muscle2: ['hamstrings', 'gluteus maximus'],
     videoUrl: ['https://www.youtube.com/embed/gOsd8NNPg04'],
-    link: 'front-squats',
+    link: 'front squats',
   },
   // Glutes/Hamstrings exercises
   {
@@ -276,7 +276,7 @@ export const exercises = [
       'https://www.youtube.com/embed/ezEQkeQWMPM',
       'https://www.youtube.com/embed/zj6IrdvL9Ps',
     ],
-    link: 'hip-thrusts',
+    link: 'hip thrusts',
   },
   {
     exerciseName: 'Leg Abduction on Machine',
@@ -290,7 +290,7 @@ export const exercises = [
       'adductors',
     ],
     videoUrl: ['https://www.youtube.com/embed/IydaB14rnlg'],
-    link: 'leg-abduction-on-machine',
+    link: 'leg abduction on machine',
   },
   // Shoulders exercises
   {
@@ -304,7 +304,7 @@ export const exercises = [
       'https://www.youtube.com/embed/utGTzZRrwm0',
       'https://www.youtube.com/embed/CHWdd9-6Vfw',
     ],
-    link: 'barbell-overhead-press',
+    link: 'barbell overhead press',
   },
   {
     exerciseName: 'Seated Dumbbell Press',
@@ -314,7 +314,7 @@ export const exercises = [
     muscle1: ['middle deltoid'],
     muscle2: ['triceps brachii', 'trapezius'],
     videoUrl: ['https://www.youtube.com/embed/pInYJYisaEo'],
-    link: 'seated-dumbbell-press',
+    link: 'seated dumbbell press',
   },
   {
     exerciseName: 'Lateral Raises with Dumbbells',
@@ -324,7 +324,7 @@ export const exercises = [
     muscle1: ['middle deltoid', 'pectoralis major sternal part (middle)'],
     muscle2: ['trapezius'],
     videoUrl: ['https://www.youtube.com/embed/5g5U2dIoeQ0'],
-    link: 'lateral-raises-with-dumbbells',
+    link: 'lateral raises with dumbbells',
   },
   {
     exerciseName: 'Face Pulls',
@@ -336,7 +336,7 @@ export const exercises = [
       'https://www.youtube.com/embed/foz3Le39glE',
       'https://www.youtube.com/embed/51AuMQzpBVY',
     ],
-    link: 'face-pulls',
+    link: 'face pulls',
   },
   {
     exerciseName: 'Dumbbell Front Raise',
@@ -346,7 +346,7 @@ export const exercises = [
     muscle1: ['anterior deltoid'],
     muscle2: ['pectoralis major clavicular part (upper)'],
     videoUrl: ['https://www.youtube.com/embed/0ZslV4JJkIg'],
-    link: 'dumbbell-front-raise',
+    link: 'dumbbell front raise',
   },
   // Abdominal exercises
   {
@@ -356,7 +356,7 @@ export const exercises = [
       'https://static.strengthlevel.com/images/illustrations/hanging-knee-raise-1000x1000.jpg',
     muscle1: ['rectus abdominis', 'iliopsoas', 'quadriceps'],
     videoUrl: ['https://www.youtube.com/embed/u1OJQFS3Irw'],
-    link: 'hanging-knee-raises',
+    link: 'hanging knee raises',
   },
   {
     exerciseName: 'Scissor Kicks',
@@ -366,7 +366,7 @@ export const exercises = [
     time: true,
     muscle1: ['rectus abdominis', 'obliques'],
     videoUrl: ['https://www.youtube.com/embed/y1hXARQhHZM'],
-    link: 'scissor-kicks',
+    link: 'scissor kicks',
   },
   {
     exerciseName: 'Hanging Leg Raise',
@@ -376,7 +376,7 @@ export const exercises = [
     muscle1: ['triceps brachii', 'abdominal', 'quadriceps femoris'],
     muscle2: ['biceps brachii ', 'latissimus dorsi'],
     videoUrl: ['https://www.youtube.com/embed/yTTuVSKU-Ks'],
-    link: 'hanging-leg-raise',
+    link: 'hanging leg raise',
   },
   {
     exerciseName: 'Cable Crunch',
@@ -387,7 +387,7 @@ export const exercises = [
     videoUrl: [
       'https://www.youtube.com/watch?v=ToJeyhydUxU&pp=ygUMQ2FibGUgQ3J1bmNo&ab_channel=TestosteroneNation',
     ],
-    link: 'cable-crunch',
+    link: 'cable crunch',
   },
   // Biceps exercises
   {
@@ -397,7 +397,7 @@ export const exercises = [
       'https://static.strengthlevel.com/images/illustrations/preacher-curl-1000x1000.jpg',
     muscle1: ['biceps brachii', 'brachialis'],
     videoUrl: ['https://www.youtube.com/embed/QkK9UjGI4Pw'],
-    link: 'preacher-curl',
+    link: 'preacher curl',
   },
   {
     exerciseName: 'Hammer Curls with Dumbbells',
@@ -406,7 +406,7 @@ export const exercises = [
       'https://static.strengthlevel.com/images/illustrations/hammer-curl-1000x1000.jpg',
     muscle1: ['brachioradialis', 'biceps brachii'],
     videoUrl: ['https://www.youtube.com/embed/s_ubLsRZ59I'],
-    link: 'hammer-curls-with-dumbbells',
+    link: 'hammer curls with dumbbells',
   },
   {
     exerciseName: 'Standing Barbell Curls',
@@ -415,7 +415,7 @@ export const exercises = [
       'https://static.strengthlevel.com/images/illustrations/barbell-curl-1000x1000.jpg',
     muscle1: ['biceps brachii', 'brachialis'],
     videoUrl: ['https://www.youtube.com/embed/wHbgdQ5rS7g'],
-    link: 'standing-arbell-curls',
+    link: 'standing arbell curls',
   },
   {
     exerciseName: 'Overhead Cable Curl',
@@ -423,7 +423,7 @@ export const exercises = [
       'https://static.strengthlevel.com/images/illustrations/overhead-cable-curl-1000x1000.jpg',
     muscle1: ['biceps brachii', 'brachialis'],
     videoUrl: ['https://www.youtube.com/embed/XlvPT0mfQO8'],
-    link: 'overhead-cable-curl',
+    link: 'overhead cable curl',
   },
   // Triceps exercises
   {
@@ -443,7 +443,7 @@ export const exercises = [
       'https://static.strengthlevel.com/images/illustrations/tricep-pushdown-1000x1000.jpg',
     muscle1: ['triceps brachii', 'brachialis'],
     videoUrl: ['https://www.youtube.com/embed/WBwvIlLTm00'],
-    link: 'tricep-pushdown',
+    link: 'tricep pushdown',
   },
   {
     exerciseName: 'Lying Tricep Extension',
@@ -452,7 +452,7 @@ export const exercises = [
       'https://static.strengthlevel.com/images/illustrations/lying-tricep-extension-1000x1000.jpg',
     muscle1: ['triceps brachii'],
     videoUrl: ['https://www.youtube.com/embed/TJkoGDIdRYk'],
-    link: 'lying-tricep-extension',
+    link: 'lying tricep extension',
   },
   {
     exerciseName: 'Dumbbell Tricep Extension',
@@ -461,6 +461,6 @@ export const exercises = [
       'https://static.strengthlevel.com/images/illustrations/dumbbell-tricep-extension-1000x1000.jpg',
     muscle1: ['triceps brachii'],
     videoUrl: ['https://www.youtube.com/embed/mJf7Q8_nJMk'],
-    link: 'dumbbell-tricep-extension',
+    link: 'dumbbell tricep extension',
   },
 ];

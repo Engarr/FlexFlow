@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import SectionTitle from '@/components/section-title';
-import { PlanDataType, validateForm } from '@/utils/plan-functions';
+
 import { useToast } from '@/components/ui/use-toast';
 import PlanForm from '@/components/plan-form/plan-form';
 import { useMutation } from 'react-query';
@@ -9,6 +9,8 @@ import { redirect, useRouter } from 'next/navigation';
 import { Loader } from 'lucide-react';
 import { addNewPlan } from '@/db/plans-functions';
 import { useAuth } from '@clerk/nextjs';
+import { PlanDataType } from '@/types/user-plan-type';
+import { validateForm } from '@/utils/plan-functions';
 
 const AddNewPlan = () => {
   const router = useRouter();
@@ -54,7 +56,7 @@ const AddNewPlan = () => {
         title: 'Success!',
         description: 'Plan Data Submitted Successfully',
       });
-      router.push('/yours-training-plans');
+      router.push('/plans/yours-training-plans');
     } catch (err) {
       toast({
         title: 'Error',

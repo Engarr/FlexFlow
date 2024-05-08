@@ -1,7 +1,7 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import { QUERY_KEY_PLANS, deletePlan } from '@/db/plans-functions';
-import { Pencil, Play, Trash2 } from 'lucide-react';
+import { FilePenLine, Info, Pencil, Play, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useQueryClient, useMutation } from 'react-query';
@@ -17,9 +17,15 @@ type UserPlanBar = {
   planName: string;
   planId?: string;
   userId?: string;
+  isAppPlan?: string;
 };
 
-export const PlanBar = ({ planName, planId, userId }: UserPlanBar) => {
+export const PlanBar = ({
+  planName,
+  planId,
+  userId,
+  isAppPlan,
+}: UserPlanBar) => {
   const pathname = usePathname();
   const queryClient = useQueryClient();
   const [popoverIsOpen, setPopoverIsOpen] = useState(false);
@@ -57,15 +63,20 @@ export const PlanBar = ({ planName, planId, userId }: UserPlanBar) => {
           <p className=' lg:text-xl'>{planName}</p>
         </div>
         <div className='flex gap-2'>
-          <Link href='/'>
+          <Link href={`/start-training/${planId}`}>
             <Button size='sm' variant='primary' tabIndex={-1}>
               <Play size='20px' />
             </Button>
           </Link>
-          {planId && (
+          <Link href={`/plans/details/${planId}`}>
+            <Button size='sm' tabIndex={-1}>
+              <Info size='20px' />
+            </Button>
+          </Link>
+          {!isAppPlan && (
             <Link href={`${pathname}/edit/${planId}`}>
               <Button size='sm' tabIndex={-1}>
-                <Pencil size='20px' />
+                <FilePenLine size='20px' />
               </Button>
             </Link>
           )}

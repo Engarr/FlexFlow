@@ -8,10 +8,15 @@ import React from 'react';
 
 const Exercise = ({ params }: { params: { exercise: string } }) => {
   const exercise = params.exercise;
-  const convertedExercise = exercise
+
+  const decodedName = decodeURIComponent(exercise);
+
+  const convertedExercise = decodedName
     .toLowerCase()
     .replace(/\b\w/g, (char) => char.toUpperCase());
-  const musclesExercises = exercises.find((e) => e.link === exercise);
+  const musclesExercises = exercises.find(
+    (e) => e.link.toLowerCase() === decodedName.toLowerCase()
+  );
 
   return (
     <section>

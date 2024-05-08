@@ -15,7 +15,7 @@ const buttonVariants = cva(
         primary:
           'dark:bg-lime-400 bg-lime-300 text-neutral-700 hover:bg-lime-400/80 dark:border-lime-500 border-lime-400 active:border-b-0 font-semibold',
         primaryOutline:
-          'dark:text-lime-400 text-lime-600 hover:text-lime-600 border-transparent font-semibold',
+          'text-text-secondary hover:text-lime-700 border-transparent font-semibold',
         danger:
           'dark:bg-rose-500 bg-rose-400 text-neutral-700 hover:bg-rose-500/90 dark:border-rose-600 border-rose-500 active:border-b-0',
 

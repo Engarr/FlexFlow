@@ -3,8 +3,6 @@ import { Button } from '../ui/button';
 import InputItem from '@/components/plan-form/_components/input-item';
 import ErrorMessage from '../error-message';
 import {
-  ErrorsType,
-  PlanDataType,
   handleAddNewExersise,
   handleAddSeries,
   handleRemoveExersise,
@@ -15,6 +13,7 @@ import {
 } from '@/utils/plan-functions';
 import ExerciseInput from '@/components/plan-form/_components/exercise-input';
 import { Trash2 } from 'lucide-react';
+import { ErrorsType, PlanDataType } from '@/types/user-plan-type';
 
 type PlanFormType = {
   onSubmit: (e: React.FormEvent) => Promise<void>;

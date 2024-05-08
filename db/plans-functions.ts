@@ -1,10 +1,18 @@
-import { PlanDataType } from '@/utils/plan-functions';
+import { PlanDataType } from '@/types/user-plan-type';
+
 export const QUERY_KEY_PLANS = 'PLANS';
 
 const url = process.env.NEXT_PUBLIC_APP_API_URL || '/api';
 type PropsTypeFetchPlan = {
   userId: string | undefined;
 };
+
+export async function fetchAppPlans() {
+  const response = await fetch(`${url}/app-plans`);
+  const appPlans = await response.json();
+
+  return appPlans;
+}
 
 export async function fetchUserPlans({ userId }: PropsTypeFetchPlan) {
   const response = await fetch(`${url}/plans/${userId}`);
@@ -14,8 +22,8 @@ export async function fetchUserPlans({ userId }: PropsTypeFetchPlan) {
 
 export async function fetchPlan({ planId }: { planId: string }) {
   const response = await fetch(`${url}/plan?planId=${planId}`);
-  const userPlan = await response.json();
-  return userPlan;
+  const plan = await response.json();
+  return plan;
 }
 
 export async function addNewPlan(formData: PlanDataType) {

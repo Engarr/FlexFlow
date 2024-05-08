@@ -19,7 +19,7 @@ const planSchema = new Schema({
       ],
     },
   ],
-  isAppPlan: { type: Boolean, default: true },
+  isAppPlan: { type: Boolean, default: false },
 });
 
 const Plan = mongoose.models.Plan || mongoose.model('Plan', planSchema);
