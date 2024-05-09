@@ -4,26 +4,24 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:border-2 border !border-b-4 ',
+  'inline-flex items-center justify-center whitespace-nowrap rounded-xl text-sm font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 uppercase tracking-wide ',
   {
     variants: {
       variant: {
         locked:
-          'bg-neutral-200 text-primary-foreground hover:bg-neutral-200/90 border-neutral-400  active:border-b-0',
+          'bg-neutral-200  hover:bg-neutral-200/90 border-neutral-400 border-b-4 active:border-b-2 ',
         default:
-          'bg-gray-200 text-neutral-700 border-gray-400  active:border-b-2 hover:bg-gray-300 text-slate-500',
+          'bg-gray-50 border-gray-300  dark:border-gray-400  hover:bg-gray-100 text-slate-500 border-b-4 active:border-b-2 border-t border-x ',
         primary:
-          'dark:bg-lime-400 bg-lime-300 text-neutral-700 hover:bg-lime-400/80 dark:border-lime-500 border-lime-400 active:border-b-0 font-semibold',
+          'bg-lime-400 border-lime-600 text-neutral-700 hover:bg-lime-400/80  font-semibold border-b-4 border-b-4 active:border-b-2',
         primaryOutline:
-          'text-text-secondary hover:text-lime-700 border-transparent font-semibold',
+          'text-text-secondary hover:text-lime-700 border-transparent font-semibold border-b-4 active:border-b-2',
         danger:
-          'dark:bg-rose-500 bg-rose-400 text-neutral-700 hover:bg-rose-500/90 dark:border-rose-600 border-rose-500 active:border-b-0',
-
+          'bg-rose-500 text-neutral-700 hover:bg-rose-400/90  border-rose-700 border-b-4 active:border-b-2',
         sidebarActive:
-          'dark:bg-zinc-800 bg-zinc-400 !text-white dark:border-zinc-700 border-zinc-300 border-2  active:border-b-2 dark:hover:bg-zinc-700 hover:bg-zinc-500 text-slate-500',
-
+          'bg-gray-500/60 dark:bg-gray-500 text-white border-gray-300 dark:border-gray-400  border-y-2 border-x dark:hover:bg-gray-500/80  ',
         ghost:
-          'bg-transparent text-slate-50 border-transparent border-0 hover:text-slate-400',
+          'bg-transparent text-text border-transparent border-0 hover:text-slate-400',
       },
 
       size: {

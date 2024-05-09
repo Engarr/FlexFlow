@@ -45,8 +45,8 @@ const Page = ({ params }: { params: { id: string } }) => {
                   (e) => e.exerciseName === exercise.exercisesName
                 );
                 return (
-                  <CarouselItem key={index}>
-                    <div className='text-xl'>
+                  <CarouselItem key={index} className=''>
+                    <div className='text-xl mx-3'>
                       <p>
                         Exercise No.{' '}
                         <span className='text-text-secondary font-semibold'>
@@ -58,7 +58,7 @@ const Page = ({ params }: { params: { id: string } }) => {
                         </span>
                       </p>
                     </div>
-                    <div className='p-3 border-gray-400 border rounded-md  '>
+                    <div className='p-3 border-gray-400 border rounded-md  shadow-md shadow-gray-500/50 dark:shadow-gray-200/40 m-3'>
                       {isExerciseOnTheAppBase ? (
                         <Link href={`/exercise/${exercise.exercisesName}`}>
                           <h3 className='text-2xl  hover:text-lime-700 transition-colors mb-2 '>

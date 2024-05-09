@@ -16,7 +16,7 @@ const MainLayout = ({ children }: Props) => {
     <>
       <QueryClientProvider client={queryClient}>
         <AppOptions style='max-lg:hidden lg:fixed' />
-      
+
         <MobileHeader />
         <Sidebar className='hidden lg:flex pt-6' />
         <Toaster />
