@@ -8,7 +8,7 @@ import { UseQueryResult, useQuery } from 'react-query';
 import { QUERY_KEY_PLANS, fetchUserPlans } from '@/db/plans-functions';
 import { useAuth } from '@clerk/nextjs';
 import LoaderComponent from '@/components/loader-component';
-import { UserPlanType } from '@/types/user-plan-type';
+import { UserPlanType } from '@/types/type';
 import { PlanBar } from '../../../../components/plan-bar';
 import ErrorComponent from '@/components/error-component';
 

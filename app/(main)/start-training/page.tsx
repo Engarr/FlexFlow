@@ -2,22 +2,22 @@ import React from 'react';
 import PlansContent from '@/components/plans-content';
 import SectionTitle from '@/components/section-title';
 
-const PlansPage = () => {
+const Page = () => {
   const buttonsData = [
     {
-      title: 'Choose Your Own Plan',
+      title: 'Yours Plans',
       info: 'Option allows you to select and manage your plans',
       href: 'plans/yours-training-plans',
     },
     {
-      title: 'Choose A Training Plan',
+      title: 'Apps Plans',
       info: 'Choose a plan from the app plans examples',
       href: 'plans/app-plans',
     },
   ];
   return (
     <section>
-      <SectionTitle>Choose Plan</SectionTitle>
+      <SectionTitle>Select Training</SectionTitle>
       <div className='flex flex-col gap-3 mt-6'>
         {buttonsData.map((button, idx) => (
           <React.Fragment key={idx}>
@@ -33,4 +33,4 @@ const PlansPage = () => {
   );
 };
 
-export default PlansPage;
+export default Page;

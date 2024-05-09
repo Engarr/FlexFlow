@@ -1,4 +1,4 @@
-import { PlanDataType } from '@/types/user-plan-type';
+import { PlanDataType, TrainingDataType } from '@/types/type';
 
 export const QUERY_KEY_PLANS = 'PLANS';
 
@@ -28,6 +28,16 @@ export async function fetchPlan({ planId }: { planId: string }) {
 
 export async function addNewPlan(formData: PlanDataType) {
   await fetch(`${url}/plans`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+  });
+}
+export async function addNewPlanToHostory(formData: TrainingDataType) {
+  console.log(`${url}/history`);
+  await fetch(`${url}/training-history`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

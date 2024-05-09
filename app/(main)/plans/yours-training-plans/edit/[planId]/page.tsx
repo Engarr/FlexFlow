@@ -7,7 +7,7 @@ import { UseQueryResult, useMutation, useQuery } from 'react-query';
 import { QUERY_KEY_PLANS, editUserPlan, fetchPlan } from '@/db/plans-functions';
 import { useAuth } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
-import { PlanDataType, UserPlanType } from '@/types/user-plan-type';
+import { PlanDataType, UserPlanType } from '@/types/type';
 import LoaderComponent from '@/components/loader-component';
 import ErrorComponent from '@/components/error-component';
 import { validateForm } from '@/utils/plan-functions';

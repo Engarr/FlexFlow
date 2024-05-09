@@ -4,7 +4,7 @@ import { PlanBar } from '@/components/plan-bar';
 import SectionTitle from '@/components/section-title';
 import { Button } from '@/components/ui/button';
 import { fetchAppPlans } from '@/db/plans-functions';
-import { PlanDataType } from '@/types/user-plan-type';
+import { PlanDataType } from '@/types/type';
 import Link from 'next/link';
 
 import React from 'react';
@@ -15,7 +15,7 @@ const Page = () => {
     ['appPlans'],
     fetchAppPlans
   );
- 
+
   return (
     <div>
       <SectionTitle>

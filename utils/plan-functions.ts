@@ -1,4 +1,4 @@
-import { ErrorsType, PlanDataType } from "@/types/user-plan-type";
+import { ErrorsType, PlanDataType, TrainingDataType } from '@/types/type';
 
 export const handleAddSeries = (
   e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -214,7 +214,6 @@ export const validateForm = (
 
   // Set errors
   setErrors(newErrors);
-  console.log(newErrors);
 
   const hasErrors = Object.values(newErrors).some((error) => {
     if (typeof error === 'string') {

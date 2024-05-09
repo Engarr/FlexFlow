@@ -13,11 +13,12 @@ import {
 } from '@/utils/plan-functions';
 import ExerciseInput from '@/components/plan-form/_components/exercise-input';
 import { Trash2 } from 'lucide-react';
-import { ErrorsType, PlanDataType } from '@/types/user-plan-type';
+import { ErrorsType, PlanDataType } from '@/types/type';
 
 type PlanFormType = {
   onSubmit: (e: React.FormEvent) => Promise<void>;
   planData: PlanDataType;
+  trainingTime?: string;
   errors: ErrorsType;
   setPlanData: React.Dispatch<React.SetStateAction<PlanDataType>>;
   setErrors: React.Dispatch<React.SetStateAction<ErrorsType>>;
@@ -29,11 +30,19 @@ const PlanForm = ({
   errors,
   setPlanData,
   setErrors,
+  trainingTime,
 }: PlanFormType) => {
   return (
     <form
       className='lg:w-3/4 flex flex-col gap-3 pb-10 px-2 lg:px-0 '
       onSubmit={onSubmit}>
+      {trainingTime && (
+        <div className='flex gap-2 underline underline-offset-2 decoration-text-secondary decoration-2'>
+          <p className='text-lg'>
+            Training data: <span className='font-semibold'>{trainingTime}</span>
+          </p>
+        </div>
+      )}
       <InputItem
         id='planName'
         label='Plan Name:'
@@ -165,7 +174,7 @@ const PlanForm = ({
         Add New Exercise
       </Button>
       <Button variant='primary' className='mt-2' type='submit'>
-        Save Plan
+        {trainingTime ? 'Finish Training' : 'Save Plan'}
       </Button>
     </form>
   );

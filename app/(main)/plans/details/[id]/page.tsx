@@ -3,7 +3,7 @@ import React from 'react';
 import SectionTitle from '@/components/section-title';
 import { UseQueryResult, useQuery } from 'react-query';
 import { fetchPlan } from '@/db/plans-functions';
-import { PlanDataType } from '@/types/user-plan-type';
+import { PlanDataType } from '@/types/type';
 import {
   Carousel,
   CarouselContent,

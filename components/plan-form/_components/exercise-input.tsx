@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { onChangeExerciseName } from '@/utils/plan-functions';
 import { exercises } from '@/lib/app-data';
 import ErrorMessage from '@/components/error-message';
-import { PlanDataType } from '@/types/user-plan-type';
+import { PlanDataType } from '@/types/type';
 
 type ExerciseInputType = {
   value: string;

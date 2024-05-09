@@ -9,7 +9,7 @@ import { redirect, useRouter } from 'next/navigation';
 import { Loader } from 'lucide-react';
 import { addNewPlan } from '@/db/plans-functions';
 import { useAuth } from '@clerk/nextjs';
-import { PlanDataType } from '@/types/user-plan-type';
+import { PlanDataType } from '@/types/type';
 import { validateForm } from '@/utils/plan-functions';
 
 const AddNewPlan = () => {

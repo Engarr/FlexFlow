@@ -14,6 +14,22 @@ export type UserPlanType = {
     }[];
   }[];
 };
+export type TrainingDataType = {
+  _id?: string;
+  planName: string;
+  exercisesArr: {
+    exercisesName: string;
+    id: number;
+    seriesData: {
+      seriesId: number;
+      series: number;
+      weight: number;
+      repetitions: number;
+    }[];
+  }[];
+  date: string;
+  userId: string;
+};
 export type PlanDataType = {
   _id?: string;
   planName: string;
