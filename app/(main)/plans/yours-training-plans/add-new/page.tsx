@@ -95,8 +95,12 @@ const AddNewPlan = () => {
   ) => {
     handleAddSeries(e, index, setFormData);
   };
-  const removeSeries = (exerciseId: number, seriesId: number) => {
-    handleRemoveSeries(exerciseId, seriesId, setFormData);
+  const removeSeries = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    exerciseId: number,
+    seriesId: number
+  ) => {
+    handleRemoveSeries(e, exerciseId, seriesId, setFormData);
   };
   const changeSeriesRepetitionsHandler = (
     value: string,
