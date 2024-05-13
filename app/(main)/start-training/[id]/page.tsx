@@ -34,7 +34,7 @@ const Page = ({ params }: { params: { id: string } }) => {
     addNewPlanToHostory(formData)
   );
   const trainingTime = formatDateTime(new Date());
-  
+
   const {
     temporaryTrainingData,
     updateTemporaryTrainingData,
@@ -53,21 +53,35 @@ const Page = ({ params }: { params: { id: string } }) => {
   const isTemporaryTrainingDataChanged =
     JSON.stringify(temporaryTrainingData) !==
     JSON.stringify(defaultTemporaryTrainingValues);
+
   const [errors, setErrors] = useState({
     planName: '',
     exercisesArr: '',
     exercises: [{ exercisesName: '', series: '' }],
   });
   useEffect(() => {
+    const sessionData = sessionStorage.getItem('training-storage');
+    if (sessionData) {
+      const parsedSessionData = JSON.parse(sessionData);
+      updateTemporaryTrainingData(
+        parsedSessionData.state.temporaryTrainingData
+      );
+    }
     if (data && !isTemporaryTrainingDataChanged) {
       updateTemporaryTrainingData(data);
       changeActualTrainingPlanId(id);
     } else if (actualTrainingPlanId !== id && data) {
-      console.log('inne');
       changeActualTrainingPlanId(id);
       updateTemporaryTrainingData(data);
     }
-  }, [actualTrainingPlanId, changeActualTrainingPlanId, data, id, isTemporaryTrainingDataChanged, updateTemporaryTrainingData]);
+  }, [
+    actualTrainingPlanId,
+    changeActualTrainingPlanId,
+    data,
+    id,
+    isTemporaryTrainingDataChanged,
+    updateTemporaryTrainingData,
+  ]);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
