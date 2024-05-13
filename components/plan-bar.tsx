@@ -12,6 +12,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { Dispatch, SetStateAction, useState } from 'react';
+import ConfirmPopup from './confirm-popup';
 
 type UserPlanBar = {
   planName: string;
@@ -114,17 +115,12 @@ export const DeletBtn = ({
         </Button>
       </PopoverTrigger>
       <PopoverContent className=' border-slate-100/50 shadow-none'>
-        <div className='flex items-center justify-center flex-col gap-2'>
-          <p className='text-center'>
-            Are you sure you want to delete the plan?
-          </p>
-          <div className='flex gap-3'>
-            <Button onClick={removePlan} variant='danger'>
-              Yes
-            </Button>
-            <Button onClick={() => setPopoverIsOpen(false)}>No</Button>
-          </div>
-        </div>
+       
+        <ConfirmPopup
+          message='Are you sure you want to delete the plan?'
+          confirmFunction={removePlan}
+          setPopoverIsOpen={setPopoverIsOpen}
+        />
       </PopoverContent>
     </Popover>
   );

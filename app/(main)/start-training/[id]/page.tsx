@@ -4,7 +4,7 @@ import ErrorComponent from '@/components/error-component';
 import LoaderComponent from '@/components/loader-component';
 import PlanForm from '@/components/plan-form/plan-form';
 import SectionTitle from '@/components/section-title';
-import { addNewPlanToHostory, fetchPlan } from '@/db/plans-functions';
+import { addNewPlanToHistory, fetchPlan } from '@/db/plans-functions';
 import { PlanDataType, TrainingDataType } from '@/types/type';
 import { formatDateTime } from '@/utils/date-transform';
 import { validateForm } from '@/utils/plan-functions';
@@ -25,13 +25,13 @@ const Page = ({ params }: { params: { id: string } }) => {
   }
   const { toast } = useToast();
 
-  const { data, isLoading, isError }: UseQueryResult<PlanDataType> = useQuery(
-    ['plan', id],
-    () => fetchPlan({ planId: id.toString() })
-  );
+  const { data, isLoading, isError }: UseQueryResult<PlanDataType> =
+    useQuery(['plan', id], () => fetchPlan({ planId: id.toString() }), {
+      refetchOnMount: true,
+    });
 
   const { mutateAsync } = useMutation((formData: TrainingDataType) =>
-    addNewPlanToHostory(formData)
+    addNewPlanToHistory(formData)
   );
   const trainingTime = formatDateTime(new Date());
 
@@ -59,6 +59,7 @@ const Page = ({ params }: { params: { id: string } }) => {
     exercisesArr: '',
     exercises: [{ exercisesName: '', series: '' }],
   });
+
   useEffect(() => {
     const sessionData = sessionStorage.getItem('training-storage');
     if (sessionData) {
@@ -130,7 +131,9 @@ const Page = ({ params }: { params: { id: string } }) => {
         Start Training:{' '}
         <span className='text-text-secondary'>{data?.planName}</span>
       </SectionTitle>
-      {data && (
+      {isLoading && !data ? (
+        <LoaderComponent />
+      ) : (
         <PlanForm
           trainingTime={trainingTime}
           errors={errors}

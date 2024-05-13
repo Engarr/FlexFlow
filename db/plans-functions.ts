@@ -35,7 +35,7 @@ export async function addNewPlan(formData: PlanDataType) {
     body: JSON.stringify(formData),
   });
 }
-export async function addNewPlanToHostory(formData: TrainingDataType) {
+export async function addNewPlanToHistory(formData: TrainingDataType) {
   console.log(`${url}/history`);
   await fetch(`${url}/training-history`, {
     method: 'POST',
