@@ -7,11 +7,21 @@ import { UseQueryResult, useMutation, useQuery } from 'react-query';
 import { QUERY_KEY_PLANS, editUserPlan, fetchPlan } from '@/db/plans-functions';
 import { useAuth } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
-import { PlanDataType, UserPlanType } from '@/types/type';
+import { ErrorsType, PlanDataType, UserPlanType } from '@/types/type';
 import LoaderComponent from '@/components/loader-component';
 import ErrorComponent from '@/components/error-component';
-import { validateForm } from '@/utils/plan-functions';
 import { useToast } from '@/components/ui/use-toast';
+import {
+  handleAddNewExersise,
+  handleAddSeries,
+  handleRemoveExersise,
+  handleRemoveSeries,
+  onChangeExerciseName,
+  onChangePlanName,
+  onChangeSeriesRepetitions,
+  onChangeSeriesWeight,
+  validateForm,
+} from '@/utils/plan-functions';
 
 const EdditPlan = () => {
   const { planId } = useParams();
@@ -24,7 +34,7 @@ const EdditPlan = () => {
 
   const defaultValues = {
     planName: '',
-    creator: '',
+
     exercisesArr: [
       {
         exercisesName: '',
@@ -72,8 +82,12 @@ const EdditPlan = () => {
       });
       return;
     }
+    const edditedPlanValues = {
+      ...newPlanData,
+      creator: userId,
+    };
     try {
-      await mutateAsync(newPlanData);
+      await mutateAsync(edditedPlanValues);
       toast({
         title: 'Success!',
         description: 'The Plan Has Been Changed Successfully!',
@@ -86,6 +100,52 @@ const EdditPlan = () => {
         variant: 'destructive',
       });
     }
+  };
+  const planNameHandler = (planName: string) => {
+    onChangePlanName(planName, setNewPlanData);
+  };
+  const exerciseSeriesWeightHandler = (
+    value: string,
+    planId: number,
+    seriesId: number
+  ) => {
+    onChangeSeriesWeight(value, planId, seriesId, setNewPlanData);
+  };
+  const exerciseNameHandler = (name: string, planId: number) => {
+    onChangeExerciseName(name, planId, setNewPlanData);
+  };
+  const addSeriesHandler = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    index: number
+  ) => {
+    handleAddSeries(e, index, setNewPlanData);
+  };
+  const removeSeries = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    exerciseId: number,
+    seriesId: number
+  ) => {
+    handleRemoveSeries(e, exerciseId, seriesId, setNewPlanData);
+  };
+  const changeSeriesRepetitionsHandler = (
+    value: string,
+    planId: number,
+    seriesId: number
+  ) => {
+    onChangeSeriesRepetitions(value, planId, seriesId, setNewPlanData);
+  };
+  const addNewExerciseHandler = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    index: number
+  ) => {
+    handleAddNewExersise(e, index, setNewPlanData);
+  };
+  const removeExerciseHandler = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    exerciseId: number,
+    setErrors: React.Dispatch<React.SetStateAction<ErrorsType>>
+  ) => {
+    handleRemoveExersise(e, exerciseId, setNewPlanData, setErrors);
   };
 
   return (
@@ -101,9 +161,16 @@ const EdditPlan = () => {
         <PlanForm
           errors={errors}
           onSubmit={onSubmit}
-          planData={newPlanData}
+          data={newPlanData}
           setErrors={setErrors}
-          setPlanData={setNewPlanData}
+          onChangePlanName={planNameHandler}
+          onChangeExerciseSeriesWeight={exerciseSeriesWeightHandler}
+          onChangeExerciseName={exerciseNameHandler}
+          onAddSeries={addSeriesHandler}
+          onRemoveSeries={removeSeries}
+          onChangeSeriesRepetitions={changeSeriesRepetitionsHandler}
+          addNewExersiseHandler={addNewExerciseHandler}
+          removeExerciseHandler={removeExerciseHandler}
         />
       )}
     </div>

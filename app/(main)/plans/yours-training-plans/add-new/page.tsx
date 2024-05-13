@@ -1,7 +1,6 @@
 'use client';
 import { useState } from 'react';
 import SectionTitle from '@/components/section-title';
-
 import { useToast } from '@/components/ui/use-toast';
 import PlanForm from '@/components/plan-form/plan-form';
 import { useMutation } from 'react-query';
@@ -9,8 +8,18 @@ import { redirect, useRouter } from 'next/navigation';
 import { Loader } from 'lucide-react';
 import { addNewPlan } from '@/db/plans-functions';
 import { useAuth } from '@clerk/nextjs';
-import { PlanDataType } from '@/types/type';
-import { validateForm } from '@/utils/plan-functions';
+import { ErrorsType, PlanDataType } from '@/types/type';
+import {
+  handleAddNewExersise,
+  handleAddSeries,
+  handleRemoveExersise,
+  handleRemoveSeries,
+  onChangeExerciseName,
+  onChangePlanName,
+  onChangeSeriesRepetitions,
+  onChangeSeriesWeight,
+  validateForm,
+} from '@/utils/plan-functions';
 
 const AddNewPlan = () => {
   const router = useRouter();
@@ -19,7 +28,7 @@ const AddNewPlan = () => {
     redirect('/');
   }
   const { toast } = useToast();
-  const [planData, setPlanData] = useState({
+  const [formData, setFormData] = useState({
     planName: '',
     exercisesArr: [
       {
@@ -28,20 +37,19 @@ const AddNewPlan = () => {
         seriesData: [{ seriesId: 1, series: 1, weight: 0, repetitions: 10 }],
       },
     ],
-    creator: userId,
   });
   const [errors, setErrors] = useState({
     planName: '',
     exercisesArr: '',
     exercises: [{ exercisesName: '', series: '' }],
   });
-  const { mutateAsync, isLoading } = useMutation((formData: PlanDataType) =>
-    addNewPlan(formData)
+  const { mutateAsync, isLoading } = useMutation((PlanData: PlanDataType) =>
+    addNewPlan(PlanData)
   );
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validateForm(planData, setErrors)) {
+    if (validateForm(formData, setErrors)) {
       toast({
         title: 'Form Validation Error',
         description: 'Correct Errors In The Form',
@@ -49,9 +57,12 @@ const AddNewPlan = () => {
       });
       return;
     }
-
+    const planDataWithUserId = {
+      ...formData,
+      creator: userId,
+    };
     try {
-      await mutateAsync(planData);
+      await mutateAsync(planDataWithUserId);
       toast({
         title: 'Success!',
         description: 'Plan Data Submitted Successfully',
@@ -65,6 +76,48 @@ const AddNewPlan = () => {
       });
     }
   };
+  const planNameHandler = (planName: string) => {
+    onChangePlanName(planName, setFormData);
+  };
+  const exerciseSeriesWeightHandler = (
+    value: string,
+    planId: number,
+    seriesId: number
+  ) => {
+    onChangeSeriesWeight(value, planId, seriesId, setFormData);
+  };
+  const exerciseNameHandler = (name: string, planId: number) => {
+    onChangeExerciseName(name, planId, setFormData);
+  };
+  const addSeriesHandler = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    index: number
+  ) => {
+    handleAddSeries(e, index, setFormData);
+  };
+  const removeSeries = (exerciseId: number, seriesId: number) => {
+    handleRemoveSeries(exerciseId, seriesId, setFormData);
+  };
+  const changeSeriesRepetitionsHandler = (
+    value: string,
+    planId: number,
+    seriesId: number
+  ) => {
+    onChangeSeriesRepetitions(value, planId, seriesId, setFormData);
+  };
+  const addNewExerciseHandler = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    index: number
+  ) => {
+    handleAddNewExersise(e, index, setFormData);
+  };
+  const removeExerciseHandler = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    exerciseId: number,
+    setErrors: React.Dispatch<React.SetStateAction<ErrorsType>>
+  ) => {
+    handleRemoveExersise(e, exerciseId, setFormData, setErrors);
+  };
 
   return (
     <div className='relative'>
@@ -77,9 +130,16 @@ const AddNewPlan = () => {
         <PlanForm
           errors={errors}
           onSubmit={onSubmit}
-          planData={planData}
+          data={formData}
           setErrors={setErrors}
-          setPlanData={setPlanData}
+          onChangePlanName={planNameHandler}
+          onChangeExerciseSeriesWeight={exerciseSeriesWeightHandler}
+          onChangeExerciseName={exerciseNameHandler}
+          onAddSeries={addSeriesHandler}
+          onRemoveSeries={removeSeries}
+          onChangeSeriesRepetitions={changeSeriesRepetitionsHandler}
+          addNewExersiseHandler={addNewExerciseHandler}
+          removeExerciseHandler={removeExerciseHandler}
         />
       )}
     </div>

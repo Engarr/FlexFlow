@@ -40,18 +40,3 @@ const InputItem = ({
 
 export default InputItem;
 
-//   <InputItem
-//   id='planName'
-//   label='Exercise Name'
-//   type='text'
-//   style='items-start'
-//   value={plan.exercisesName}
-//   onChange={(e) =>
-//     onChangeExerciseName(
-//       e.target.value,
-//       plan.id,
-//       setPlanData
-//     )
-//   }
-//   error={errors.exercises[i]?.exercisesName}
-// />

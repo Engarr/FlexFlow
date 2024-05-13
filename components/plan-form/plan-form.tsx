@@ -2,35 +2,62 @@ import React from 'react';
 import { Button } from '../ui/button';
 import InputItem from '@/components/plan-form/_components/input-item';
 import ErrorMessage from '../error-message';
-import {
-  handleAddNewExersise,
-  handleAddSeries,
-  handleRemoveExersise,
-  handleRemoveSeries,
-  onChangePlanName,
-  onChangeSeriesRepetitions,
-  onChangeSeriesWeight,
-} from '@/utils/plan-functions';
 import ExerciseInput from '@/components/plan-form/_components/exercise-input';
 import { Trash2 } from 'lucide-react';
-import { ErrorsType, PlanDataType } from '@/types/type';
+import { ErrorsType, FormDataType } from '@/types/type';
 
 type PlanFormType = {
   onSubmit: (e: React.FormEvent) => Promise<void>;
-  planData: PlanDataType;
+  data: FormDataType;
   trainingTime?: string;
   errors: ErrorsType;
-  setPlanData: React.Dispatch<React.SetStateAction<PlanDataType>>;
   setErrors: React.Dispatch<React.SetStateAction<ErrorsType>>;
+  onChangePlanName: (planName: string) => void;
+  onChangeExerciseSeriesWeight: (
+    value: string,
+    planId: number,
+    seriesId: number
+  ) => void;
+  onChangeExerciseName: (name: string, planId: number) => void;
+  onAddSeries: (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    index: number
+  ) => void;
+  onRemoveSeries: (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    exerciseId: number,
+    seriesId: number
+  ) => void;
+  onChangeSeriesRepetitions: (
+    value: string,
+    planId: number,
+    seriesId: number
+  ) => void;
+  addNewExersiseHandler: (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    index: number
+  ) => void;
+  removeExerciseHandler: (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    exerciseId: number,
+    setErrors: React.Dispatch<React.SetStateAction<ErrorsType>>
+  ) => void;
 };
 
 const PlanForm = ({
   onSubmit,
-  planData,
+  data,
   errors,
-  setPlanData,
   setErrors,
   trainingTime,
+  onChangePlanName,
+  onChangeExerciseName,
+  onChangeExerciseSeriesWeight,
+  onAddSeries,
+  onRemoveSeries,
+  onChangeSeriesRepetitions,
+  addNewExersiseHandler,
+  removeExerciseHandler,
 }: PlanFormType) => {
   return (
     <form
@@ -47,8 +74,8 @@ const PlanForm = ({
         id='planName'
         label='Plan Name:'
         type='text'
-        value={planData.planName || ''}
-        onChange={(e) => onChangePlanName(e.target.value, setPlanData)}
+        value={data.planName || ''}
+        onChange={(e) => onChangePlanName(e.target.value)}
         style='mb-1 lg:mb-2'
         error={errors.planName}
       />
@@ -59,8 +86,8 @@ const PlanForm = ({
           style='text-base lg:text-xl'
         />
       )}
-      {planData.exercisesArr &&
-        planData.exercisesArr.map((plan, i) => (
+      {data.exercisesArr &&
+        data.exercisesArr.map((plan, i) => (
           <div
             key={i}
             className='my-1 lg:my-2 border-2 dark:border-slate-100/10 p-2 lg:p-4 rounded-md relative '>
@@ -75,18 +102,16 @@ const PlanForm = ({
                 <ExerciseInput
                   error={errors.exercises[i]?.exercisesName}
                   planId={plan.id}
-                  setPlanData={setPlanData}
-                  value={planData.exercisesArr[i].exercisesName || ''}
-                  searchExercise={planData.exercisesArr[i].exercisesName}
+                  onChangeExerciseName={onChangeExerciseName}
+                  value={data.exercisesArr[i].exercisesName || ''}
+                  searchExercise={data.exercisesArr[i].exercisesName}
                 />
               </div>
               <Button
                 size='sm'
                 variant='ghost'
                 className='mt-6'
-                onClick={(e) =>
-                  handleRemoveExersise(e, plan.id, setPlanData, setErrors)
-                }>
+                onClick={(e) => removeExerciseHandler(e, plan.id, setErrors)}>
                 <div>
                   <Trash2 />
                 </div>
@@ -96,69 +121,61 @@ const PlanForm = ({
               {errors.exercises[i]?.series && (
                 <ErrorMessage message={errors.exercises[i].series} />
               )}
-              {planData.exercisesArr[i].seriesData.map(
-                (exercisesSeries, index) => (
-                  <div
-                    className='flex gap-2 items-start justify-center odd:bg-gray-200/50  dark:odd:bg-gray-700/40 p-2 rounded-md'
-                    key={index}>
-                    <div className='flex max-lg:flex-col w-full gap-2'>
-                      <InputItem
-                        id='series'
-                        label='Series:'
-                        value={exercisesSeries.series || ''}
-                        type='number'
-                        style='disabled:cursor-default disabled:opacity-100'
-                        disabled
-                      />
-                      <InputItem
-                        id='weight'
-                        label='Weight (kg):'
-                        value={exercisesSeries.weight || ''}
-                        type='number'
-                        onChange={(e) =>
-                          onChangeSeriesWeight(
-                            e.target.value,
-                            plan.id,
-                            exercisesSeries.seriesId,
-                            setPlanData
-                          )
-                        }
-                      />
-                      <InputItem
-                        id='repetitions'
-                        label='Repetitions:'
-                        value={exercisesSeries.repetitions || ''}
-                        type='number'
-                        onChange={(e) =>
-                          onChangeSeriesRepetitions(
-                            e.target.value,
-                            plan.id,
-                            exercisesSeries.seriesId,
-                            setPlanData
-                          )
-                        }
-                      />
-                    </div>
-
-                    <Button
-                      size='sm'
-                      variant='danger'
-                      className='mt-6 '
-                      onClick={() =>
-                        handleRemoveSeries(
+              {data.exercisesArr[i].seriesData.map((exercisesSeries, index) => (
+                <div
+                  className='flex gap-2 items-start justify-center odd:bg-gray-200/50  dark:odd:bg-gray-700/40 p-2 rounded-md'
+                  key={index}>
+                  <div className='flex max-lg:flex-col w-full gap-2'>
+                    <InputItem
+                      id='series'
+                      label='Series:'
+                      value={exercisesSeries.series || ''}
+                      type='number'
+                      style='disabled:cursor-default disabled:opacity-100'
+                      disabled
+                    />
+                    <InputItem
+                      id='weight'
+                      label='Weight (kg):'
+                      value={exercisesSeries.weight || ''}
+                      type='number'
+                      onChange={(e) =>
+                        onChangeExerciseSeriesWeight(
+                          e.target.value,
                           plan.id,
-                          exercisesSeries.seriesId,
-                          setPlanData
+                          exercisesSeries.seriesId
                         )
-                      }>
-                      <div>X</div>
-                    </Button>
+                      }
+                    />
+                    <InputItem
+                      id='repetitions'
+                      label='Repetitions:'
+                      value={exercisesSeries.repetitions || ''}
+                      type='number'
+                      onChange={(e) =>
+                        onChangeSeriesRepetitions(
+                          e.target.value,
+                          plan.id,
+                          exercisesSeries.seriesId
+                        )
+                      }
+                    />
                   </div>
-                )
-              )}
+
+                  <Button
+                    size='sm'
+                    variant='danger'
+                    className='mt-6 '
+                    onClick={(e) =>
+                      onRemoveSeries(e, plan.id, exercisesSeries.seriesId)
+                    }>
+                    <div>X</div>
+                  </Button>
+                </div>
+              ))}
 
               <Button
-                onClick={(e) => handleAddSeries(e, i, setPlanData)}
+                onClick={(e) => onAddSeries(e, i)}
                 className=''
                 variant='primaryOutline'>
                 Add Series
@@ -167,9 +184,7 @@ const PlanForm = ({
           </div>
         ))}
       <Button
-        onClick={(e) =>
-          handleAddNewExersise(e, planData.exercisesArr.length, setPlanData)
-        }
+        onClick={(e) => addNewExersiseHandler(e, data.exercisesArr.length)}
         className=''>
         Add New Exercise
       </Button>

@@ -1,9 +1,9 @@
-import { ErrorsType, PlanDataType, TrainingDataType } from '@/types/type';
+import { ErrorsType, FormDataType, TrainingDataType } from '@/types/type';
 
 export const handleAddSeries = (
   e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   index: number,
-  setPlanData: React.Dispatch<React.SetStateAction<PlanDataType>>
+  setPlanData: React.Dispatch<React.SetStateAction<FormDataType>>
 ) => {
   e.preventDefault();
 
@@ -29,10 +29,14 @@ export const handleAddSeries = (
   }));
 };
 export const handleRemoveSeries = (
+  e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+
   exerciseId: number,
   seriesId: number,
-  setPlanData: React.Dispatch<React.SetStateAction<PlanDataType>>
+  setPlanData: React.Dispatch<React.SetStateAction<FormDataType>>
 ) => {
+  e.preventDefault();
+
   setPlanData((prevData) => ({
     ...prevData,
     exercisesArr: prevData.exercisesArr.map((exercise) => {
@@ -56,7 +60,7 @@ export const handleRemoveSeries = (
 export const handleAddNewExersise = (
   e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   index: number,
-  setPlanData: React.Dispatch<React.SetStateAction<PlanDataType>>
+  setPlanData: React.Dispatch<React.SetStateAction<FormDataType>>
 ) => {
   e.preventDefault();
 
@@ -74,7 +78,7 @@ export const handleAddNewExersise = (
 };
 export const onChangePlanName = (
   planName: string,
-  setPlanData: React.Dispatch<React.SetStateAction<PlanDataType>>
+  setPlanData: React.Dispatch<React.SetStateAction<FormDataType>>
 ) => {
   setPlanData((prevData) => ({
     ...prevData,
@@ -85,7 +89,7 @@ export const onChangeSeriesWeight = (
   value: string,
   planId: number,
   seriesId: number,
-  setPlanData: React.Dispatch<React.SetStateAction<PlanDataType>>
+  setPlanData: React.Dispatch<React.SetStateAction<FormDataType>>
 ) => {
   setPlanData((prevData) => ({
     ...prevData,
@@ -112,7 +116,7 @@ export const onChangeSeriesRepetitions = (
   value: string,
   planId: number,
   seriesId: number,
-  setPlanData: React.Dispatch<React.SetStateAction<PlanDataType>>
+  setPlanData: React.Dispatch<React.SetStateAction<FormDataType>>
 ) => {
   setPlanData((prevData) => ({
     ...prevData,
@@ -138,7 +142,7 @@ export const onChangeSeriesRepetitions = (
 export const onChangeExerciseName = (
   name: string,
   planId: number,
-  setPlanData: React.Dispatch<React.SetStateAction<PlanDataType>>
+  setPlanData: React.Dispatch<React.SetStateAction<FormDataType>>
 ) => {
   setPlanData((prevData) => ({
     ...prevData,
@@ -156,7 +160,7 @@ export const onChangeExerciseName = (
 export const handleRemoveExersise = (
   e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   exerciseId: number,
-  setPlanData: React.Dispatch<React.SetStateAction<PlanDataType>>,
+  setPlanData: React.Dispatch<React.SetStateAction<FormDataType>>,
   setErrors: React.Dispatch<React.SetStateAction<ErrorsType>>
 ) => {
   e.preventDefault();
@@ -176,7 +180,7 @@ export const handleRemoveExersise = (
 };
 
 export const validateForm = (
-  planData: PlanDataType,
+  planData: FormDataType,
   setErrors: React.Dispatch<React.SetStateAction<ErrorsType>>
 ) => {
   const newErrors = {

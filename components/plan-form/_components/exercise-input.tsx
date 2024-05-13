@@ -10,7 +10,7 @@ import { PlanDataType } from '@/types/type';
 type ExerciseInputType = {
   value: string;
   planId: number;
-  setPlanData: React.Dispatch<React.SetStateAction<PlanDataType>>;
+  onChangeExerciseName: (name: string, planId: number) => void;
   error: string;
   searchExercise: string;
 };
@@ -18,7 +18,7 @@ type ExerciseInputType = {
 const ExerciseInput = ({
   value,
   planId,
-  setPlanData,
+  onChangeExerciseName,
   error,
   searchExercise,
 }: ExerciseInputType) => {
@@ -58,9 +58,7 @@ const ExerciseInput = ({
         id='exerciseName'
         type='text'
         value={value}
-        onChange={(e) =>
-          onChangeExerciseName(e.target.value, planId, setPlanData)
-        }
+        onChange={(e) => onChangeExerciseName(e.target.value, planId)}
         onClick={toggleDropdown}
       />
       {error && <ErrorMessage message={error} />}
@@ -72,7 +70,7 @@ const ExerciseInput = ({
                 className='cursor-pointer pb-1'
                 key={e.exerciseName}
                 onClick={() => {
-                  onChangeExerciseName(e.exerciseName, planId, setPlanData);
+                  onChangeExerciseName(e.exerciseName, planId);
                   setDropdownOpen(false);
                 }}>
                 {e.exerciseName}

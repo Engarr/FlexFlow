@@ -54,3 +54,16 @@ export type ErrorsType = {
     series: string;
   }[];
 };
+export type FormDataType = {
+  planName: string;
+  exercisesArr: {
+    exercisesName: string;
+    id: number;
+    seriesData: {
+      seriesId: number;
+      series: number;
+      weight: number;
+      repetitions: number;
+    }[];
+  }[];
+};

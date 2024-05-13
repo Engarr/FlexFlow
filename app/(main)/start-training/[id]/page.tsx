@@ -1,6 +1,5 @@
 'use client';
 import { useAuth } from '@clerk/nextjs';
-
 import ErrorComponent from '@/components/error-component';
 import LoaderComponent from '@/components/loader-component';
 import PlanForm from '@/components/plan-form/plan-form';
@@ -13,7 +12,8 @@ import React, { useEffect, useState } from 'react';
 import { UseQueryResult, useMutation, useQuery } from 'react-query';
 import { redirect, useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
-import { defaultPlanValues, defaultTrainingValues } from './_lib';
+import { useStore } from '@/context/store';
+import { defaultTemporaryTrainingValues } from './_lib';
 
 const Page = ({ params }: { params: { id: string } }) => {
   const { id } = params;
@@ -33,33 +33,45 @@ const Page = ({ params }: { params: { id: string } }) => {
   const { mutateAsync } = useMutation((formData: TrainingDataType) =>
     addNewPlanToHostory(formData)
   );
-
   const trainingTime = formatDateTime(new Date());
-  const [trainingData, setTrainingData] = useState(defaultPlanValues);
-  const [newTrainingData, setNewTrainingData] = useState(defaultTrainingValues);
+  
+  const {
+    temporaryTrainingData,
+    updateTemporaryTrainingData,
+    onChangeExerciseName,
+    onChangePlanName,
+    onChangeSeriesRepetitions,
+    onChangeSeriesWeight,
+    handleAddSeries,
+    handleRemoveExersise,
+    handleRemoveSeries,
+    handlerAddExercise,
+    actualTrainingPlanId,
+    changeActualTrainingPlanId,
+  } = useStore();
 
+  const isTemporaryTrainingDataChanged =
+    JSON.stringify(temporaryTrainingData) !==
+    JSON.stringify(defaultTemporaryTrainingValues);
   const [errors, setErrors] = useState({
     planName: '',
     exercisesArr: '',
     exercises: [{ exercisesName: '', series: '' }],
   });
   useEffect(() => {
-    if (data) {
-      setTrainingData(data);
+    if (data && !isTemporaryTrainingDataChanged) {
+      updateTemporaryTrainingData(data);
+      changeActualTrainingPlanId(id);
+    } else if (actualTrainingPlanId !== id && data) {
+      console.log('inne');
+      changeActualTrainingPlanId(id);
+      updateTemporaryTrainingData(data);
     }
-  }, [data]);
-  useEffect(() => {
-    setNewTrainingData({
-      planName: trainingData.planName,
-      exercisesArr: trainingData.exercisesArr,
-      date: trainingTime,
-      userId: userId,
-    });
-  }, [trainingData, trainingTime, userId]);
+  }, [actualTrainingPlanId, changeActualTrainingPlanId, data, id, isTemporaryTrainingDataChanged, updateTemporaryTrainingData]);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validateForm(trainingData, setErrors)) {
+    if (validateForm(temporaryTrainingData, setErrors)) {
       toast({
         title: 'Form Validation Error',
         description: 'Correct Errors In The Form',
@@ -67,6 +79,13 @@ const Page = ({ params }: { params: { id: string } }) => {
       });
       return;
     }
+    const newTrainingData = {
+      ...temporaryTrainingData,
+      planName: temporaryTrainingData.planName,
+      exercisesArr: temporaryTrainingData.exercisesArr,
+      date: trainingTime,
+      userId: userId,
+    };
     try {
       await mutateAsync(newTrainingData);
       toast({
@@ -90,6 +109,7 @@ const Page = ({ params }: { params: { id: string } }) => {
   if (isError) {
     return <ErrorComponent message='Failed Fetching Data' />;
   }
+
   return (
     <div>
       <SectionTitle>
@@ -101,9 +121,16 @@ const Page = ({ params }: { params: { id: string } }) => {
           trainingTime={trainingTime}
           errors={errors}
           onSubmit={onSubmit}
-          planData={trainingData}
+          data={temporaryTrainingData}
           setErrors={setErrors}
-          setPlanData={setTrainingData}
+          onChangePlanName={onChangePlanName}
+          onChangeExerciseSeriesWeight={onChangeSeriesWeight}
+          onChangeExerciseName={onChangeExerciseName}
+          removeExerciseHandler={handleRemoveExersise}
+          onAddSeries={handleAddSeries}
+          onRemoveSeries={handleRemoveSeries}
+          onChangeSeriesRepetitions={onChangeSeriesRepetitions}
+          addNewExersiseHandler={handlerAddExercise}
         />
       )}
     </div>
