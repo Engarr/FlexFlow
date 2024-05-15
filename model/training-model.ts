@@ -5,6 +5,8 @@ const { Schema } = mongoose;
 const trainingSchema = new Schema({
   planName: { type: String, required: true },
   date: { type: String, required: true },
+  dayOfTheWeek: { type: String, required: true },
+  time: { type: String, required: true },
   userId: { type: String, required: true },
   exercisesArr: [
     {

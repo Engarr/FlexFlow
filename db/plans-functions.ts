@@ -26,6 +26,26 @@ export async function fetchPlan({ planId }: { planId: string }) {
   return plan;
 }
 
+export async function fetchTrainingsHistoryByDate({ date }: { date: string }) {
+  const response = await fetch(`${url}/training-history?date=${date}`);
+  const training = await response.json();
+  return training;
+}
+//Funkcja pobieraia detali treningu //dodać Route do funkcji
+export async function fetchTrainingDetails({
+  trainingId,
+  userId,
+}: {
+  trainingId: string;
+  userId: string;
+}) {
+  const response = await fetch(
+    `${url}/training-history/${trainingId}?userId=${userId}`
+  );
+  const training = await response.json();
+  return training;
+}
+
 export async function addNewPlan(formData: PlanDataType) {
   await fetch(`${url}/plans`, {
     method: 'POST',

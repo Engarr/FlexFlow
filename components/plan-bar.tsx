@@ -17,6 +17,7 @@ import ConfirmPopup from './confirm-popup';
 type UserPlanBar = {
   planName: string;
   planId?: string;
+  trainingId?: string;
   userId?: string;
   isAppPlan?: string;
 };
@@ -24,6 +25,7 @@ type UserPlanBar = {
 export const PlanBar = ({
   planName,
   planId,
+  trainingId,
   userId,
   isAppPlan,
 }: UserPlanBar) => {
@@ -57,6 +59,9 @@ export const PlanBar = ({
       }
     }
   };
+  const detailsLink = trainingId
+    ? `/training/details/${trainingId}`
+    : `/plans/details/${planId}`;
   return (
     <>
       <div className='bg-card p-3 rounded-md flex lg:justify-between max-lg:flex-col items-center max-lg:gap-2 shadow-lg'>
@@ -69,7 +74,7 @@ export const PlanBar = ({
               <Play size='20px' />
             </Button>
           </Link>
-          <Link href={`/plans/details/${planId}`}>
+          <Link href={detailsLink}>
             <Button size='sm' tabIndex={-1}>
               <Info size='20px' />
             </Button>
@@ -115,7 +120,6 @@ export const DeletBtn = ({
         </Button>
       </PopoverTrigger>
       <PopoverContent className=' border-slate-100/50 shadow-none'>
-       
         <ConfirmPopup
           message='Are you sure you want to delete the plan?'
           confirmFunction={removePlan}

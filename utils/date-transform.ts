@@ -1,4 +1,8 @@
-export function formatDateTime(date: Date | undefined): string {
+export function formatDateTime(date: Date | undefined): {
+  date: string;
+  time: string;
+  dayOfTheWeek: string;
+} {
   const days = [
     'Sunday',
     'Monday',
@@ -35,7 +39,11 @@ export function formatDateTime(date: Date | undefined): string {
     const meridiem = hour < '12' ? 'AM' : 'PM';
     hour = (parseInt(hour) % 12).toString().padStart(2, '0');
 
-    return `${day} ${month} ${year} ${hour}:${minute} ${meridiem} ${dayOfWeek}`;
+    return {
+      date: `${day} ${month} ${year}`,
+      time: `${hour}:${minute} ${meridiem}`,
+      dayOfTheWeek: dayOfWeek,
+    };
   }
-  return '';
+  return { date: '', time: '', dayOfTheWeek: '' };
 }

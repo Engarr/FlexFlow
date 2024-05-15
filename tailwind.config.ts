@@ -23,6 +23,7 @@ const config = {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
+        green: 'hsl(var(--green))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         text: {

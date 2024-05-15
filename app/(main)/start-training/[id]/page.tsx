@@ -25,10 +25,13 @@ const Page = ({ params }: { params: { id: string } }) => {
   }
   const { toast } = useToast();
 
-  const { data, isLoading, isError }: UseQueryResult<PlanDataType> =
-    useQuery(['plan', id], () => fetchPlan({ planId: id.toString() }), {
+  const { data, isLoading, isError }: UseQueryResult<PlanDataType> = useQuery(
+    ['plan', id],
+    () => fetchPlan({ planId: id.toString() }),
+    {
       refetchOnMount: true,
-    });
+    }
+  );
 
   const { mutateAsync } = useMutation((formData: TrainingDataType) =>
     addNewPlanToHistory(formData)
@@ -98,7 +101,9 @@ const Page = ({ params }: { params: { id: string } }) => {
       ...temporaryTrainingData,
       planName: temporaryTrainingData.planName,
       exercisesArr: temporaryTrainingData.exercisesArr,
-      date: trainingTime,
+      date: trainingTime.date,
+      dayOfTheWeek: trainingTime.dayOfTheWeek,
+      time: trainingTime.time,
       userId: userId,
     };
     try {
@@ -135,7 +140,7 @@ const Page = ({ params }: { params: { id: string } }) => {
         <LoaderComponent />
       ) : (
         <PlanForm
-          trainingTime={trainingTime}
+          trainingTime={trainingTime.date}
           errors={errors}
           onSubmit={onSubmit}
           data={temporaryTrainingData}

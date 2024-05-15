@@ -46,5 +46,4 @@ export const PUT = async (req: NextRequest) => {
   }
 };
 
-// const topic = await Topic.findOne({ _id: id });
-// return NextResponse.json({ topic }, { status: 200 });
+

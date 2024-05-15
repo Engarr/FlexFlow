@@ -6,6 +6,7 @@
   :root {
     --main-background: hsl(204, 45%, 98%);
     --text-secondary: 85, 85%, 35%;
+    --green: 84, 81%, 44%;
     --text: 217, 33%, 17%;
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -40,6 +41,7 @@
 
   .dark {
     --main-background: rgb(37, 40, 45);
+    --green: 83, 78%, 55%;
     --text: 215, 20%, 95%;
     --text-secondary: 83, 78%, 55%;
     --second-background: #1e1e1e;
