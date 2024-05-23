@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { TrainingDataType } from '@/types/type';
 import LoaderComponent from './loader-component';

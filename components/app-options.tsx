@@ -1,4 +1,4 @@
-import { ChevronUp, Settings } from 'lucide-react';
+import {  Settings } from 'lucide-react';
 import React from 'react';
 import { Button } from './ui/button';
 import {
@@ -30,9 +30,7 @@ const AppOptions = ({ style }: PropsType) => {
           </PopoverContent>
         </Popover>
       </div>
-      {/* <Button className='fixed bottom-0 right-0 mr-5' size='sm'>
-        <ChevronUp />
-      </Button> */}
+     
     </>
   );
 };

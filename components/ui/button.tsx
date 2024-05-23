@@ -19,7 +19,7 @@ const buttonVariants = cva(
         danger:
           'bg-rose-500 text-neutral-700 hover:bg-rose-400/90  border-rose-700 border-b-4 active:border-b-2',
         sidebarActive:
-          'bg-gray-500/60 dark:bg-gray-500 text-white border-gray-300 dark:border-gray-400  border-y-2 border-x dark:hover:bg-gray-500/80  ',
+          'dark:bg-gray-50/80 bg-gray-100 dark:border-gray-300 border-gray-300 dark:border-gray-400  hover:bg-gray-100 text-slate-500 border-b-2 active:border-b-0 border-t-2 border-x ',
         ghost:
           'bg-transparent text-text border-transparent border-0 hover:text-slate-400',
       },

@@ -1,10 +1,7 @@
 'use client';
 import { Button } from '@/components/ui/button';
-import { QUERY_KEY_PLANS, deletePlan } from '@/db/plans-functions';
-import { FilePenLine, Info, Pencil, Play, Trash2 } from 'lucide-react';
+import { FilePenLine, Info, Play, Trash2 } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useQueryClient, useMutation } from 'react-query';
 import { toast } from './ui/use-toast';
 import {
   Popover,
@@ -13,6 +10,7 @@ import {
 } from '@/components/ui/popover';
 import { Dispatch, SetStateAction, useState } from 'react';
 import ConfirmPopup from './confirm-popup';
+import { deletePlan } from '@/server/actions/actions';
 
 type UserPlanBar = {
   planName: string;
@@ -29,39 +27,31 @@ export const PlanBar = ({
   userId,
   isAppPlan,
 }: UserPlanBar) => {
-  const pathname = usePathname();
-  const queryClient = useQueryClient();
   const [popoverIsOpen, setPopoverIsOpen] = useState(false);
-
-  const { mutateAsync } = useMutation(
-    ({ planId, userId }: { planId: string; userId: string }) =>
-      deletePlan({ planId, userId }),
-    {
-      onSuccess: () => queryClient.invalidateQueries(QUERY_KEY_PLANS),
-    }
-  );
+  const detailsLink = trainingId
+    ? `/training/details/${trainingId}`
+    : `/plans/details/${planId}`;
 
   const removePlan = async () => {
     if (planId && userId) {
-      const res = await mutateAsync({ planId, userId });
+      const res = await deletePlan(userId, planId);
 
-      if (res.status === 200) {
+      if (res?.success) {
         toast({
-          title: `${res.title}`,
-          description: `${res.message}`,
+          title: 'Success!',
+          description: res.success,
         });
-      } else if (res.status !== 200) {
+      }
+      if (res?.error) {
         toast({
-          title: `${res.title}`,
-          description: `${res.message}`,
+          title: 'Error',
+          description: res.error,
           variant: 'destructive',
         });
       }
     }
   };
-  const detailsLink = trainingId
-    ? `/training/details/${trainingId}`
-    : `/plans/details/${planId}`;
+
   return (
     <>
       <div className='bg-card p-3 rounded-md flex lg:justify-between max-lg:flex-col items-center max-lg:gap-2 shadow-lg'>
@@ -80,7 +70,7 @@ export const PlanBar = ({
             </Button>
           </Link>
           {!isAppPlan && (
-            <Link href={`${pathname}/edit/${planId}`}>
+            <Link href={`/plans/yours-training-plans/edit/${planId}`}>
               <Button size='sm' tabIndex={-1}>
                 <FilePenLine size='20px' />
               </Button>

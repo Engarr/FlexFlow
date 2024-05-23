@@ -1,39 +1,30 @@
-'use client';
-import React from 'react';
-import { UseQueryResult, useQuery } from 'react-query';
-import { fetchPlan } from '@/db/plans-functions';
-import { PlanDataType } from '@/types/type';
+import React, { Suspense } from 'react';
 
-import ErrorComponent from '@/components/error-component';
-import { useAuth } from '@clerk/nextjs';
-import { redirect } from 'next/navigation';
+import { fetchPlanById } from '@/server/get-db-data-functions';
 import DetailContainer from '@/components/detail-container';
+import LoaderComponent from '@/components/loader-component';
+import ErrorComponent from '@/components/error-component';
+
+async function PlanDetails({ planId }: { planId: string }) {
+  const details = await fetchPlanById(planId);
+
+  if (!details) {
+    return (
+      <div>
+        <ErrorComponent message='Failed To Fetch Plan Details' />
+      </div>
+    );
+  }
+  return <DetailContainer data={details} title='Plan Detail' />;
+}
 
 const Page = ({ params }: { params: { id: string } }) => {
   const { id } = params;
-  const { userId } = useAuth();
-  if (!userId) {
-    redirect('/');
-  }
-
-  const { data, isLoading, isError }: UseQueryResult<PlanDataType> = useQuery(
-    ['plan', id],
-    () => fetchPlan({ planId: id.toString() })
-  );
-  if (isError) {
-    return <ErrorComponent message='Failed fetch data' />;
-  }
-  if (data) {
-    console.log(data);
-  }
 
   return (
-    <DetailContainer
-      data={data}
-      isLoading={isLoading}
-      title='Plan Detail'
-      
-    />
+    <Suspense fallback={<LoaderComponent />}>
+      <PlanDetails planId={id} />
+    </Suspense>
   );
 };
 

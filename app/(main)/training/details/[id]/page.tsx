@@ -6,6 +6,8 @@ import { UseQueryResult, useQuery } from 'react-query';
 import { TrainingDataType } from '@/types/type';
 import { fetchTrainingDetails } from '@/db/plans-functions';
 import DetailContainer from '@/components/detail-container';
+import NotFound from '@/components/not-found';
+import ErrorComponent from '@/components/error-component';
 
 const TrainingDetails = ({ params }: { params: { id: string } }) => {
   const { id } = params;
@@ -17,14 +19,18 @@ const TrainingDetails = ({ params }: { params: { id: string } }) => {
     useQuery([id, userId], () =>
       fetchTrainingDetails({ trainingId: id.toString(), userId: userId })
     );
-  if (data) {
-    console.log(data);
+  if (isError) {
+    return <ErrorComponent message='Failed fetch data' />;
+  }
+  if (!data && !isLoading) {
+    return <NotFound message='Plan Not Found' />;
   }
   return (
     <DetailContainer
       data={data}
+      date={data?.date}
       isLoading={isLoading}
-      title='Training Detail'
+      title='Training Name'
       isTraining={true}
     />
   );

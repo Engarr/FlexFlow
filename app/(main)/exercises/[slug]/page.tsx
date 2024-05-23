@@ -1,22 +1,17 @@
-'use client';
-
 import React from 'react';
 import SectionTitle from '@/components/section-title';
-import { categoryDescriptions, exercises } from '@/lib/app-data';
+import { categoryDescriptions } from '@/lib/app-data';
 import { Loader } from 'lucide-react';
-import { usePathname } from 'next/navigation';
 import AccordionWrapper from '@/components/accordion-wrapper';
-import ExercisesListItem from './exercises-list-item';
+import ExercisesWrapper from './exercises-wrapper';
 
 const ExerciseCategory = ({ params }: { params: { slug: string } }) => {
   const slug = params.slug;
-  const pathname = usePathname();
 
   const convertedSlug = slug
     .toLowerCase()
     .replace(/\b\w/g, (char) => char.toUpperCase());
   const musclesData = categoryDescriptions.find((m) => m.category === slug);
-  const musclesExercises = exercises.filter((e) => e.category === slug);
 
   return (
     <section>
@@ -37,17 +32,7 @@ const ExerciseCategory = ({ params }: { params: { slug: string } }) => {
         Exercises List:
       </SectionTitle>
       <div className='flex flex-col gap-3 px-2 xl:px-0 '>
-        {Array.isArray(musclesExercises) &&
-          musclesExercises.map((e) => (
-            <React.Fragment key={e.exerciseName}>
-              <ExercisesListItem
-                exerciseName={e.exerciseName}
-                imageUrl={e.imageUrl}
-                pathname={pathname}
-                link={e.link}
-              />
-            </React.Fragment>
-          ))}
+        <ExercisesWrapper slug={slug} />
       </div>
     </section>
   );
