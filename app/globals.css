@@ -94,3 +94,23 @@ body,
 :root {
   @apply h-full;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+  padding: 10px;
+}
+
+::-webkit-scrollbar-track {
+
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  transition: 3s;
+  background: #555;
+}

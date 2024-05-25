@@ -4,6 +4,8 @@ import Plan from '@/model/plan-model';
 import { z } from 'zod';
 import { formSchema } from '@/lib/form-schema';
 import { revalidatePath } from 'next/cache';
+import { TrainingDataType } from '@/types/type';
+import Training from '@/model/training-model';
 
 export async function addNewPlan(
   values: z.infer<typeof formSchema> & { creator: string }
@@ -43,5 +45,29 @@ export async function deletePlan(userId: string, planId: string) {
     await Plan.findByIdAndDelete(planId);
     revalidatePath('/plans/yours-training-plans');
     return { success: 'Plan has been deleted' };
+  }
+}
+export async function deleteTrainingHistory(
+  userId: string,
+  trainingId: string
+) {
+  await connectMongoDB();
+  const training = await Training.findOne({ _id: trainingId });
+
+  if (training.userId !== userId) {
+    return { error: 'Authorization error' };
+  } else {
+    await Training.findByIdAndDelete(trainingId);
+    revalidatePath('/home');
+    return { success: 'Training has been deleted' };
+  }
+}
+export async function addNewPlanToHistory(formData: TrainingDataType) {
+  await connectMongoDB();
+  const training = await Training.create(formData);
+  if (!training) {
+    return { error: 'Authorization error' };
+  } else {
+    return { success: 'Training has been finished successfully' };
   }
 }

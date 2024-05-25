@@ -10,7 +10,8 @@ import {
 } from '@/components/ui/popover';
 import { Dispatch, SetStateAction, useState } from 'react';
 import ConfirmPopup from './confirm-popup';
-import { deletePlan } from '@/server/actions/actions';
+import { deletePlan, deleteTrainingHistory } from '@/server/actions/actions';
+import useSWR, { useSWRConfig } from 'swr';
 
 type UserPlanBar = {
   planName: string;
@@ -18,6 +19,7 @@ type UserPlanBar = {
   trainingId?: string;
   userId?: string;
   isAppPlan?: string;
+  day?: string;
 };
 
 export const PlanBar = ({
@@ -26,21 +28,36 @@ export const PlanBar = ({
   trainingId,
   userId,
   isAppPlan,
+  day,
 }: UserPlanBar) => {
+  const { mutate } = useSWRConfig();
+
   const [popoverIsOpen, setPopoverIsOpen] = useState(false);
   const detailsLink = trainingId
     ? `/training/details/${trainingId}`
     : `/plans/details/${planId}`;
 
   const removePlan = async () => {
-    if (planId && userId) {
-      const res = await deletePlan(userId, planId);
+    let action;
+    if (userId) {
+      let action = null;
+
+      if (trainingId) {
+        action = deleteTrainingHistory(userId, trainingId);
+      } else if (planId) {
+        action = deletePlan(userId, planId);
+      }
+
+      const res = await action;
 
       if (res?.success) {
         toast({
           title: 'Success!',
           description: res.success,
         });
+        if (trainingId) {
+          mutate(['training', day]);
+        }
       }
       if (res?.error) {
         toast({

@@ -1,38 +1,44 @@
-'use client';
-import React from 'react';
-import { useAuth } from '@clerk/nextjs';
+import React, { Suspense } from 'react';
+import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
-import { UseQueryResult, useQuery } from 'react-query';
-import { TrainingDataType } from '@/types/type';
-import { fetchTrainingDetails } from '@/db/plans-functions';
 import DetailContainer from '@/components/detail-container';
-import NotFound from '@/components/not-found';
 import ErrorComponent from '@/components/error-component';
+import { fetchTrainingDetails } from '@/server/get-db-data-functions';
+import LoaderComponent from '@/components/loader-component';
 
-const TrainingDetails = ({ params }: { params: { id: string } }) => {
-  const { id } = params;
-  const { userId } = useAuth();
-  if (!userId) {
-    redirect('/');
+async function DetailsTrainingBox({
+  id,
+  userId,
+}: {
+  id: string;
+  userId: string;
+}) {
+  const trainingDetails = await fetchTrainingDetails(id, userId);
+  if (!trainingDetails) {
+    return <ErrorComponent message='Failed To Fetch Plans' />;
   }
-  const { data, isLoading, isError }: UseQueryResult<TrainingDataType> =
-    useQuery([id, userId], () =>
-      fetchTrainingDetails({ trainingId: id.toString(), userId: userId })
-    );
-  if (isError) {
-    return <ErrorComponent message='Failed fetch data' />;
-  }
-  if (!data && !isLoading) {
-    return <NotFound message='Plan Not Found' />;
-  }
+
   return (
     <DetailContainer
-      data={data}
-      date={data?.date}
-      isLoading={isLoading}
+      data={trainingDetails}
+      date={trainingDetails?.date}
       title='Training Name'
       isTraining={true}
     />
+  );
+}
+
+const TrainingDetails = async ({ params }: { params: { id: string } }) => {
+  const { id } = params;
+  const { userId } = auth();
+  if (!userId) {
+    redirect('/');
+  }
+
+  return (
+    <Suspense fallback={<LoaderComponent />}>
+      <DetailsTrainingBox id={id} userId={userId} />
+    </Suspense>
   );
 };
 

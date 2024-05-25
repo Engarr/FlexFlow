@@ -2,7 +2,7 @@ import AppOptions from '@/components/app-options';
 import MobileHeader from '@/components/mobile-header';
 import Sidebar from '@/components/sidebar';
 import { Toaster } from '@/components/ui/toaster';
-import QueryProviders from '@/lib/query-provider';
+// import QueryProviders from '@/lib/query-provider';
 
 type Props = {
   children: React.ReactNode;
@@ -10,7 +10,8 @@ type Props = {
 
 const MainLayout = ({ children }: Props) => {
   return (
-    <QueryProviders>
+    // <QueryProviders>
+    <>
       <AppOptions style='max-lg:hidden lg:fixed' />
       <MobileHeader />
       <Sidebar className='hidden lg:flex pt-6' />
@@ -20,7 +21,8 @@ const MainLayout = ({ children }: Props) => {
           {children}
         </div>
       </main>
-    </QueryProviders>
+    </>
+    // </QueryProviders>
   );
 };
 

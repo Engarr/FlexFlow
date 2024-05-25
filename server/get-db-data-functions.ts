@@ -23,8 +23,12 @@ export async function fetchUserPlans(userId: string) {
   const userPlans = await Plan.find({ creator: { $in: userId } });
   return userPlans as UserPlanType[];
 }
-// export async function fetchTrainingsHistoryByDate(date: string) {
-//   await connectMongoDB();
-//   const trainings = await Training.find({ date: date });
-//   return trainings as TrainingDataType[];
-// }
+
+export async function fetchTrainingDetails(trainingId: string, userId: string) {
+  await connectMongoDB();
+  if (!mongoose.Types.ObjectId.isValid(trainingId)) {
+    return null;
+  }
+  const training = await Training.findOne({ _id: trainingId, userId: userId });
+  return training as TrainingDataType;
+}

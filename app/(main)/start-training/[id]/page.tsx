@@ -1,161 +1,42 @@
-'use client';
-import { useAuth } from '@clerk/nextjs';
+import React, { Suspense } from 'react';
+import { auth } from '@clerk/nextjs/server';
+import { fetchPlanById } from '@/server/get-db-data-functions';
 import ErrorComponent from '@/components/error-component';
-import LoaderComponent from '@/components/loader-component';
-import PlanForm from '@/components/plan-form/plan-form';
+import { transformExercisesArr } from '../../plans/yours-training-plans/edit/[planId]/_utils';
+
+import TrainingForm from '@/components/training-form/training-form';
 import SectionTitle from '@/components/section-title';
-import { addNewPlanToHistory, fetchPlan } from '@/db/plans-functions';
-import { PlanDataType, TrainingDataType } from '@/types/type';
 import { formatDateTime } from '@/utils/date-transform';
-import { validateForm } from '@/utils/plan-functions';
-import React, { useEffect, useState } from 'react';
-import { UseQueryResult, useMutation, useQuery } from 'react-query';
-import { redirect, useRouter } from 'next/navigation';
-import { useToast } from '@/components/ui/use-toast';
-import { useStore } from '@/context/store';
-import { defaultTemporaryTrainingValues } from './_lib';
+import LoaderComponent from '@/components/loader-component';
 
-const Page = ({ params }: { params: { id: string } }) => {
+const Page = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
-  const { userId } = useAuth();
-  const router = useRouter();
+  const { userId } = auth();
 
-  if (!userId) {
-    redirect('/');
+  const planValuses = await fetchPlanById(id);
+  if (!planValuses) {
+    return <ErrorComponent message='Failed To Fetch Plans Details' />;
   }
-  const { toast } = useToast();
+  if (!userId) {
+    return <ErrorComponent message='Failed To Fetch Plans Details' />;
+  }
 
-  const { data, isLoading, isError }: UseQueryResult<PlanDataType> = useQuery(
-    ['plan', id],
-    () => fetchPlan({ planId: id.toString() }),
-    {
-      refetchOnMount: true,
-    }
-  );
-
-  const { mutateAsync } = useMutation((formData: TrainingDataType) =>
-    addNewPlanToHistory(formData)
-  );
+  const newExercisesArr = await transformExercisesArr(planValuses.exercisesArr);
   const trainingTime = formatDateTime(new Date());
 
-  const {
-    temporaryTrainingData,
-    updateTemporaryTrainingData,
-    onChangeExerciseName,
-    onChangePlanName,
-    onChangeSeriesRepetitions,
-    onChangeSeriesWeight,
-    handleAddSeries,
-    handleRemoveExersise,
-    handleRemoveSeries,
-    handlerAddExercise,
-    actualTrainingPlanId,
-    changeActualTrainingPlanId,
-  } = useStore();
-
-  const isTemporaryTrainingDataChanged =
-    JSON.stringify(temporaryTrainingData) !==
-    JSON.stringify(defaultTemporaryTrainingValues);
-
-  const [errors, setErrors] = useState({
-    planName: '',
-    exercisesArr: '',
-    exercises: [{ exercisesName: '', series: '' }],
-  });
-
-  useEffect(() => {
-    const sessionData = sessionStorage.getItem('training-storage');
-    if (sessionData) {
-      const parsedSessionData = JSON.parse(sessionData);
-      updateTemporaryTrainingData(
-        parsedSessionData.state.temporaryTrainingData
-      );
-    }
-    if (data && !isTemporaryTrainingDataChanged) {
-      updateTemporaryTrainingData(data);
-      changeActualTrainingPlanId(id);
-    } else if (actualTrainingPlanId !== id && data) {
-      changeActualTrainingPlanId(id);
-      updateTemporaryTrainingData(data);
-    }
-  }, [
-    actualTrainingPlanId,
-    changeActualTrainingPlanId,
-    data,
-    id,
-    isTemporaryTrainingDataChanged,
-    updateTemporaryTrainingData,
-  ]);
-
-  const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (validateForm(temporaryTrainingData, setErrors)) {
-      toast({
-        title: 'Form Validation Error',
-        description: 'Correct Errors In The Form',
-        variant: 'destructive',
-      });
-      return;
-    }
-    const newTrainingData = {
-      ...temporaryTrainingData,
-      planName: temporaryTrainingData.planName,
-      exercisesArr: temporaryTrainingData.exercisesArr,
-      date: trainingTime.date,
-      dayOfTheWeek: trainingTime.dayOfTheWeek,
-      time: trainingTime.time,
-      userId: userId,
-    };
-    try {
-      await mutateAsync(newTrainingData);
-      toast({
-        title: 'Success!',
-        description:
-          'Training Has Been Completed Successfully, See You On The Next One',
-      });
-      router.push('/home');
-    } catch (error) {
-      toast({
-        title: 'Error',
-        description: `There Was An Error Changing Plan Data: ${error}`,
-        variant: 'destructive',
-      });
-    }
-  };
-
-  if (isLoading && !data) {
-    return <LoaderComponent />;
-  }
-  if (isError) {
-    return <ErrorComponent message='Failed Fetching Data' />;
-  }
-
   return (
-    <div>
+    <Suspense fallback={<LoaderComponent />}>
       <SectionTitle>
         Start Training:{' '}
-        <span className='text-text-secondary'>{data?.planName}</span>
+        <span className='text-text-secondary'>{planValuses.planName}</span>
       </SectionTitle>
-      {isLoading && !data ? (
-        <LoaderComponent />
-      ) : (
-        <PlanForm
-          trainingTime={trainingTime.date}
-          errors={errors}
-          onSubmit={onSubmit}
-          data={temporaryTrainingData}
-          setErrors={setErrors}
-          onChangePlanName={onChangePlanName}
-          onChangeExerciseSeriesWeight={onChangeSeriesWeight}
-          onChangeExerciseName={onChangeExerciseName}
-          removeExerciseHandler={handleRemoveExersise}
-          onAddSeries={handleAddSeries}
-          onRemoveSeries={handleRemoveSeries}
-          onChangeSeriesRepetitions={onChangeSeriesRepetitions}
-          addNewExersiseHandler={handlerAddExercise}
-        />
-      )}
-    </div>
+      <TrainingForm
+        exercisesArr={newExercisesArr}
+        planName={planValuses.planName}
+        trainingTime={trainingTime}
+        userId={userId} 
+      />
+    </Suspense>
   );
 };
 
