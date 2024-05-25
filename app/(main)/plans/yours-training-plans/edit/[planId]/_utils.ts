@@ -1,4 +1,4 @@
-import { exerciseType } from '@/components/form/plan-form';
+import { exerciseType } from '@/types/form-types';
 
 export const transformExercisesArr = async (arr: exerciseType[]) => {
   'use server';
