@@ -46,14 +46,7 @@ export type PlanDataType = {
     }[];
   }[];
 };
-export type ErrorsType = {
-  planName: string;
-  exercisesArr: string;
-  exercises: {
-    exercisesName: string;
-    series: string;
-  }[];
-};
+
 export type FormDataType = {
   planName: string;
   exercisesArr: {
