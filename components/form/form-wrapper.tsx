@@ -99,8 +99,18 @@ const FormWrapper = ({
           }>
           Add Exercise
         </Button>
-        <Button type='submit' variant='primary'>
-          {isTraining ? 'End Training' : 'Save Plan'}
+        <Button
+          type='submit'
+          className={`${form.formState.isSubmitting && 'animate-pulse'}`}
+          variant='primary'
+          disabled={
+            form.formState.isSubmitting || form.formState.isSubmitSuccessful
+          }>
+          {form.formState.isSubmitting
+            ? 'Saves Data...'
+            : isTraining
+            ? 'End Training'
+            : 'Save Plan'}
         </Button>
       </form>
     </FormProvider>
