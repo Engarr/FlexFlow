@@ -18,12 +18,12 @@ export const SidebarItem = ({
   mobileNavHandler,
 }: Props) => {
   const pathname = usePathname();
-  const pathnameElements = pathname.split('/');
-  const active = '/' + pathnameElements[1].toString() === href;
+  const activePath = pathname.startsWith(href);
+  
 
   return (
     <Button
-      variant={active ? 'sidebarActive' : 'default'}
+      variant={activePath ? 'sidebarActive' : 'default'}
       className='justify-start h-[52px] w-full '
       asChild
       onClick={() => mobileNavHandler && mobileNavHandler(false)}>

@@ -11,7 +11,7 @@ import {
 import { Dispatch, SetStateAction, useState } from 'react';
 import ConfirmPopup from './confirm-popup';
 import { deletePlan, deleteTrainingHistory } from '@/server/actions/actions';
-import useSWR, { useSWRConfig } from 'swr';
+import { useSWRConfig } from 'swr';
 
 type UserPlanBar = {
   planName: string;

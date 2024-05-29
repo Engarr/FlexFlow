@@ -1,3 +1,5 @@
+// TO DELETE -->>
+
 // import { ErrorsType, FormDataType } from '@/types/type';
 // import { create } from 'zustand';
 // import { persist, createJSONStorage } from 'zustand/middleware';
@@ -260,4 +262,3 @@
 //     }
 //   )
 // );
-
