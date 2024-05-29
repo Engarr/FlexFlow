@@ -11,12 +11,6 @@ import { z } from 'zod';
 import { addNewPlanToHistory } from '@/server/actions/actions';
 import { FormTrainingType } from '@/types/form-types';
 
-type TrainingDatatype = {
-  date: string;
-  time: string;
-  dayOfTheWeek: string;
-};
-
 const TrainingForm = ({
   planName,
   exercisesArr,
