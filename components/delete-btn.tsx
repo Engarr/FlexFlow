@@ -27,8 +27,8 @@ export const DeletBtn = ({
 }: DeletBtnProps) => {
   const [popoverIsOpen, setPopoverIsOpen] = useState(false);
   const { mutate } = useSWRConfig();
+
   const removePlan = async () => {
-    let action;
     if (userId) {
       let action = null;
 
@@ -46,7 +46,7 @@ export const DeletBtn = ({
           description: res.success,
         });
         if (trainingId) {
-          mutate(['training', day]);
+          mutate(day);
         }
       }
       if (res?.error) {

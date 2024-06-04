@@ -32,3 +32,12 @@ export async function fetchTrainingDetails(trainingId: string, userId: string) {
   const training = await Training.findOne({ _id: trainingId, userId: userId });
   return training as TrainingDataType;
 }
+// export const fetchTrainingsHistory = async (date: string) => {
+//   const response = await fetch(`/api/training-history?date=${date}`, {
+//     next: { tags: ['training'] },
+//   });
+//   if (!response.ok) {
+//     throw new Error('Failed to fetch data');
+//   }
+//   return response.json();
+// };

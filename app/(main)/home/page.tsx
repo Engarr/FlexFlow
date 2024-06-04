@@ -1,37 +1,27 @@
 'use client';
+
 import React from 'react';
 import { Calendar } from '@/components/ui/calendar';
-import { formatDateTime, formattingToTheDisplayedDate } from '@/utils/date-transform';
+import {
+  formatDateTime,
+  formattingToTheDisplayedDate,
+} from '@/utils/date-transform';
 import SectionTitle from '@/components/section-title';
 
-
 import TrainingHistoryBox from '@/components/training-history-box';
-import useSWR from 'swr';
 import ErrorComponent from '@/components/error-component';
-import { TrainingDataType } from '@/types/type';
+import { useTrainingsHistory } from '../../../lib/use-trainings-history';
 
-const fetchTrainingsHistory = async (date: string) => {
-  const response = await fetch(`/api/training-history?date=${date}`);
-  if (!response.ok) {
-    throw new Error('Failed to fetch data');
-  }
-  return response.json();
-};
+
 
 const Page = () => {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
-
   const displayData = date && formattingToTheDisplayedDate(date);
   const newDate = formatDateTime(date);
   const day = newDate.date;
 
-  const {
-    data: trainingsData,
-    error,
-    isLoading,
-  } = useSWR<TrainingDataType[]>(day ? ['training', day] : null, () =>
-    fetchTrainingsHistory(day)
-  );
+  const { trainingsData, isLoading, error } = useTrainingsHistory(day);
+
   if (error) {
     return <ErrorComponent message='Failed to fetch data' />;
   }
