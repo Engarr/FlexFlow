@@ -1,44 +1,42 @@
 'use client';
 
 import React from 'react';
+import useStore from '@/context/store';
+
 import { Calendar } from '@/components/ui/calendar';
-import {
-  formatDateTime,
-  formattingToTheDisplayedDate,
-} from '@/utils/date-transform';
+import { formattingToTheDisplayedDate } from '@/utils/date-transform';
 import SectionTitle from '@/components/section-title';
 
 import TrainingHistoryBox from '@/components/training-history-box';
 import ErrorComponent from '@/components/error-component';
 import { useTrainingsHistory } from '../../../lib/use-trainings-history';
 
-
-
 const Page = () => {
-  const [date, setDate] = React.useState<Date | undefined>(new Date());
-  const displayData = date && formattingToTheDisplayedDate(date);
-  const newDate = formatDateTime(date);
-  const day = newDate.date;
+  const { selectedDate, actualDay, changeDay } = useStore();
 
-  const { trainingsData, isLoading, error } = useTrainingsHistory(day);
+  const displayData =
+    selectedDate && formattingToTheDisplayedDate(selectedDate);
+
+  const { trainingsData, isLoading, error } = useTrainingsHistory(
+    actualDay.date
+  );
 
   if (error) {
     return <ErrorComponent message='Failed to fetch data' />;
   }
 
   return (
-    <div className=''>
-      <div className='flex gap-10 flex-col sm:flex-row max-xl:px-2 rounded-md dark:border-gray-200/25 border-2 px-2 py-4 '>
+    <>
+      <div className='flex gap-10 flex-col sm:flex-row  rounded-md dark:border-gray-200/25 border-2 px-2 py-4  max-2xl:mx-2'>
         <Calendar
+          onDayClick={(day) => changeDay(day)}
           mode='single'
-          selected={date}
-          onSelect={setDate}
-          className=''
+          selected={selectedDate}
         />
 
         <div className='w-full mb-6'>
           <SectionTitle>Training History:</SectionTitle>
-          {date && (
+          {selectedDate && (
             <p className='mb-2'>
               Selected Date:{' '}
               <span className='text-text-secondary'>{displayData}</span>
@@ -48,11 +46,10 @@ const Page = () => {
           <TrainingHistoryBox
             isLoading={isLoading}
             trainingsData={trainingsData}
-            day={day}
           />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

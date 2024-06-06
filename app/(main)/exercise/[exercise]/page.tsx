@@ -19,7 +19,7 @@ const Exercise = ({ params }: { params: { exercise: string } }) => {
   );
 
   return (
-    <section>
+    <section className='pb-10'>
       <div className='flex  gap-2 justify-start max-lg:px-2'>
         <SectionTitle>{convertedExercise} Exercise</SectionTitle>
         <Button size='sm' className=' '>
@@ -44,21 +44,23 @@ const Exercise = ({ params }: { params: { exercise: string } }) => {
         )}
       </AccordionWrapper>
       <AccordionWrapper title='Video'>
-        {musclesExercises &&
-          musclesExercises.videoUrl.map((v, i) => (
-            <div
-              key={i}
-              className='w-full relative  shadow-xl h-[300px] overflow-hidden rounded-md mb-2'>
-              <iframe
-                width='100%'
-                height='100%'
-                src={v}
-                allowFullScreen
-                className='bg-black '
-                loading='lazy'
-              />
-            </div>
-          ))}
+        <div className='flex gap-2 flex-col sm:flex-row lg:flex-col'>
+          {musclesExercises &&
+            musclesExercises.videoUrl.map((v, i) => (
+              <div
+                key={i}
+                className='w-full relative  shadow-xl h-[300px] overflow-hidden rounded-md mb-2 '>
+                <iframe
+                  width='100%'
+                  height='100%'
+                  src={v}
+                  allowFullScreen
+                  className='bg-black '
+                  loading='lazy'
+                />
+              </div>
+            ))}
+        </div>
       </AccordionWrapper>
     </section>
   );

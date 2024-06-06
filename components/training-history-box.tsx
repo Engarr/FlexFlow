@@ -9,13 +9,11 @@ import { SquareMousePointer } from 'lucide-react';
 type TrainingHistoryComponentPropsType = {
   isLoading: boolean;
   trainingsData: TrainingDataType[] | undefined;
-  day?: string;
 };
 
 const TrainingHistoryBox = ({
   isLoading,
   trainingsData,
-  day,
 }: TrainingHistoryComponentPropsType) => {
   const heightClass =
     trainingsData && trainingsData?.length > 3
@@ -34,7 +32,6 @@ const TrainingHistoryBox = ({
                   planName={t.planName}
                   userId={t.userId}
                   trainingId={t._id}
-                  day={day}
                 />
               </React.Fragment>
             ))}

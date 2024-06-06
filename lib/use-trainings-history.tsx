@@ -1,7 +1,9 @@
 import useSWR from 'swr';
 
 const fetchTrainingsHistory = async (date: string) => {
-  const response = await fetch(`/api/training-history?date=${date}`);
+  const response = await fetch(`/api/training-history?date=${date}`, {
+    cache: 'no-cache',
+  });
   if (!response.ok) {
     throw new Error('Failed to fetch data');
   }

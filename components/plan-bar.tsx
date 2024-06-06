@@ -10,7 +10,7 @@ type UserPlanBar = {
   trainingId?: string;
   userId?: string;
   isAppPlan?: string;
-  day?: string;
+  
 };
 
 export const PlanBar = ({
@@ -19,7 +19,7 @@ export const PlanBar = ({
   trainingId,
   userId,
   isAppPlan,
-  day,
+
 }: UserPlanBar) => {
   const detailsLink = trainingId
     ? `/training/details/${trainingId}`
@@ -54,7 +54,7 @@ export const PlanBar = ({
               userId={userId}
               trainingId={trainingId}
               planId={planId}
-              day={day}
+              // day={day}
             />
           )}
         </div>

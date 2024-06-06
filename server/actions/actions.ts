@@ -1,9 +1,10 @@
 'use server';
+
 import connectMongoDB from '@/db/mongodb';
 import Plan from '@/model/plan-model';
 import { z } from 'zod';
 import { formSchema } from '@/lib/form-schema';
-import { revalidatePath, revalidateTag } from 'next/cache';
+import { revalidatePath } from 'next/cache';
 import { TrainingDataType } from '@/types/type';
 import Training from '@/model/training-model';
 
@@ -58,7 +59,7 @@ export async function deleteTrainingHistory(
     return { error: 'Authorization error' };
   } else {
     await Training.findByIdAndDelete(trainingId);
-    revalidateTag('training');
+
     return { success: 'Training has been deleted' };
   }
 }

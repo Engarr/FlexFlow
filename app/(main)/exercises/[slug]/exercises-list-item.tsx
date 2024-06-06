@@ -5,20 +5,19 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import Link from 'next/link';
-import { ImageIcon, Plus, Info } from 'lucide-react';
+import { ImageIcon, Plus } from 'lucide-react';
 import Image from 'next/image';
 
 type Props = {
   exerciseName: string;
-  pathname: string;
+ 
   link: string;
   imageUrl: string;
 };
 
 const ExercisesListItem = ({
   exerciseName,
-  pathname,
-  link,
+    link,
   imageUrl,
 }: Props) => {
   return (
@@ -49,7 +48,6 @@ const ExercisesListItem = ({
                 src={imageUrl}
                 alt={exerciseName}
                 fill
-                sizes='(max-width: 768px) 100vw, 33vw'
                 placeholder='blur'
                 blurDataURL='data:image/svg+xml;base64,...'
                 className='rounded-md shadow-2xl object-cover'

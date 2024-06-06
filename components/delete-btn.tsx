@@ -11,21 +11,24 @@ import { Trash2 } from 'lucide-react';
 import { deletePlan, deleteTrainingHistory } from '@/server/actions/actions';
 import { useSWRConfig } from 'swr';
 import { toast } from './ui/use-toast';
+import useStore from '@/context/store';
 
 type DeletBtnProps = {
   trainingId?: string;
   userId?: string;
   planId?: string;
-  day?: string;
+ 
 };
 
 export const DeletBtn = ({
   trainingId,
   userId,
   planId,
-  day,
+  
 }: DeletBtnProps) => {
   const [popoverIsOpen, setPopoverIsOpen] = useState(false);
+  const { actualDay } = useStore();
+
   const { mutate } = useSWRConfig();
 
   const removePlan = async () => {
@@ -46,7 +49,7 @@ export const DeletBtn = ({
           description: res.success,
         });
         if (trainingId) {
-          mutate(day);
+          mutate(actualDay.date);
         }
       }
       if (res?.error) {
