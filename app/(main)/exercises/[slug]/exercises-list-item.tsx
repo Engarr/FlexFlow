@@ -5,21 +5,19 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import Link from 'next/link';
-import { ImageIcon, Plus } from 'lucide-react';
+import { Heart, ImageIcon } from 'lucide-react';
 import Image from 'next/image';
+import { Suspense } from 'react';
+import LoaderComponent from '@/components/loader-component';
 
 type Props = {
   exerciseName: string;
- 
+
   link: string;
   imageUrl: string;
 };
 
-const ExercisesListItem = ({
-  exerciseName,
-    link,
-  imageUrl,
-}: Props) => {
+const ExercisesListItem = ({ exerciseName, link, imageUrl }: Props) => {
   return (
     <div
       key={exerciseName}
@@ -43,21 +41,23 @@ const ExercisesListItem = ({
           <PopoverContent
             className='bg-transparent border-none shadow-none '
             align='end'>
-            <div className='relative w-[200px] h-[200px] lg:w-[300px] lg:h-[300px] rounded-md overflow-hidden'>
-              <Image
-                src={imageUrl}
-                alt={exerciseName}
-                fill
-                placeholder='blur'
-                blurDataURL='data:image/svg+xml;base64,...'
-                className='rounded-md shadow-2xl object-cover'
-              />
-            </div>
+            <Suspense fallback={<LoaderComponent />}>
+              <div className='relative w-[200px] h-[200px] lg:w-[300px] lg:h-[300px] rounded-md overflow-hidden text-black'>
+                <Image
+                  src={imageUrl}
+                  alt={exerciseName}
+                  fill
+                  placeholder='blur'
+                  blurDataURL='data:image/svg+xml;base64,...'
+                  className='rounded-md shadow-2xl object-cover bg-white'
+                />
+              </div>
+            </Suspense>
           </PopoverContent>
         </Popover>
-        <Button size='sm' className=' ' variant='primary'>
+        <Button size='sm' className=' '>
           <div>
-            <Plus />
+            <Heart />
           </div>
         </Button>
       </div>

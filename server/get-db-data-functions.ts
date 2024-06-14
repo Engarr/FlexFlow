@@ -1,7 +1,16 @@
 import connectMongoDB from '@/db/mongodb';
+import Categorie from '@/model/exercise-category';
+import Exercise from '@/model/exercise-model';
+
 import Plan from '@/model/plan-model';
 import Training from '@/model/training-model';
-import { PlanDataType, TrainingDataType, UserPlanType } from '@/types/type';
+import {
+  ExerciseCategorieType,
+  ExerciseType,
+  PlanDataType,
+  TrainingDataType,
+  UserPlanType,
+} from '@/types/type';
 import mongoose from 'mongoose';
 
 export const fetchPlans = async () => {
@@ -32,12 +41,21 @@ export async function fetchTrainingDetails(trainingId: string, userId: string) {
   const training = await Training.findOne({ _id: trainingId, userId: userId });
   return training as TrainingDataType;
 }
-// export const fetchTrainingsHistory = async (date: string) => {
-//   const response = await fetch(`/api/training-history?date=${date}`, {
-//     next: { tags: ['training'] },
-//   });
-//   if (!response.ok) {
-//     throw new Error('Failed to fetch data');
-//   }
-//   return response.json();
-// };
+
+export async function getExerciseCategory() {
+  await connectMongoDB();
+  const exerciseCategories = await Categorie.find();
+  return exerciseCategories as ExerciseCategorieType[];
+}
+
+export async function getCategoryByName(name: string) {
+  await connectMongoDB();
+  const exerciseCategories = await Categorie.findOne({ category: name });
+  return exerciseCategories as ExerciseCategorieType;
+}
+
+export async function getCategoryExerciseList(slug: string) {
+  await connectMongoDB();
+  const exercises = await Exercise.find({ category: { $in: slug } });
+  return exercises as ExerciseType[];
+}

@@ -40,7 +40,7 @@ async function AppPlans() {
 
 const AppPlansPage = () => {
   return (
-    <Suspense fallback={<LoaderComponent />}>
+    <>
       <SectionTitle>
         <span className='text-text-secondary'>Select</span> A Plan From Those
         Available Below:
@@ -50,7 +50,7 @@ const AppPlansPage = () => {
           <AppPlans />
         </div>
       </Suspense>
-    </Suspense>
+    </>
   );
 };
 

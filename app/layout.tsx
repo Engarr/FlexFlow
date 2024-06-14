@@ -6,11 +6,6 @@ import { Providers } from './providers';
 
 const baloo = Baloo_2({ subsets: ['latin'] });
 
-export const metadata: Metadata = {
-  title: 'FlexFlow',
-  description:
-    'Achieve, track, and perfect your workout results with FlexFlow!',
-};
 
 export default function RootLayout({
   children,

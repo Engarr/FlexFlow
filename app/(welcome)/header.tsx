@@ -33,19 +33,27 @@ const Header = () => {
               <UserButton afterSignOutUrl='/' />
             </div>
           </SignedIn>
-          <SignedOut>
-            <SignInButton
-              mode='modal'
-              afterSignInUrl='/home'
-              afterSignUpUrl='/home'>
-              <Button
-                size='lg'
-                variant='ghost'
-                className='text-xl max-sm:h-9 max-sm:px-3'>
-                Login
-              </Button>
-            </SignInButton>
-          </SignedOut>
+          <div>
+            <SignedOut>
+              <SignInButton
+                mode='modal'
+                afterSignInUrl='/home'
+                afterSignUpUrl='/home'>
+                <Button
+                  size='lg'
+                  variant='ghost'
+                  className='text-xl max-sm:h-9 max-sm:px-3'>
+                  Login
+                </Button>
+              </SignInButton>
+            </SignedOut>
+            {/* <Button
+              size='lg'
+              variant='ghost'
+              className='text-xl max-sm:h-9 max-sm:px-3'>
+              Admin
+            </Button> */}
+          </div>
         </ClerkLoaded>
       </div>
     </header>

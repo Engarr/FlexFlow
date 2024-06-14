@@ -2,15 +2,19 @@ import AppOptions from '@/components/app-options';
 import MobileHeader from '@/components/mobile-header';
 import Sidebar from '@/components/sidebar';
 import { Toaster } from '@/components/ui/toaster';
-// import QueryProviders from '@/lib/query-provider';
+import { Metadata } from 'next';
 
 type Props = {
   children: React.ReactNode;
 };
+export const metadata: Metadata = {
+  title: 'FlexFlow',
+  description:
+    'Achieve, track, and perfect your workout results with FlexFlow!',
+};
 
 const MainLayout = ({ children }: Props) => {
   return (
-    // <QueryProviders>
     <>
       <AppOptions style='max-lg:hidden lg:fixed' />
       <MobileHeader />
@@ -22,7 +26,6 @@ const MainLayout = ({ children }: Props) => {
         </div>
       </main>
     </>
-    // </QueryProviders>
   );
 };
 

@@ -1,0 +1,315 @@
+[
+  {
+    "exerciseName": "Barbell Bench Press",
+    "category": "chest",
+    "muscle1": ["pectoralis major", "triceps brachii", "anterior deltoid"],
+    "muscle2": ["anterior serratus", "anterior deltoid"],
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/bench-press-1000x1000.jpg",
+    "videoUrl": [
+      "https://www.youtube.com/embed/bmjHkNJr7O0",
+      "https://www.youtube.com/embed/l9BBv5bU4ks"
+    ],
+    "link": "barbell bench press"
+  },
+  {
+    "exerciseName": "Barbell Bench Press (30-45° Incline)",
+    "category": "chest",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/incline-bench-press-1000x1000.jpg",
+    "muscle1": [
+      "pectoralis major clavicular part (upper)",
+      "triceps brachii",
+      "anterior deltoid"
+    ],
+    "muscle2": ["anterior serratus"],
+    "videoUrl": ["https://www.youtube.com/embed/LDxaLKO33TQ"],
+    "link": "barbell bench press 30 45 incline"
+  },
+  {
+    "exerciseName": "Dumbbell Bench Press",
+    "category": "chest",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/decline-dumbbell-bench-press-1000x1000.jpg",
+    "muscle1": ["pectoralis major", "triceps brachii", "anterior deltoid"],
+    "videoUrl": ["https://www.youtube.com/embed/ACsYCmLA9Do"],
+    "link": "dumbbell-bench-press"
+  },
+  {
+    "exerciseName": "Dumbbell Bench Press (30-45° Incline)",
+    "category": "chest",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/incline-dumbbell-bench-press-1000x1000.jpg",
+    "muscle1": ["pectoralis major clavicular part (upper)", "anterior deltoid"],
+    "muscle2": ["triceps brachii"],
+    "videoUrl": ["https://www.youtube.com/embed/C06qMsCzjQ8"],
+    "link": "dumbbell bench press 30 45 incline"
+  },
+  {
+    "exerciseName": "Cable Flyes",
+    "category": "chest",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/cable-fly-1000x1000.jpg",
+    "muscle1": ["pectoralis major", "anterior deltoid"],
+    "videoUrl": ["https://www.youtube.com/embed/vM1Ovmiu71M"],
+    "link": "cable flyes"
+  },
+  {
+    "exerciseName": "Pull-Ups (Wide Grip)",
+    "category": "back",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/pull-ups-1000x1000.jpg",
+    "muscle1": ["latissimus dorsi", "trapezius", "rhomboids", "biceps brachii"],
+    "videoUrl": [
+      "https://www.youtube.com/embed/UvW6XnClK7A",
+      "https://www.youtube.com/embed/YYbqPzlwY6c"
+    ],
+    "link": "pull ups wide grip"
+  },
+  {
+    "exerciseName": "Bent Over Barbell Rows",
+    "category": "back",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/bent-over-row-1000x1000.jpg",
+    "muscle1": ["latissimus dorsi", "trapezius", "rhomboids"],
+    "muscle2": ["pectoralis major clavicular part (upper)", "brachialis", "anterior deltoid"],
+    "videoUrl": [
+      "https://www.youtube.com/embed/MOlDmANU_4U",
+      "https://www.youtube.com/embed/d6MZDg35qzc"
+    ],
+    "link": "bent overbarbellrows"
+  },
+  {
+    "exerciseName": "Seated Cable Row",
+    "category": "back",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/seated-cable-row-1000x1000.jpg",
+    "muscle1": ["latissimus dorsi", "teres major", "posterior deltoid", "biceps brachii muscle"],
+    "videoUrl": [
+      "https://www.youtube.com/watch?v=sP_4vybjVJs&ab_channel=MindPumpTV"
+    ],
+    "link": "seated cable row"
+  }, 
+  {
+    "exerciseName": "Dumbbell Lunges",
+    "category": "quadriceps",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/dumbbell-lunge-1000x1000.jpg",
+    "muscle1": ["quadriceps", "hamstrings", "gluteus maximus"],
+    "videoUrl": ["https://www.youtube.com/embed/M4THUsShZFA"],
+    "link": "dumbbell lunges"
+  },
+  {
+    "exerciseName": "Back Squats",
+    "category": "quadriceps",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/squat-1000x1000.jpg",
+    "muscle1": ["quadriceps"],
+    "muscle2": ["hamstrings", "gluteus maximus"],
+    "videoUrl": ["https://www.youtube.com/embed/aX7aE0meWcY"],
+    "link": "back squats"
+  },
+  {
+    "exerciseName": "Front Squats",
+    "category": "quadriceps",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/front-squat-1000x1000.jpg",
+    "muscle1": ["quadriceps"],
+    "muscle2": ["hamstrings", "gluteus maximus"],
+    "videoUrl": ["https://www.youtube.com/embed/gOsd8NNPg04"],
+    "link": "front squats"
+  },
+  {
+    "exerciseName": "Deadlift",
+    "category": "hamstrings-glutes",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/deadlift-1000x1000.jpg",
+    "muscle1": [
+      "gluteus maximus",
+      "hamstrings",
+      "quadriceps",
+      "erector spinae",
+      "lumbar trapezius",
+      "rhomboids"
+    ],
+    "videoUrl": [
+      "https://www.youtube.com/embed/eMhIdSrCaqU",
+      "https://www.youtube.com/embed/0_igODjLiXM"
+    ],
+    "link": "deadlift"
+  },
+  {
+    "exerciseName": "Hip Thrusts",
+    "category": "hamstrings-glutes",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/hip-thrust-1000x1000.jpg",
+    "muscle1": [
+      "gluteus maximus",
+      "hamstrings",
+      "quadriceps"
+    ],
+    "videoUrl": [
+      "https://www.youtube.com/embed/ezEQkeQWMPM",
+      "https://www.youtube.com/embed/zj6IrdvL9Ps"
+    ],
+    "link": "hip thrusts"
+  },
+  {
+    "exerciseName": "Leg Abduction on Machine",
+    "category": "hamstrings-glutes",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/hip-abduction-1000x1000.jpg",
+    "muscle1": [
+      "gluteus maximus",
+      "iliotibial tract",
+      "tensor fasciae latae",
+      "adductors"
+    ],
+    "videoUrl": [
+      "https://www.youtube.com/embed/IydaB14rnlg"
+    ],
+    "link": "leg abduction on machine"
+  },
+  {
+    "exerciseName": "Barbell Overhead Press",
+    "category": "shoulders",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/shoulder-press-1000x1000.jpg",
+    "muscle1": ["anterior deltoid"],
+    "muscle2": ["pectoralis major clavicular part (upper)", "subscapularis"],
+    "videoUrl": [
+      "https://www.youtube.com/embed/utGTzZRrwm0",
+      "https://www.youtube.com/embed/CHWdd9-6Vfw"
+    ],
+    "link": "barbell overhead press"
+  },
+  {
+    "exerciseName": "Seated Dumbbell Press",
+    "category": "shoulders",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/seated-dumbbell-shoulder-press-1000x1000.jpg",
+    "muscle1": ["middle deltoid"],
+    "muscle2": ["triceps brachii", "trapezius"],
+    "videoUrl": [
+      "https://www.youtube.com/embed/pInYJYisaEo"
+    ],
+    "link": "seated dumbbell press"
+  },
+  {
+    "exerciseName": "Lateral Raises with Dumbbells",
+    "category": "shoulders",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/dumbbell-lateral-raise-1000x1000.jpg",
+    "muscle1": ["middle deltoid", "pectoralis major sternal part (middle)"],
+    "muscle2": ["trapezius"],
+    "videoUrl": [
+      "https://www.youtube.com/embed/5g5U2dIoeQ0"
+    ],
+    "link": "lateral raises with dumbbells"
+  },
+  {
+    "exerciseName": "Face Pulls",
+    "category": "shoulders",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/face-pull-1000x1000.jpg",
+    "muscle1": ["posterior deltoid", "infraspinatus", "teres minor", "trapezius"],
+    "videoUrl": [
+      "https://www.youtube.com/embed/foz3Le39glE",
+      "https://www.youtube.com/embed/51AuMQzpBVY"
+    ],
+    "link": "face pulls"
+  },
+  {
+    "exerciseName": "Dumbbell Front Raise",
+    "category": "shoulders",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/dumbbell-front-raise-1000x1000.jpg",
+    "muscle1": ["anterior deltoid"],
+    "muscle2": ["pectoralis major clavicular part (upper)"],
+    "videoUrl": [
+      "https://www.youtube.com/embed/0ZslV4JJkIg"
+    ],
+    "link": "dumbbell front raise"
+  },
+  {
+    "exerciseName": "Hanging Knee Raises",
+    "category": "abs",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/hanging-knee-raise-1000x1000.jpg",
+    "muscle1": ["rectus abdominis", "iliopsoas", "quadriceps"],
+    "videoUrl": ["https://www.youtube.com/embed/u1OJQFS3Irw"],
+    "link": "hanging knee raises"
+  },
+  {
+    "exerciseName": "Scissor Kicks",
+    "category": "abs",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/scissor-kicks-1000x1000.jpg",
+    "time": true,
+    "muscle1": ["rectus abdominis", "obliques"],
+    "videoUrl": ["https://www.youtube.com/embed/y1hXARQhHZM"],
+    "link": "scissor kicks"
+  },
+  {
+    "exerciseName": "Hanging Leg Raise",
+    "category": "abs",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/toes-to-bar-1000x1000.jpg",
+    "muscle1": ["triceps brachii", "abdominal", "quadriceps femoris"],
+    "muscle2": ["biceps brachii", "latissimus dorsi"],
+    "videoUrl": ["https://www.youtube.com/embed/yTTuVSKU-Ks"],
+    "link": "hanging leg raise"
+  },
+  {
+    "exerciseName": "Cable Crunch",
+    "category": "abs",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/cable-crunch-1000x1000.jpg",
+    "muscle1": ["rectus abdominis", "obliques"],
+    "videoUrl": [
+      "https://www.youtube.com/watch?v=ToJeyhydUxU&pp=ygUMQ2FibGUgQ3J1bmNo&ab_channel=TestosteroneNation"
+    ],
+    "link": "cable crunch"
+  },
+  {
+    "exerciseName": "Preacher Curl",
+    "category": "biceps",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/preacher-curl-1000x1000.jpg",
+    "muscle1": ["biceps brachii", "brachialis"],
+    "videoUrl": ["https://www.youtube.com/embed/QkK9UjGI4Pw"],
+    "link": "preacher curl"
+  },
+  {
+    "exerciseName": "Hammer Curls with Dumbbells",
+    "category": "biceps",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/hammer-curl-1000x1000.jpg",
+    "muscle1": ["brachioradialis", "biceps brachii"],
+    "videoUrl": ["https://www.youtube.com/embed/s_ubLsRZ59I"],
+    "link": "hammer curls with dumbbells"
+  },
+  {
+    "exerciseName": "Standing Barbell Curls",
+    "category": "biceps",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/barbell-curl-1000x1000.jpg",
+    "muscle1": ["biceps brachii", "brachialis"],
+    "videoUrl": ["https://www.youtube.com/embed/wHbgdQ5rS7g"],
+    "link": "standing arbell curls"
+  },
+  {
+    "exerciseName": "Overhead Cable Curl",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/overhead-cable-curl-1000x1000.jpg",
+    "muscle1": ["biceps brachii", "brachialis"],
+    "videoUrl": ["https://www.youtube.com/embed/XlvPT0mfQO8"],
+    "link": "overhead cable curl"
+  },
+  {
+    "exerciseName": "Dips",
+    "category": "triceps",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/dips-1000x1000.jpg",
+    "muscle1": ["triceps brachii"],
+    "muscle2": ["brachialis"],
+    "videoUrl": ["https://www.youtube.com/embed/hiAvKCpOWdg"],
+    "link": "dips"
+  },
+  {
+    "exerciseName": "Tricep Pushdown",
+    "category": "triceps",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/tricep-pushdown-1000x1000.jpg",
+    "muscle1": ["triceps brachii", "brachialis"],
+    "videoUrl": ["https://www.youtube.com/embed/WBwvIlLTm00"],
+    "link": "tricep pushdown"
+  },
+  {
+    "exerciseName": "Lying Tricep Extension",
+    "category": "triceps",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/lying-tricep-extension-1000x1000.jpg",
+    "muscle1": ["triceps brachii"],
+    "videoUrl": ["https://www.youtube.com/embed/TJkoGDIdRYk"],
+    "link": "lying tricep extension"
+  },
+  {
+    "exerciseName": "Dumbbell Tricep Extension",
+    "category": "triceps",
+    "imageUrl": "https://static.strengthlevel.com/images/illustrations/dumbbell-tricep-extension-1000x1000.jpg",
+    "muscle1": ["triceps brachii"],
+    "videoUrl": ["https://www.youtube.com/embed/mJf7Q8_nJMk"],
+    "link": "dumbbell tricep extension"
+  }
+]

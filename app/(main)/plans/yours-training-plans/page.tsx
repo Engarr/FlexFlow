@@ -1,8 +1,8 @@
 import React, { Suspense } from 'react';
 import { redirect } from 'next/navigation';
-import LoaderComponent from '@/components/loader-component';
 import { auth } from '@clerk/nextjs/server';
 import UserPlansList from './_components/user-plans-list';
+import LoaderComponent from '@/components/loader-component';
 
 const Page = () => {
   const { userId } = auth();
@@ -12,11 +12,11 @@ const Page = () => {
   }
 
   return (
-    <Suspense fallback={<LoaderComponent />}>
-      <div className='max-lg:px-2'>
+    <div className='max-lg:px-2'>
+      <Suspense fallback={<LoaderComponent />}>
         <UserPlansList userId={userId} />
-      </div>
-    </Suspense>
+      </Suspense>
+    </div>
   );
 };
 

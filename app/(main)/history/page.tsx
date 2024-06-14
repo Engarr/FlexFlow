@@ -3,14 +3,12 @@ import React, { Suspense } from 'react';
 import HistoryWrapper from '@/components/history-wrapper';
 import LoaderComponent from '@/components/loader-component';
 
-const Page = () => {
+const HistoryPage = () => {
   return (
-    <>
-      <Suspense fallback={<LoaderComponent />}>
-        <HistoryWrapper />
-      </Suspense>
-    </>
+    <Suspense fallback={<LoaderComponent />}>
+      <HistoryWrapper />
+    </Suspense>
   );
 };
 
-export default Page;
+export default HistoryPage;

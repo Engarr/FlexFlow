@@ -60,3 +60,24 @@ export type FormDataType = {
     }[];
   }[];
 };
+export type ExerciseCategorieType = {
+  category: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  name: string;
+  alt: string;
+  src: string;
+  link: string;
+ 
+};
+export type ExerciseType = {
+  exerciseName: string;
+  category: string;
+  muscle1: string[];
+  muscle2?: string[];
+  imageUrl: string;
+  videoUrl: string[];
+  link: string;
+  
+};
