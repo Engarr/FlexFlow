@@ -1,4 +1,3 @@
-import type { Metadata } from 'next';
 import { Baloo_2 } from 'next/font/google';
 import './globals.css';
 import { ClerkProvider } from '@clerk/nextjs';

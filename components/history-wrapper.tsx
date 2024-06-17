@@ -1,15 +1,15 @@
 'use client';
 
 import useStore from '@/context/store';
-
 import { Calendar } from '@/components/ui/calendar';
 import { formattingToTheDisplayedDate } from '@/utils/date-transform';
 import SectionTitle from '@/components/section-title';
 
 import TrainingHistoryBox from '@/components/training-history-box';
 import ErrorComponent from '@/components/error-component';
+import { useTrainingsHistory } from '@/server/get-trainings-history';
 
-import { useTrainingsHistory } from '@/lib/use-trainings-history';
+
 
 const HistoryWrapper = () => {
   const { selectedDate, actualDay, changeDay } = useStore();
