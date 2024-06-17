@@ -15,7 +15,6 @@ export const metadata: Metadata = {
 const Categories = async () => {
   const categories = await getExerciseCategory();
 
-
   if (!categories) {
     return (
       <ErrorComponent
@@ -26,13 +25,13 @@ const Categories = async () => {
   }
 
   return (
-    <Suspense fallback={<LoaderComponent />}>
+    <>
       {categories.map((categorie) => (
         <React.Fragment key={categorie.name}>
           <ExerciseCard link={categorie.link} name={categorie.name} />
         </React.Fragment>
       ))}
-    </Suspense>
+    </>
   );
 };
 
@@ -41,7 +40,9 @@ const Exercise = () => {
     <section>
       <SectionTitle>Exercise catalogue</SectionTitle>
       <div className='flex flex-wrap gap-2 max-xl:pl-2 lg:gap-5 max-w-[500px]'>
-        <Categories />
+        <Suspense fallback={<LoaderComponent />}>
+          <Categories />
+        </Suspense>
       </div>
     </section>
   );

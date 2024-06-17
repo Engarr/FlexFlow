@@ -1,4 +1,5 @@
 import connectMongoDB from '@/db/mongodb';
+import { formSchema } from '@/lib/form-schema';
 import Categorie from '@/model/exercise-category';
 import Exercise from '@/model/exercise-model';
 
@@ -21,12 +22,25 @@ export const fetchPlans = async () => {
 
 export const fetchPlanById = async (planId: string) => {
   await connectMongoDB();
+
+  // Validate planId
   if (!mongoose.Types.ObjectId.isValid(planId)) {
     return null;
   }
+
+  // Fetch plan from database
   const plan = await Plan.findOne({ _id: planId });
+
+  // Validate plan data
+  const parsedPlan = formSchema.safeParse(plan);
+  if (!parsedPlan.success) {
+    return null;
+  }
+
+  // Return the entire plan
   return plan as PlanDataType;
 };
+
 export async function fetchUserPlans(userId: string) {
   await connectMongoDB();
   const userPlans = await Plan.find({ creator: { $in: userId } });
@@ -58,4 +72,9 @@ export async function getCategoryExerciseList(slug: string) {
   await connectMongoDB();
   const exercises = await Exercise.find({ category: { $in: slug } });
   return exercises as ExerciseType[];
+}
+export async function getExercise(exerciseName: string) {
+  await connectMongoDB();
+  const exercises = await Exercise.findOne({ link: exerciseName });
+  return exercises as ExerciseType;
 }

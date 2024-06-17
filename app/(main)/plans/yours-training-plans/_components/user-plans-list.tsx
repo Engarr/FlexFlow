@@ -20,7 +20,7 @@ const UserPlansList = async ({ userId }: UserPlanListType) => {
       </div>
     );
   }
-
+  
   return (
     <div className='max-lg:px-2'>
       <div className='flex w-full justify-between lg:items-start max-lg:flex-col items-center'>
