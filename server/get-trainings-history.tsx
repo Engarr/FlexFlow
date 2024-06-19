@@ -23,3 +23,4 @@ export function useTrainingsHistory(day: string) {
     error,
   };
 }
+

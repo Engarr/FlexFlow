@@ -28,7 +28,7 @@ const FormElement = ({ form, title, name }: FormElementType) => {
           typeof value === 'string' || typeof value === 'number' ? value : '';
 
         return (
-          <FormItem>
+          <FormItem className='mb-5'>
             <FormLabel>{title}</FormLabel>
             <FormControl>
               <Input {...restField} value={safeValue} />

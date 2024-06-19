@@ -26,18 +26,19 @@ const Page = async ({ params }: { params: { planId: string } }) => {
   const newExercisesArr = await transformExercisesArr(planValuses.exercisesArr);
 
   return (
-    <Suspense fallback={<LoaderComponent />}>
+    <>
       <SectionTitle>
-        Edit Plan ID: <span className='text-lime-theme'>{planId}</span>
+        Edit Plan ID: <span className='text-text-secondary'>{planId}</span>
       </SectionTitle>
-
-      <PlanForm
-        planName={planValuses.planName}
-        creator={planValuses.creator}
-        exercisesArr={newExercisesArr && newExercisesArr}
-        planId={planId}
-      />
-    </Suspense>
+      <Suspense fallback={<LoaderComponent />}>
+        <PlanForm
+          planName={planValuses.planName}
+          creator={planValuses.creator}
+          exercisesArr={newExercisesArr && newExercisesArr}
+          planId={planId}
+        />
+      </Suspense>
+    </>
   );
 };
 

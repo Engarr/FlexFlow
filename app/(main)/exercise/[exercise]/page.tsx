@@ -77,14 +77,16 @@ const Exercise = ({ params }: Props) => {
 
   return (
     <section className='pb-10'>
-      <div className='flex  gap-2 justify-start max-lg:px-2'>
-        <SectionTitle>{convertedExercise} Exercise</SectionTitle>
-        <Button size='sm' className=' '>
-          <div>
-            <Plus />
-          </div>
-        </Button>
-      </div>
+      <Suspense fallback={<LoaderComponent />}>
+        <div className='flex  gap-2 justify-start max-lg:px-2'>
+          <SectionTitle>{convertedExercise} Exercise</SectionTitle>
+          <Button size='sm' className=' '>
+            <div>
+              <Plus />
+            </div>
+          </Button>
+        </div>
+      </Suspense>
       <Suspense fallback={<LoaderComponent />}>
         <WorkoutDescription decodedName={decodedName} />
       </Suspense>

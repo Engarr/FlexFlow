@@ -28,6 +28,8 @@ export type TrainingDataType = {
     }[];
   }[];
   date: string;
+  dayOfTheWeek: string;
+  time: string;
   userId: string;
 };
 export type PlanDataType = {
@@ -69,7 +71,6 @@ export type ExerciseCategorieType = {
   alt: string;
   src: string;
   link: string;
- 
 };
 export type ExerciseType = {
   exerciseName: string;
@@ -79,5 +80,4 @@ export type ExerciseType = {
   imageUrl: string;
   videoUrl: string[];
   link: string;
-  
 };

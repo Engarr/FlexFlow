@@ -4,6 +4,9 @@ import Sidebar from '@/components/sidebar';
 import { Toaster } from '@/components/ui/toaster';
 import { Metadata } from 'next';
 
+import { auth } from '@clerk/nextjs/server';
+import { redirect } from 'next/navigation';
+
 type Props = {
   children: React.ReactNode;
 };
@@ -14,6 +17,12 @@ export const metadata: Metadata = {
 };
 
 const MainLayout = ({ children }: Props) => {
+  
+  const { userId } = auth();
+  if (!userId) {
+    redirect('/');
+  }
+
   return (
     <>
       <AppOptions style='max-lg:hidden lg:fixed' />

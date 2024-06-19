@@ -9,8 +9,6 @@ import TrainingHistoryBox from '@/components/training-history-box';
 import ErrorComponent from '@/components/error-component';
 import { useTrainingsHistory } from '@/server/get-trainings-history';
 
-
-
 const HistoryWrapper = () => {
   const { selectedDate, actualDay, changeDay } = useStore();
   const { trainingsData, isLoading, error } = useTrainingsHistory(
@@ -29,6 +27,7 @@ const HistoryWrapper = () => {
         onDayClick={(day) => changeDay(day)}
         mode='single'
         selected={selectedDate}
+        disabled={(date) => date > new Date() || date < new Date('1900-01-01')}
       />
 
       <div className='w-full mb-6'>

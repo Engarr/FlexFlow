@@ -7,6 +7,7 @@ import { formSchema } from '@/lib/form-schema';
 import { revalidatePath } from 'next/cache';
 import { TrainingDataType } from '@/types/type';
 import Training from '@/model/training-model';
+import { formatDateTime } from '@/utils/date-transform';
 
 export async function addNewPlan(
   values: z.infer<typeof formSchema> & { creator: string }
@@ -70,5 +71,30 @@ export async function addNewPlanToHistory(formData: TrainingDataType) {
     return { error: 'Authorization error' };
   } else {
     return { success: 'Training has been finished successfully' };
+  }
+}
+
+export async function editTraining(
+  values: z.infer<typeof formSchema>,
+  userId: string,
+  trainingId: string,
+  date: Date
+) {
+  const newDate = formatDateTime(date);
+  const newValue = {
+    ...values,
+    date: newDate.date,
+    dayOfTheWeek: newDate.dayOfTheWeek,
+    time: newDate.time,
+  };
+  await connectMongoDB();
+  const training = await Training.findOne({ _id: trainingId });
+
+  if (training.userId !== userId) {
+    return { error: 'Authorization error' };
+  } else {
+    await Training.findByIdAndUpdate(trainingId, newValue);
+    revalidatePath('/plans/yours-training-plans');
+    return { success: 'Plan has been updated' };
   }
 }

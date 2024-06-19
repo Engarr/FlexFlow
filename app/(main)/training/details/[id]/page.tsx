@@ -6,13 +6,13 @@ import ErrorComponent from '@/components/error-component';
 import { fetchTrainingDetails } from '@/server/get-db-data-functions';
 import LoaderComponent from '@/components/loader-component';
 
-async function DetailsTrainingBox({
+const DetailsTrainingBox = async ({
   id,
   userId,
 }: {
   id: string;
   userId: string;
-}) {
+}) => {
   const trainingDetails = await fetchTrainingDetails(id, userId);
   if (!trainingDetails) {
     return <ErrorComponent message='Failed To Fetch Plans' />;
@@ -26,7 +26,7 @@ async function DetailsTrainingBox({
       isTraining={true}
     />
   );
-}
+};
 
 const TrainingDetails = async ({ params }: { params: { id: string } }) => {
   const { id } = params;

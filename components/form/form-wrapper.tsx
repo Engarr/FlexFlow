@@ -15,6 +15,7 @@ import ExerciseNameInput from './exercise-name-input';
 import { Button } from '../ui/button';
 import SeriesFieldArray from './series-field-array';
 import { Trash2 } from 'lucide-react';
+import { DeletBtn } from '../delete-btn';
 
 type FormWrapperTye = {
   form: UseFormReturn<formSchemaType, any, undefined>;
@@ -78,6 +79,7 @@ const FormWrapper = ({
                     <Trash2 />
                   </div>
                 </Button>
+                <DeletBtn />
               </div>
               {errorSeriesMessage}
               <SeriesFieldArray form={form} exerciseIndex={index} />

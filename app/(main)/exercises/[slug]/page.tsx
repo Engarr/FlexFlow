@@ -82,8 +82,8 @@ const ExerciseCategory = ({ params }: { params: { slug: string } }) => {
 
   return (
     <section>
-      <SectionTitle>{convertedSlug} Muscles</SectionTitle>
       <Suspense fallback={<LoaderComponent />}>
+        <SectionTitle>{convertedSlug} Muscles</SectionTitle>
         <ExercisesDescription slug={slug} />
       </Suspense>
 

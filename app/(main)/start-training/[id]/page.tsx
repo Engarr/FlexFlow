@@ -25,18 +25,22 @@ const Page = async ({ params }: { params: { id: string } }) => {
   const trainingTime = formatDateTime(new Date());
 
   return (
-    <Suspense fallback={<LoaderComponent />}>
-      <SectionTitle>
-        Start Training:{' '}
-        <span className='text-text-secondary'>{planValuses.planName}</span>
-      </SectionTitle>
-      <TrainingForm
-        exercisesArr={newExercisesArr}
-        planName={planValuses.planName}
-        trainingTime={trainingTime}
-        userId={userId} 
-      />
-    </Suspense>
+    <>
+      <Suspense fallback={<LoaderComponent />}>
+        <SectionTitle>
+          Start Training:{' '}
+          <span className='text-text-secondary'>{planValuses.planName}</span>
+        </SectionTitle>
+      </Suspense>
+      <Suspense fallback={<LoaderComponent />}>
+        <TrainingForm
+          exercisesArr={newExercisesArr}
+          planName={planValuses.planName}
+          trainingTime={trainingTime}
+          userId={userId}
+        />
+      </Suspense>
+    </>
   );
 };
 

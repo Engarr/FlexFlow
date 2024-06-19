@@ -16,6 +16,8 @@ export type FormType = {
   creator?: string;
   exercisesArr?: exerciseType[];
   planId?: string;
+  trainingId?: string;
+  initialDate?: Date;
 };
 type TrainingDatatype = {
   date: string;
