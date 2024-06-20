@@ -14,7 +14,7 @@ import { z } from 'zod';
 import ExerciseNameInput from './exercise-name-input';
 import { Button } from '../ui/button';
 import SeriesFieldArray from './series-field-array';
-import { Trash2 } from 'lucide-react';
+import { Trash } from 'lucide-react';
 import { DeletBtn } from '../delete-btn';
 
 type FormWrapperTye = {
@@ -69,17 +69,13 @@ const FormWrapper = ({
                     title='Exercise Name:'
                   />
                 </div>
-                <Button
-                  type='button'
-                  size='sm'
-                  variant='ghost'
-                  className='mt-6 w-[20px]'
-                  onClick={() => remove(index)}>
+                <DeletBtn
+                  removeHandler={async () => remove(index)}
+                  btnStyle='mt-6'>
                   <div>
-                    <Trash2 />
+                    <Trash size='20px' />
                   </div>
-                </Button>
-                <DeletBtn />
+                </DeletBtn>
               </div>
               {errorSeriesMessage}
               <SeriesFieldArray form={form} exerciseIndex={index} />

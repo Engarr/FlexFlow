@@ -86,8 +86,6 @@ const Exercise = ({ params }: Props) => {
             </div>
           </Button>
         </div>
-      </Suspense>
-      <Suspense fallback={<LoaderComponent />}>
         <WorkoutDescription decodedName={decodedName} />
       </Suspense>
     </section>

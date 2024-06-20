@@ -74,7 +74,7 @@ const PlanForm = ({
         description: res.success,
       });
       form.reset();
-      router.push('/plans/yours-training-plans');
+      router.back();
     }
     if (res?.error) {
       toast({

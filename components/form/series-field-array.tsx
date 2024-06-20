@@ -1,7 +1,8 @@
-import FormElement from './form-element'; 
+import FormElement from './form-element';
 import { Button } from '../ui/button';
 import { formSchemaType } from '@/lib/form-schema';
 import { UseFormReturn, useFieldArray } from 'react-hook-form';
+import { DeletBtn } from '../delete-btn';
 
 const SeriesFieldArray = ({
   form,
@@ -66,15 +67,10 @@ const SeriesFieldArray = ({
               title='Repetitions:'
             />
           </div>
-
-          <Button
-            type='button'
-            size='sm'
-            variant='danger'
-            className='mt-6 '
-            onClick={() => removeSeries(index)}>
-            <div>X</div>
-          </Button>
+          <DeletBtn removeHandler={async () => removeSeries(index)}>
+            <p>X</p>
+          </DeletBtn>
+        
         </div>
       ))}
       <Button type='button' variant='primaryOutline' onClick={addNewSeries}>

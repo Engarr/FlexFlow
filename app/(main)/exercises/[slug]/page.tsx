@@ -85,16 +85,14 @@ const ExerciseCategory = ({ params }: { params: { slug: string } }) => {
       <Suspense fallback={<LoaderComponent />}>
         <SectionTitle>{convertedSlug} Muscles</SectionTitle>
         <ExercisesDescription slug={slug} />
-      </Suspense>
 
-      <SectionTitle element='p' style='my-4'>
-        Exercises List:
-      </SectionTitle>
-      <div className='flex flex-col gap-3 px-2 xl:px-0 '>
-        <Suspense fallback={<LoaderComponent />}>
+        <SectionTitle element='p' style='my-4'>
+          Exercises List:
+        </SectionTitle>
+        <div className='flex flex-col gap-3 px-2 xl:px-0 '>
           <ExercisesList slug={slug} />
-        </Suspense>
-      </div>
+        </div>
+      </Suspense>
     </section>
   );
 };

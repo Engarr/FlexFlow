@@ -27,16 +27,15 @@ const Page = async ({ params }: { params: { trainingId: string } }) => {
 
   const dateStr = trainingDetails.date;
   const timeStr = trainingDetails.time;
-
   const initialDate = new Date(`${dateStr} ${timeStr}`);
 
   return (
     <div>
-      <SectionTitle>
-        Edit Training history ID:
-        <span className='text-text-secondary'>{trainingId}</span>
-      </SectionTitle>
       <Suspense fallback={<LoaderComponent />}>
+        <SectionTitle>
+          Edit Training history ID:
+          <span className='text-text-secondary'>{trainingId}</span>
+        </SectionTitle>
         <PlanForm
           planName={trainingDetails.planName}
           exercisesArr={newExercisesArr && newExercisesArr}
