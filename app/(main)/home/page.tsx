@@ -7,7 +7,6 @@ import { clerkClient } from '@clerk/nextjs';
 import SectionTitle from '@/components/section-title';
 
 const WelcomeUser = async () => {
-  
   const { userId } = auth();
   if (!userId) {
     return;
@@ -18,10 +17,13 @@ const WelcomeUser = async () => {
   return (
     <div className='mb-10'>
       <SectionTitle style='mb-0 '>Hello, {firstName}!</SectionTitle>
-      <p>
-        Remember, every workout is a step towards a healthier and stronger you.
-      </p>
-      <p className='text-text-secondary'>Let&apos; s get moving!</p>
+      <div className='px-2 xl:px-0'>
+        <p>
+          Remember, every workout is a step towards a healthier and stronger
+          you.
+        </p>
+        <p className='text-text-secondary '>Let&apos; s get moving!</p>
+      </div>
     </div>
   );
 };
