@@ -73,6 +73,7 @@ export type ExerciseCategorieType = {
   link: string;
 };
 export type ExerciseType = {
+  id: string;
   exerciseName: string;
   category: string;
   muscle1: string[];
@@ -80,4 +81,8 @@ export type ExerciseType = {
   imageUrl: string;
   videoUrl: string[];
   link: string;
+};
+export type UserInfoType = {
+  id: string;
+  favorites: string[];
 };

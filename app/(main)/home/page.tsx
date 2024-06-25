@@ -7,10 +7,12 @@ import { clerkClient } from '@clerk/nextjs';
 import SectionTitle from '@/components/section-title';
 
 const WelcomeUser = async () => {
+  
   const { userId } = auth();
   if (!userId) {
     return;
   }
+
   const response = await clerkClient.users.getUser(userId);
   const { firstName } = response;
   return (

@@ -5,11 +5,13 @@ import Exercise from '@/model/exercise-model';
 
 import Plan from '@/model/plan-model';
 import Training from '@/model/training-model';
+import User from '@/model/user-schema';
 import {
   ExerciseCategorieType,
   ExerciseType,
   PlanDataType,
   TrainingDataType,
+  UserInfoType,
   UserPlanType,
 } from '@/types/type';
 import mongoose from 'mongoose';
@@ -77,4 +79,9 @@ export async function getExercise(exerciseName: string) {
   await connectMongoDB();
   const exercises = await Exercise.findOne({ link: exerciseName });
   return exercises as ExerciseType;
+}
+export async function getUserInformation(userId: string) {
+  await connectMongoDB();
+  const user = await User.findOne({ userId: userId });
+  return user as UserInfoType;
 }

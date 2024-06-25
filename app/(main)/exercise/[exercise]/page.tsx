@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import Image from 'next/image';
 import { getExercise } from '@/server/get-db-data-functions';
+import ToggleFavoriteExerciseBtn from '@/components/toggle-favorite-exercise-btn';
 
 type Props = {
   params: { exercise: string };
@@ -26,8 +27,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const WorkoutDescription = async ({ decodedName }: { decodedName: string }) => {
   const workout = await getExercise(decodedName);
+
   return (
     <>
+      {/* <ToggleFavoriteExerciseBtn /> */}
       <AccordionWrapper title='Photos' style='flex items-center justify-center'>
         {workout && (
           <div className='relative w-[200px] h-[200px] lg:w-[300px] lg:h-[300px] rounded-md overflow-hidden  '>

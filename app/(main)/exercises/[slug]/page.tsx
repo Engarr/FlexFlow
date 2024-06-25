@@ -1,4 +1,5 @@
 import React, { Suspense } from 'react';
+import { auth } from '@clerk/nextjs/server';
 import SectionTitle from '@/components/section-title';
 import AccordionWrapper from '@/components/accordion-wrapper';
 import LoaderComponent from '@/components/loader-component';
@@ -6,6 +7,7 @@ import { Metadata } from 'next';
 import {
   getCategoryByName,
   getCategoryExerciseList,
+  getUserInformation,
 } from '@/server/get-db-data-functions';
 import ErrorComponent from '@/components/error-component';
 import ExercisesListItem from './exercises-list-item';
@@ -26,7 +28,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const ExercisesList = async ({ slug }: { slug: string }) => {
+  const { userId } = auth();
+  if (!userId) {
+    return;
+  }
   const exercisesArr = await getCategoryExerciseList(slug);
+  const userInfo = await getUserInformation(userId);
 
   if (!exercisesArr) {
     return (
@@ -38,15 +45,21 @@ const ExercisesList = async ({ slug }: { slug: string }) => {
   }
   return (
     <>
-      {exercisesArr.map((e) => (
-        <React.Fragment key={e.exerciseName}>
-          <ExercisesListItem
-            exerciseName={e.exerciseName}
-            imageUrl={e.imageUrl}
-            link={e.link}
-          />
-        </React.Fragment>
-      ))}
+      {exercisesArr.map((e) => {
+        const isAdded = userInfo.favorites.some((f) => f === e.id);
+
+        return (
+          <React.Fragment key={e.exerciseName}>
+            <ExercisesListItem
+              exerciseName={e.exerciseName}
+              imageUrl={e.imageUrl}
+              link={e.link}
+              id={e.id}
+              isAdded={isAdded}
+            />
+          </React.Fragment>
+        );
+      })}
     </>
   );
 };

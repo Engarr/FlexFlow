@@ -5,23 +5,29 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import Link from 'next/link';
-import { Heart, ImageIcon } from 'lucide-react';
+import { ImageIcon } from 'lucide-react';
 import Image from 'next/image';
 import { Suspense } from 'react';
 import LoaderComponent from '@/components/loader-component';
+import ToggleFavoriteExerciseBtn from '@/components/toggle-favorite-exercise-btn';
 
 type Props = {
   exerciseName: string;
-
   link: string;
   imageUrl: string;
+  id: string;
+  isAdded: boolean;
 };
 
-const ExercisesListItem = ({ exerciseName, link, imageUrl }: Props) => {
+const ExercisesListItem = ({
+  exerciseName,
+  link,
+  imageUrl,
+  id,
+  isAdded,
+}: Props) => {
   return (
-    <div
-      key={exerciseName}
-      className='bg-card shadow-lg rounded-md px-2 py-3 flex justify-between max-sm:gap-2 max-sm:flex-col items-center last-of-type:mb-6'>
+    <div className='bg-card shadow-lg rounded-md px-2 py-3 flex justify-between max-sm:gap-2 max-sm:flex-col items-center last-of-type:mb-6'>
       <div>
         <Link href={`/exercise/${link}`}>
           <Button size='lg' className='max-md:h-10 max-md:px-3'>
@@ -55,11 +61,7 @@ const ExercisesListItem = ({ exerciseName, link, imageUrl }: Props) => {
             </Suspense>
           </PopoverContent>
         </Popover>
-        <Button size='sm' className=' '>
-          <div>
-            <Heart />
-          </div>
-        </Button>
+        <ToggleFavoriteExerciseBtn id={id} isAdded={isAdded} />
       </div>
     </div>
   );

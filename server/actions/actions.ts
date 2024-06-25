@@ -8,6 +8,7 @@ import { revalidatePath } from 'next/cache';
 import { TrainingDataType } from '@/types/type';
 import Training from '@/model/training-model';
 import { formatDateTime } from '@/utils/date-transform';
+import User from '@/model/user-schema';
 
 export async function addNewPlan(
   values: z.infer<typeof formSchema> & { creator: string }
@@ -68,7 +69,7 @@ export async function addNewPlanToHistory(formData: TrainingDataType) {
   await connectMongoDB();
   const training = await Training.create(formData);
   if (!training) {
-    return { error: 'Authorization error' };
+    return { error: 'Failed to finish training' };
   } else {
     return { success: 'Training has been finished successfully' };
   }
@@ -96,5 +97,35 @@ export async function editTraining(
     await Training.findByIdAndUpdate(trainingId, newValue);
     revalidatePath('/plans/yours-training-plans');
     return { success: 'Plan has been updated' };
+  }
+}
+
+export async function toggleExerciseToFavorites(
+  exerciseId: string,
+  userId: string,
+  revalidatePathName: string
+) {
+  try {
+    await connectMongoDB();
+    let user = await User.findOne({ userId });
+
+    if (!user) {
+      user = await User.create({ userId, favorites: [exerciseId] });
+    } else {
+      const index = user.favorites.indexOf(exerciseId);
+
+      if (index !== -1) {
+        user.favorites.splice(index, 1);
+      } else {
+        user.favorites.push(exerciseId);
+      }
+      revalidatePath(`${revalidatePathName}`);
+      await user.save();
+    }
+
+    return;
+  } catch (error) {
+    console.error('Error toggling exercise to favorites:', error);
+    throw error;
   }
 }
