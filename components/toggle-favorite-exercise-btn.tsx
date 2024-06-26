@@ -24,10 +24,14 @@ const ToggleFavoriteExerciseBtn = ({
       {userId && (
         <Button
           size='sm'
-          onClick={async () =>
+                    onClick={async () =>
             await toggleExerciseToFavorites(id, userId, revalidatePathName)
           }>
-          {isAdded ? <Heart className='text-red-500 ' /> : <Heart />}
+          {isAdded ? (
+            <Heart className='text-red-400 stroke-[3px] ' />
+          ) : (
+            <Heart className=' stroke-[3px] ' />
+          )}
         </Button>
       )}
     </>

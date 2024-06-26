@@ -14,10 +14,8 @@ const Page = async ({ params }: { params: { id: string } }) => {
   const { userId } = auth();
 
   const planValuses = await fetchPlanById(id);
-  if (!planValuses) {
-    return <ErrorComponent message='Failed To Fetch Plans Details' />;
-  }
-  if (!userId) {
+  
+  if (!planValuses || !userId) {
     return <ErrorComponent message='Failed To Fetch Plans Details' />;
   }
 

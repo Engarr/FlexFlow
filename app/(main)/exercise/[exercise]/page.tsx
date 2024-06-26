@@ -4,11 +4,14 @@ import { Metadata } from 'next';
 import AccordionWrapper from '@/components/accordion-wrapper';
 import LoaderComponent from '@/components/loader-component';
 import SectionTitle from '@/components/section-title';
-import { Button } from '@/components/ui/button';
-import { Plus } from 'lucide-react';
 import Image from 'next/image';
-import { getExercise } from '@/server/get-db-data-functions';
+import {
+  getExercise,
+  getUserInformation,
+} from '@/server/get-db-data-functions';
 import ToggleFavoriteExerciseBtn from '@/components/toggle-favorite-exercise-btn';
+import { auth } from '@clerk/nextjs/server';
+import { redirect } from 'next/navigation';
 
 type Props = {
   params: { exercise: string };
@@ -26,11 +29,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const WorkoutDescription = async ({ decodedName }: { decodedName: string }) => {
+  const { userId } = auth();
+  if (!userId) {
+    redirect('/');
+  }
+  const convertedExercise = decodedName
+    .toLowerCase()
+    .replace(/\b\w/g, (char) => char.toUpperCase());
   const workout = await getExercise(decodedName);
+  const userInfo = await getUserInformation(userId);
+  const isAdded = userInfo.favorites.some((f) => f === workout.id);
 
   return (
     <>
-      {/* <ToggleFavoriteExerciseBtn /> */}
+      <div className='flex  gap-2 justify-start max-lg:px-2'>
+        <SectionTitle>{convertedExercise} Exercise</SectionTitle>
+        <ToggleFavoriteExerciseBtn id={workout.id} isAdded={isAdded} />
+      </div>
       <AccordionWrapper title='Photos' style='flex items-center justify-center'>
         {workout && (
           <div className='relative w-[200px] h-[200px] lg:w-[300px] lg:h-[300px] rounded-md overflow-hidden  '>
@@ -74,21 +89,10 @@ const WorkoutDescription = async ({ decodedName }: { decodedName: string }) => {
 const Exercise = ({ params }: Props) => {
   const { exercise } = params;
   const decodedName = decodeURIComponent(exercise);
-  const convertedExercise = decodedName
-    .toLowerCase()
-    .replace(/\b\w/g, (char) => char.toUpperCase());
 
   return (
     <section className='pb-10'>
       <Suspense fallback={<LoaderComponent />}>
-        <div className='flex  gap-2 justify-start max-lg:px-2'>
-          <SectionTitle>{convertedExercise} Exercise</SectionTitle>
-          <Button size='sm' className=' '>
-            <div>
-              <Plus />
-            </div>
-          </Button>
-        </div>
         <WorkoutDescription decodedName={decodedName} />
       </Suspense>
     </section>
