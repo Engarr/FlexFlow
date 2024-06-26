@@ -38,7 +38,7 @@ const Categories = async () => {
 const Exercise = () => {
   return (
     <section>
-      <SectionTitle>Exercise catalogue</SectionTitle>
+      <SectionTitle>App Exercise Catalog</SectionTitle>
       <div className='flex flex-wrap gap-2 max-xl:pl-2 lg:gap-5 max-w-[500px]'>
         <Suspense fallback={<LoaderComponent />}>
           <Categories />

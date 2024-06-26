@@ -42,7 +42,7 @@ const WorkoutDescription = async ({ decodedName }: { decodedName: string }) => {
 
   return (
     <>
-      <div className='flex  gap-2 justify-start max-lg:px-2'>
+      <div className='flex  gap-2 justify-between px-2 xl:px-0'>
         <SectionTitle>{convertedExercise} Exercise</SectionTitle>
         <ToggleFavoriteExerciseBtn id={workout.id} isAdded={isAdded} />
       </div>
