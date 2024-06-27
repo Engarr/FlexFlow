@@ -1,3 +1,4 @@
+import { baloo } from '@/lib/fonts';
 import { cn } from '@/lib/utils';
 import React from 'react';
 
@@ -12,7 +13,7 @@ const SectionTitle = ({ children, style, element = 'h2' }: PropsType) => {
   return (
     <Element
       className={cn(
-        'text-xl xl:text-3xl font-semibold mb-10 px-2 xl:px-0',
+        `text-xl xl:text-3xl font-semibold mb-10 px-2 xl:px-0 ${baloo.className}`,
         style
       )}>
       {children}
