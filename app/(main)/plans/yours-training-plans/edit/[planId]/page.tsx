@@ -27,10 +27,10 @@ const Page = async ({ params }: { params: { planId: string } }) => {
 
   return (
     <>
-      <SectionTitle>
-        Edit Plan ID: <span className='text-text-secondary'>{planId}</span>
-      </SectionTitle>
       <Suspense fallback={<LoaderComponent />}>
+        <SectionTitle>
+          Edit Plan ID: <span className='text-text-secondary'>{planId}</span>
+        </SectionTitle>
         <PlanForm
           planName={planValuses.planName}
           creator={planValuses.creator}
