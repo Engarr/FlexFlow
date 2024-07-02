@@ -1,5 +1,20 @@
 ![Opis alternatywny](public/images/Banner.png)
 
+## Navigation
+
+- [FlexFlow: Gym Achievement Tracker](#flexflow-gym-achievement-tracker)
+- [Key Features](#key-features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+  - [Prerequisites](#prerequisites)
+  - [Installation Steps](#installation-steps)
+- [Available Scripts](#available-scripts)
+- [Dependencies](#dependencies)
+- [Development Dependencies](#development-dependencies)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgements](#acknowledgements)
+
 # FlexFlow: Gym Achievement Tracker
 
 FlexFlow is a web application designed to help users track their gym achievements and manage their workout plans efficiently. Built using Next.js for the frontend and MongoDB for the backend database, FlexFlow utilizes server actions for data fetching and management.
