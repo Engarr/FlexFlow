@@ -40,7 +40,7 @@
   }
 
   .dark {
-    --main-background: rgb(37, 40, 45);
+    --main-background: #25282d;
     --green: 83, 78%, 55%;
     --text: 215, 20%, 95%;
     --text-secondary: 83, 78%, 55%;
