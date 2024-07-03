@@ -9,7 +9,7 @@ type PropsType = {
 const ExerciseCard = ({ name, link }: PropsType) => {
   return (
     <Link href={`/exercises/${link}`}>
-      <Button className='' size='lg'>
+      <Button className='' size='lg' >
         {name}
       </Button>
     </Link>

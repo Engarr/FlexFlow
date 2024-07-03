@@ -39,11 +39,11 @@ const Exercise = () => {
   return (
     <section>
       <SectionTitle>App Exercise Catalog</SectionTitle>
-      <div className='flex flex-wrap gap-2 max-xl:pl-2 lg:gap-5 max-w-[500px]'>
-        <Suspense fallback={<LoaderComponent />}>
+      <Suspense fallback={<LoaderComponent />}>
+        <div className='flex flex-wrap gap-2 max-xl:pl-2 lg:gap-5 max-w-[500px]'>
           <Categories />
-        </Suspense>
-      </div>
+        </div>
+      </Suspense>
     </section>
   );
 };
