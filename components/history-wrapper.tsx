@@ -7,20 +7,41 @@ import SectionTitle from '@/components/section-title';
 
 import TrainingHistoryBox from '@/components/training-history-box';
 import ErrorComponent from '@/components/error-component';
-import { useTrainingsHistory } from '@/server/get-trainings-history';
+
+import {
+  UseQueryOptions,
+  UseQueryResult,
+  useQuery,
+} from '@tanstack/react-query';
+import { TrainingDataType } from '@/types/type';
+import { fetchTrainingsHistory } from '@/server/fetch-from-api-functions';
+
+
 
 const HistoryWrapper = () => {
   const { selectedDate, actualDay, changeDay } = useStore();
-  const { trainingsData, isLoading, error } = useTrainingsHistory(
-    actualDay.date
-  );
+
+  const queryOptions: UseQueryOptions<any, Error> = {
+    queryKey: ['trainingsHistory', actualDay.date],
+    queryFn: () => fetchTrainingsHistory(actualDay.date),
+  };
+
+  const {
+    data: trainingsData,
+    isLoading,
+    isError,
+  }: UseQueryResult<TrainingDataType[], Error> = useQuery(queryOptions);
 
   const displayData =
     selectedDate && formattingToTheDisplayedDate(selectedDate);
 
-  if (error) {
+
+    
+  if (isError) {
     return <ErrorComponent message='Failed to fetch data' />;
   }
+
+
   return (
     <div className='flex gap-10 flex-col sm:flex-row  rounded-md dark:border-gray-200/25 border-2 px-2 py-4  max-2xl:mx-2'>
       <Calendar
@@ -49,3 +70,14 @@ const HistoryWrapper = () => {
 };
 
 export default HistoryWrapper;
+
+
+// export const fetchTrainingsHistory = async (day: string) => {
+//   const response = await fetch(`/api/training-history?date=${day}`, {
+//     cache: 'no-cache',
+//   });
+//   if (!response.ok) {
+//     throw new Error('Failed to fetch data');
+//   }
+//   return response.json();
+// };

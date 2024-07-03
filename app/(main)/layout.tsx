@@ -6,6 +6,7 @@ import { Metadata } from 'next';
 
 import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
+import { QueryProviders } from './query-providers';
 
 type Props = {
   children: React.ReactNode;
@@ -17,14 +18,13 @@ export const metadata: Metadata = {
 };
 
 const MainLayout = ({ children }: Props) => {
-  
   const { userId } = auth();
   if (!userId) {
     redirect('/');
   }
 
   return (
-    <>
+    <QueryProviders>
       <AppOptions style='max-lg:hidden lg:fixed' />
       <MobileHeader />
       <Sidebar className='hidden lg:flex pt-6' />
@@ -34,7 +34,7 @@ const MainLayout = ({ children }: Props) => {
           {children}
         </div>
       </main>
-    </>
+    </QueryProviders>
   );
 };
 

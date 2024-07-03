@@ -1,12 +1,14 @@
+import React, { Suspense } from 'react';
+
+import { auth } from '@clerk/nextjs/server';
+import { redirect } from 'next/navigation';
+
 import ErrorComponent from '@/components/error-component';
 import PlanForm from '@/components/form/plan-form';
 import LoaderComponent from '@/components/loader-component';
 import SectionTitle from '@/components/section-title';
 import { fetchPlanById } from '@/server/get-db-data-functions';
-import { auth } from '@clerk/nextjs/server';
 
-import { redirect } from 'next/navigation';
-import React, { Suspense } from 'react';
 import { transformExercisesArr } from './_utils';
 
 const Page = async ({ params }: { params: { planId: string } }) => {

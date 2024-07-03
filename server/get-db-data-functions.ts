@@ -80,8 +80,3 @@ export async function getExercise(exerciseName: string) {
   const exercises = await Exercise.findOne({ link: exerciseName });
   return exercises as ExerciseType;
 }
-export async function getUserInformation(userId: string) {
-  await connectMongoDB();
-  const user = await User.findOne({ userId: userId });
-  return user as UserInfoType;
-}

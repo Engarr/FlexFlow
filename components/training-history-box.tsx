@@ -15,10 +15,12 @@ const TrainingHistoryBox = ({
   isLoading,
   trainingsData,
 }: TrainingHistoryComponentPropsType) => {
+  
   const heightClass =
     trainingsData && trainingsData?.length > 3
       ? ' max-h-[250px] lg:max-h-[200px] overflow-y-scroll'
       : '';
+
   return (
     <>
       {isLoading ? (

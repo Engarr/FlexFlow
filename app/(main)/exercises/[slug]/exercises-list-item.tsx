@@ -16,16 +16,9 @@ type Props = {
   link: string;
   imageUrl: string;
   id: string;
-  isAdded: boolean;
 };
 
-const ExercisesListItem = ({
-  exerciseName,
-  link,
-  imageUrl,
-  id,
-  isAdded,
-}: Props) => {
+const ExercisesListItem = ({ exerciseName, link, imageUrl, id }: Props) => {
   return (
     <div className='bg-card shadow-lg rounded-xl px-3 py-4 flex justify-between max-sm:gap-2 max-sm:flex-col items-center last-of-type:mb-6'>
       <div>
@@ -61,7 +54,7 @@ const ExercisesListItem = ({
             </Suspense>
           </PopoverContent>
         </Popover>
-        <ToggleFavoriteExerciseBtn id={id} isAdded={isAdded} />
+        <ToggleFavoriteExerciseBtn id={id} />
       </div>
     </div>
   );

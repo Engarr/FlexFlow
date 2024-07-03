@@ -9,6 +9,7 @@ import { TrainingDataType } from '@/types/type';
 import Training from '@/model/training-model';
 import { formatDateTime } from '@/utils/date-transform';
 import User from '@/model/user-schema';
+import { useQueryClient } from '@tanstack/react-query';
 
 export async function addNewPlan(
   values: z.infer<typeof formSchema> & { creator: string }
@@ -100,32 +101,32 @@ export async function editTraining(
   }
 }
 
+
 export async function toggleExerciseToFavorites(
   exerciseId: string,
-  userId: string,
-  revalidatePathName: string
+  userId: string
 ) {
-  try {
-    await connectMongoDB();
-    let user = await User.findOne({ userId });
+  await connectMongoDB();
+  let user = await User.findOne({ userId });
 
+  try {
     if (!user) {
       user = await User.create({ userId, favorites: [exerciseId] });
+      return { success: 'Exercises Has Been Added To Favorites' };
     } else {
       const index = user.favorites.indexOf(exerciseId);
 
       if (index !== -1) {
         user.favorites.splice(index, 1);
+        await user.save();
+        return { success: 'Exercises Has Been Removed From Favorites' };
       } else {
         user.favorites.push(exerciseId);
+        await user.save();
+        return { success: 'Exercises Has Been Added To Favorites' };
       }
-      revalidatePath(`${revalidatePathName}`);
-      await user.save();
     }
-
-    return;
   } catch (error) {
-    console.error('Error toggling exercise to favorites:', error);
-    throw error;
+    return { error: `${error}` };
   }
 }

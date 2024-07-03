@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import  { Suspense } from 'react';
 
 import { fetchPlanById } from '@/server/get-db-data-functions';
 import DetailContainer from '@/components/detail-container';

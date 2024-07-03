@@ -1,48 +1,70 @@
 'use client';
-import React, {  useState } from 'react';
+
 import { Button } from './ui/button';
 import { useAuth } from '@clerk/nextjs';
-import { toggleExerciseToFavorites } from '@/server/actions/actions';
-import { Heart } from 'lucide-react';
+import { Heart, Loader } from 'lucide-react';
 import { redirect } from 'next/navigation';
-
-import { usePathname } from 'next/navigation';
+import { useMutation } from '@tanstack/react-query';
+import {
+  UseQueryOptions,
+  UseQueryResult,
+  useQuery,
+} from '@tanstack/react-query';
+import { UserInfoType } from '@/types/type';
+import { fetchUserInfo } from '@/server/fetch-from-api-functions';
+import { useFavoriteExerciseToggle } from '@/utils/toggle-to-favorites-exercise-handler';
 
 type ToggleFavoriteExerciseBtnType = {
   id: string;
-  isAdded: boolean;
 };
 
-const ToggleFavoriteExerciseBtn = ({
-  id,
-  isAdded,
-}: ToggleFavoriteExerciseBtnType) => {
+const ToggleFavoriteExerciseBtn = ({ id }: ToggleFavoriteExerciseBtnType) => {
+  
   const { userId } = useAuth();
   if (!userId) {
     redirect('/');
   }
-  const revalidatePathName = usePathname();
-  const [isLoading, setIsLoading] = useState(false);
+  let isAdded = false;
+  const { toggleToFavoritesHandler } = useFavoriteExerciseToggle();
 
-  const handleClick = async () => {
-    setIsLoading(true);
-
-    try {
-      await toggleExerciseToFavorites(id, userId, revalidatePathName);
-    } finally {
-      setIsLoading(false);
-    }
+  const queryOptions: UseQueryOptions<any, Error> = {
+    queryKey: ['favorites'],
+    queryFn: () => fetchUserInfo(userId),
   };
+
+  const {
+    data: userInfo,
+    isLoading,
+    isError,
+  }: UseQueryResult<UserInfoType> = useQuery(queryOptions);
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: () => toggleToFavoritesHandler({ exerciseId: id, userId }),
+  });
+  if (userInfo) {
+    isAdded = userInfo.favorites.some((f) => f === id);
+  }
+
+  if (isError) {
+    return (
+      <Button size='sm' disabled>
+        <Heart className='stroke-[3px]' />
+      </Button>
+    );
+  }
+  const btnCtx = isPending ? (
+    <Loader className='animate-spin ' />
+  ) : isAdded ? (
+    <Heart className='text-red-400 stroke-[3px]' />
+  ) : (
+    <Heart className='stroke-[3px]' />
+  );
 
   return (
     <>
       {userId && (
-        <Button size='sm' onClick={handleClick} disabled={isLoading}>
-          {isAdded ? (
-            <Heart className='text-red-400 stroke-[3px]' />
-          ) : (
-            <Heart className='stroke-[3px]' />
-          )}
+        <Button size='sm' onClick={() => mutate()} disabled={isPending}>
+          {btnCtx}
         </Button>
       )}
     </>

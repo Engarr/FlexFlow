@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 
 import HistoryWrapper from '@/components/history-wrapper';
 import { auth } from '@clerk/nextjs/server';
@@ -13,7 +13,9 @@ const WelcomeUser = async () => {
   }
 
   const response = await clerkClient.users.getUser(userId);
+
   const { firstName } = response;
+
   return (
     <div className='mb-10'>
       <SectionTitle style='mb-0 '>Hello, {firstName}!</SectionTitle>

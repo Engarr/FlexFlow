@@ -5,10 +5,7 @@ import AccordionWrapper from '@/components/accordion-wrapper';
 import LoaderComponent from '@/components/loader-component';
 import SectionTitle from '@/components/section-title';
 import Image from 'next/image';
-import {
-  getExercise,
-  getUserInformation,
-} from '@/server/get-db-data-functions';
+import { getExercise } from '@/server/get-db-data-functions';
 import ToggleFavoriteExerciseBtn from '@/components/toggle-favorite-exercise-btn';
 import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
@@ -37,14 +34,12 @@ const WorkoutDescription = async ({ decodedName }: { decodedName: string }) => {
     .toLowerCase()
     .replace(/\b\w/g, (char) => char.toUpperCase());
   const workout = await getExercise(decodedName);
-  const userInfo = await getUserInformation(userId);
-  const isAdded = userInfo.favorites.some((f) => f === workout.id);
 
   return (
     <>
       <div className='flex  gap-2 justify-between px-2 xl:px-0'>
         <SectionTitle>{convertedExercise} Exercise</SectionTitle>
-        <ToggleFavoriteExerciseBtn id={workout.id} isAdded={isAdded} />
+        <ToggleFavoriteExerciseBtn id={workout.id} />
       </div>
       <AccordionWrapper title='Photos' style='flex items-center justify-center'>
         {workout && (

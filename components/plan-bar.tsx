@@ -4,7 +4,8 @@ import { FilePenLine, Info, Play, Trash } from 'lucide-react';
 import Link from 'next/link';
 
 import { DeletBtn } from './delete-btn';
-import { removePlan } from '@/lib/remove-plan-handler';
+import { useRemove } from '@/utils/remove-plan-handler';
+
 
 type UserPlanBar = {
   planName: string;
@@ -21,16 +22,19 @@ export const PlanBar = ({
   userId,
   isAppPlan,
 }: UserPlanBar) => {
+  const { removeHandler } = useRemove();
   const detailsLink = trainingId
     ? `/training/details/${trainingId}`
     : `/plans/details/${planId}`;
   const editLink = trainingId
     ? `/training/edit-training/${trainingId}`
     : `/plans/yours-training-plans/edit/${planId}`;
+  const startButtonLink = trainingId ? '' : `/start-training/${planId}`;
 
-  const handleRemovePlan = async () => {
-    await removePlan({ trainingId, userId, planId });
+  const handleRemove = async () => {
+    await removeHandler({ trainingId, userId, planId });
   };
+  const isDisabled = trainingId ? true : false;
 
   return (
     <div className='bg-card p-3 rounded-md flex lg:justify-between max-lg:flex-col items-center max-lg:gap-2 shadow-lg'>
@@ -38,9 +42,15 @@ export const PlanBar = ({
         <p className=' lg:text-xl'>{planName}</p>
       </div>
       <div className='flex gap-2 '>
-        <Link href={`/start-training/${planId}`}>
-          <Button size='sm' variant='primary' tabIndex={-1}>
-            <Play size='20px' />
+        <Link href={startButtonLink}>
+          <Button
+            size='sm'
+            variant='primary'
+            tabIndex={-1}
+            disabled={isDisabled}>
+            <div>
+              <Play size='20px' />
+            </div>
           </Button>
         </Link>
         <Link href={detailsLink}>
@@ -56,7 +66,7 @@ export const PlanBar = ({
           </Link>
         )}
         {userId && (
-          <DeletBtn removeHandler={handleRemovePlan}>
+          <DeletBtn removeHandler={handleRemove}>
             <div>
               <Trash size='20px' />
             </div>
