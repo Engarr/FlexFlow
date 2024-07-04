@@ -1,4 +1,5 @@
 import React, { Suspense } from 'react';
+
 import PlansContent from '@/components/plans-content';
 import SectionTitle from '@/components/section-title';
 import LoaderComponent from '@/components/loader-component';

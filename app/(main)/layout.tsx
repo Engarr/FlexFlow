@@ -1,11 +1,12 @@
+import { Metadata } from 'next';
+import { auth } from '@clerk/nextjs/server';
+import { redirect } from 'next/navigation';
+
 import AppOptions from '@/components/app-options';
 import MobileHeader from '@/components/mobile-header';
 import Sidebar from '@/components/sidebar';
 import { Toaster } from '@/components/ui/toaster';
-import { Metadata } from 'next';
 
-import { auth } from '@clerk/nextjs/server';
-import { redirect } from 'next/navigation';
 import { QueryProviders } from './query-providers';
 
 type Props = {

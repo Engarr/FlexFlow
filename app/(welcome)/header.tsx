@@ -1,5 +1,7 @@
 'use client';
 import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 import {
   ClerkLoaded,
   ClerkLoading,
@@ -8,11 +10,11 @@ import {
   SignInButton,
   UserButton,
 } from '@clerk/nextjs';
-import { Loader } from 'lucide-react';
-import Image from 'next/image';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
+
 import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import { Loader } from 'lucide-react';
+
 
 const Header = () => {
   return (

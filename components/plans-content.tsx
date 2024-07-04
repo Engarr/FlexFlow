@@ -1,12 +1,14 @@
 import React from 'react';
+import Link from 'next/link';
+
+import { Info } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { Info } from 'lucide-react';
-import Link from 'next/link';
 
 type PropsType = {
   title: string;

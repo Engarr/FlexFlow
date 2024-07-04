@@ -1,9 +1,12 @@
+import React from 'react';
+
+import { Loader } from 'lucide-react';
+
 import { LogoButton } from '@/app/(welcome)/header';
 import { sidebarButtonsData } from '@/lib/sidebar-items-data';
 import { cn } from '@/lib/utils';
 import { ClerkLoaded, ClerkLoading, SignedIn, UserButton } from '@clerk/nextjs';
-import { Loader } from 'lucide-react';
-import React from 'react';
+
 import { SidebarItem } from './sidebar-item';
 
 type Props = {

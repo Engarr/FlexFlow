@@ -1,14 +1,15 @@
 import React, { Suspense } from 'react';
 import { Metadata } from 'next';
+import Image from 'next/image';
+
+import { auth } from '@clerk/nextjs/server';
+import { redirect } from 'next/navigation';
 
 import AccordionWrapper from '@/components/accordion-wrapper';
 import LoaderComponent from '@/components/loader-component';
 import SectionTitle from '@/components/section-title';
-import Image from 'next/image';
-import { getExercise } from '@/server/get-db-data-functions';
 import ToggleFavoriteExerciseBtn from '@/components/toggle-favorite-exercise-btn';
-import { auth } from '@clerk/nextjs/server';
-import { redirect } from 'next/navigation';
+import { getExercise } from '@/server/get-db-data-functions';
 
 type Props = {
   params: { exercise: string };

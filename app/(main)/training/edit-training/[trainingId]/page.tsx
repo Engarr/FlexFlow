@@ -1,11 +1,12 @@
 import React, { Suspense } from 'react';
 import { auth } from '@clerk/nextjs/server';
-import { fetchTrainingDetails } from '@/server/get-db-data-functions';
 import { redirect } from 'next/navigation';
+
 import ErrorComponent from '@/components/error-component';
 import SectionTitle from '@/components/section-title';
 import PlanForm from '@/components/form/plan-form';
 import LoaderComponent from '@/components/loader-component';
+import { fetchTrainingDetails } from '@/server/get-db-data-functions';
 import { transformExercisesArr } from '@/app/(main)/plans/yours-training-plans/edit/[planId]/_utils';
 
 const Page = async ({ params }: { params: { trainingId: string } }) => {

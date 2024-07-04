@@ -1,9 +1,10 @@
 import { Suspense } from 'react';
 
-import HistoryWrapper from '@/components/history-wrapper';
 import { auth } from '@clerk/nextjs/server';
-import LoaderComponent from '@/components/loader-component';
 import { clerkClient } from '@clerk/nextjs';
+
+import HistoryWrapper from '@/components/history-wrapper';
+import LoaderComponent from '@/components/loader-component';
 import SectionTitle from '@/components/section-title';
 
 const WelcomeUser = async () => {

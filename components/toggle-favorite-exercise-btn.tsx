@@ -1,9 +1,9 @@
 'use client';
 
-import { Button } from './ui/button';
-import { useAuth } from '@clerk/nextjs';
 import { Heart, Loader } from 'lucide-react';
 import { redirect } from 'next/navigation';
+import { useAuth } from '@clerk/nextjs';
+
 import { useMutation } from '@tanstack/react-query';
 import {
   UseQueryOptions,
@@ -13,6 +13,8 @@ import {
 import { UserInfoType } from '@/types/type';
 import { fetchUserInfo } from '@/server/fetch-from-api-functions';
 import { useFavoriteExerciseToggle } from '@/utils/toggle-to-favorites-exercise-handler';
+
+import { Button } from './ui/button';
 
 type ToggleFavoriteExerciseBtnType = {
   id: string;

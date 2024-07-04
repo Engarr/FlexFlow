@@ -1,6 +1,7 @@
+import React from 'react';
+
 import { baloo } from '@/lib/fonts';
 import { cn } from '@/lib/utils';
-import React from 'react';
 
 type PropsType = {
   children: React.ReactNode;

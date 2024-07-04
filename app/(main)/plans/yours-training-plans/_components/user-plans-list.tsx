@@ -1,6 +1,6 @@
 import React from 'react';
-
 import Link from 'next/link';
+
 import ErrorComponent from '@/components/error-component';
 import { PlanBar } from '@/components/plan-bar';
 import SectionTitle from '@/components/section-title';

@@ -1,7 +1,9 @@
+import { UseFormReturn, useFieldArray } from 'react-hook-form';
+
+import { formSchemaType } from '@/lib/form-schema';
+
 import FormElement from './form-element';
 import { Button } from '../ui/button';
-import { formSchemaType } from '@/lib/form-schema';
-import { UseFormReturn, useFieldArray } from 'react-hook-form';
 import { DeletBtn } from '../delete-btn';
 
 const SeriesFieldArray = ({

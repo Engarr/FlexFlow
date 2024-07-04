@@ -1,5 +1,6 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
+import { Path, UseFormReturn } from 'react-hook-form';
 
 import {
   FormControl,
@@ -8,11 +9,10 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-
-import { Path, UseFormReturn } from 'react-hook-form';
-import { formSchemaType } from '@/lib/form-schema';
-import { Input } from '../ui/input';
 import { exercises } from '@/lib/app-data';
+import { formSchemaType } from '@/lib/form-schema';
+
+import { Input } from '../ui/input';
 
 type FormElementType = {
   form: UseFormReturn<formSchemaType>;

@@ -1,9 +1,7 @@
-import './globals.css';
 import { ClerkProvider } from '@clerk/nextjs';
 import { Providers } from './providers';
 import { poppins } from '@/lib/fonts';
-
-
+import './globals.css';
 
 export default function RootLayout({
   children,

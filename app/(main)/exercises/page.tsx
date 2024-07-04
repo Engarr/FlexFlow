@@ -1,10 +1,12 @@
 import React, { Suspense } from 'react';
-import SectionTitle from '@/components/section-title';
-import ExerciseCard from './exercise-card';
 import { Metadata } from 'next';
+
+import SectionTitle from '@/components/section-title';
 import LoaderComponent from '@/components/loader-component';
-import { getExerciseCategory } from '@/server/get-db-data-functions';
 import ErrorComponent from '@/components/error-component';
+import { getExerciseCategory } from '@/server/get-db-data-functions';
+
+import ExerciseCard from './exercise-card';
 
 export const metadata: Metadata = {
   title: 'Flex-Flow - exercises',

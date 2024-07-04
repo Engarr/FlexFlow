@@ -1,6 +1,6 @@
 'use client';
-import { formSchema, formSchemaType } from '@/lib/form-schema';
 import React from 'react';
+import { formSchema, formSchemaType } from '@/lib/form-schema';
 import {
   FieldArrayWithId,
   FormProvider,
@@ -8,14 +8,15 @@ import {
   UseFieldArrayRemove,
   UseFormReturn,
 } from 'react-hook-form';
+
 import FormElement from './form-element';
-import { FormLabel } from '../ui/form';
-import { z } from 'zod';
-import ExerciseNameInput from './exercise-name-input';
-import { Button } from '../ui/button';
-import SeriesFieldArray from './series-field-array';
-import { Trash } from 'lucide-react';
 import { DeletBtn } from '../delete-btn';
+import ExerciseNameInput from './exercise-name-input';
+import SeriesFieldArray from './series-field-array';
+import { z } from 'zod';
+import { FormLabel } from '../ui/form';
+import { Button } from '../ui/button';
+import { Trash } from 'lucide-react';
 
 type FormWrapperTye = {
   form: UseFormReturn<formSchemaType, any, undefined>;

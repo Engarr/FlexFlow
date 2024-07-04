@@ -1,11 +1,13 @@
 import React, { Suspense } from 'react';
 import Link from 'next/link';
-import { fetchPlans } from '@/server/get-db-data-functions';
+
 import ErrorComponent from '@/components/error-component';
 import LoaderComponent from '@/components/loader-component';
 import SectionTitle from '@/components/section-title';
 import { PlanBar } from '@/components/plan-bar';
 import { Button } from '@/components/ui/button';
+import { fetchPlans } from '@/server/get-db-data-functions';
+
 
 async function AppPlans() {
   const appPlans = await fetchPlans();

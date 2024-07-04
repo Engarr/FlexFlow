@@ -1,4 +1,6 @@
 import React from 'react';
+import { Path, UseFormReturn } from 'react-hook-form';
+
 import {
   FormControl,
   FormField,
@@ -6,8 +8,8 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { Path, UseFormReturn } from 'react-hook-form';
 import { formSchemaType } from '@/lib/form-schema';
+
 import { Input } from '../ui/input';
 
 type FormElementType = {

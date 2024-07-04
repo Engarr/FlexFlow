@@ -1,14 +1,17 @@
-import {  Settings } from 'lucide-react';
 import React from 'react';
-import { Button } from './ui/button';
+
+import { cn } from '@/lib/utils';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
 
+import { Button } from './ui/button';
+import {  Settings } from 'lucide-react';
 import ThemeSwitch from './theme-switch';
-import { cn } from '@/lib/utils';
+
+
 type PropsType = {
   style?: string;
 };

@@ -1,14 +1,17 @@
 import React, { Suspense } from 'react';
+import { Metadata } from 'next';
+
 import { auth } from '@clerk/nextjs/server';
+
 import SectionTitle from '@/components/section-title';
 import AccordionWrapper from '@/components/accordion-wrapper';
 import LoaderComponent from '@/components/loader-component';
-import { Metadata } from 'next';
+import ErrorComponent from '@/components/error-component';
 import {
   getCategoryByName,
   getCategoryExerciseList,
 } from '@/server/get-db-data-functions';
-import ErrorComponent from '@/components/error-component';
+
 import ExercisesListItem from './exercises-list-item';
 
 type Props = {

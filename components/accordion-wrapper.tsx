@@ -6,6 +6,8 @@ import {
 } from '@/components/ui/accordion';
 import { poppins } from '@/lib/fonts';
 import { cn } from '@/lib/utils';
+
+
 type PropsType = {
   title: string;
   children: React.ReactNode;

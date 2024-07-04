@@ -1,11 +1,12 @@
 'use client';
-import { Button } from '@/components/ui/button';
-import { FilePenLine, Info, Play, Trash } from 'lucide-react';
-import Link from 'next/link';
 
-import { DeletBtn } from './delete-btn';
+import Link from 'next/link';
+import { FilePenLine, Info, Play, Trash } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
 import { useRemove } from '@/utils/remove-plan-handler';
 
+import { DeletBtn } from './delete-btn';
 
 type UserPlanBar = {
   planName: string;

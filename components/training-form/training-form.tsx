@@ -1,15 +1,16 @@
 'use client';
 import React from 'react';
-import FormWrapper from '../form/form-wrapper';
 import { useFieldArray, useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
+import { z } from 'zod';
+
 import { formSchema, formSchemaType } from '@/lib/form-schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '@/components/ui/use-toast';
-import { useRouter } from 'next/navigation';
-
-import { z } from 'zod';
 import { addNewPlanToHistory } from '@/server/actions/actions';
 import { FormTrainingType } from '@/types/form-types';
+
+import FormWrapper from '../form/form-wrapper';
 
 const TrainingForm = ({
   planName,

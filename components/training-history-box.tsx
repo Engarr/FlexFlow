@@ -1,10 +1,12 @@
 import React from 'react';
+import Link from 'next/link';
+import { SquareMousePointer } from 'lucide-react';
+
 import { TrainingDataType } from '@/types/type';
+
 import LoaderComponent from './loader-component';
 import { PlanBar } from './plan-bar';
-import Link from 'next/link';
 import { Button } from './ui/button';
-import { SquareMousePointer } from 'lucide-react';
 
 type TrainingHistoryComponentPropsType = {
   isLoading: boolean;
@@ -15,7 +17,6 @@ const TrainingHistoryBox = ({
   isLoading,
   trainingsData,
 }: TrainingHistoryComponentPropsType) => {
-  
   const heightClass =
     trainingsData && trainingsData?.length > 3
       ? ' max-h-[250px] lg:max-h-[200px] overflow-y-scroll'

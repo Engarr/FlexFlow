@@ -2,9 +2,10 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 
+import { cn } from '@/lib/utils';
+
 import { Switch } from './ui/switch';
 import { Label } from './ui/label';
-import { cn } from '@/lib/utils';
 
 type PropsType = {
   style?: string;

@@ -1,9 +1,9 @@
 import  { Suspense } from 'react';
 
-import { fetchPlanById } from '@/server/get-db-data-functions';
 import DetailContainer from '@/components/detail-container';
 import LoaderComponent from '@/components/loader-component';
 import ErrorComponent from '@/components/error-component';
+import { fetchPlanById } from '@/server/get-db-data-functions';
 
 async function PlanDetails({ planId }: { planId: string }) {
   const details = await fetchPlanById(planId);

@@ -1,5 +1,6 @@
 import React from 'react';
-import SectionTitle from './section-title';
+import Link from 'next/link';
+
 import {
   Carousel,
   CarouselContent,
@@ -9,8 +10,9 @@ import {
 } from '@/components/ui/carousel';
 import { exercises } from '@/lib/app-data';
 import { PlanDataType, TrainingDataType } from '@/types/type';
-import Link from 'next/link';
+
 import { Button } from './ui/button';
+import SectionTitle from './section-title';
 
 type PropsType = {
  

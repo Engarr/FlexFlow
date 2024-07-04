@@ -1,13 +1,14 @@
+import { Suspense } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { ImageIcon } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import Link from 'next/link';
-import { ImageIcon } from 'lucide-react';
-import Image from 'next/image';
-import { Suspense } from 'react';
 import LoaderComponent from '@/components/loader-component';
 import ToggleFavoriteExerciseBtn from '@/components/toggle-favorite-exercise-btn';
 

@@ -1,10 +1,11 @@
 import React, { Suspense } from 'react';
 import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
+
 import DetailContainer from '@/components/detail-container';
 import ErrorComponent from '@/components/error-component';
-import { fetchTrainingDetails } from '@/server/get-db-data-functions';
 import LoaderComponent from '@/components/loader-component';
+import { fetchTrainingDetails } from '@/server/get-db-data-functions';
 
 const DetailsTrainingBox = async ({
   id,
