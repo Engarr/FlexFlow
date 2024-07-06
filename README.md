@@ -1,36 +1,42 @@
 ![Opis alternatywny](public/images/Banner.png)
 
-## Navigation
+## 📋 Navigation
 
-- [FlexFlow: Gym Achievement Tracker](#flexflow-gym-achievement-tracker)
-- [Key Features](#key-features)
-- [Technologies Used](#technologies-used)
-- [Installation](#installation)
-  - [Prerequisites](#prerequisites)
-  - [Installation Steps](#installation-steps)
-- [Available Scripts](#available-scripts)
-- [Dependencies](#dependencies)
-- [Development Dependencies](#development-dependencies)
-- [Contributing](#contributing)
-- [License](#license)
-- [Acknowledgements](#acknowledgements)
+1. [FlexFlow: Gym Achievement Tracker](#flexflow-gym-achievement-tracker)
+2. [Key Features](#key-features)
+3. [Technologies Used](#technologies-used)
+4. [Installation](#installation)
+    - [Prerequisites](#prerequisites)
+    - [Installation Steps](#installation-steps)
+5. [Available Scripts](#available-scripts)
+6. [Dependencies](#dependencies)
+7. [Development Dependencies](#development-dependencies)
+8. [Contributing](#contributing)
+9. [License](#license)
+10. [Acknowledgements](#acknowledgements)
 
-# FlexFlow: Gym Achievement Tracker
+# 🤖 FlexFlow: Gym Achievement Tracker
 
 FlexFlow is a web application designed to help users track their gym achievements and manage their workout plans efficiently. Built using Next.js for the frontend and MongoDB for the backend database, FlexFlow utilizes server actions for data fetching and management.
 
-## Key Features
+## 🔋 Key Features
 
-- **Training History**: View and track past workout sessions to monitor progress over time.
-- **Custom Workout Plans**: Create personalized workout plans tailored to individual fitness goals.
-- **Plan Management**: Easily edit, delete, and manage existing workout plans and sessions.
-- **Exercise Catalog**: Explore a catalog of exercises available for inclusion in workout plans.
-- **Sample Workout Plans**: Access pre-defined workout plans for inspiration and quick start.
-- **Authentication**: Secure login and authentication powered by Clerk to manage user access.
+👉 **Training History**: View and track past workout sessions to monitor progress over time.
+
+👉 **Custom Workout Plans**: Create personalized workout plans tailored to individual fitness goals.
+
+👉 **Plan Management**: Easily edit, delete, and manage existing workout plans and sessions.
+
+👉 **Exercise Catalog**: Explore a catalog of exercises available for inclusion in workout plans.
+
+👉 **Sample Workout Plans**: Access pre-defined workout plans for inspiration and quick start.
+
+👉 **Authentication**: Secure login and authentication powered by Clerk to manage user access.
+
 
 FlexFlow aims to provide users with a comprehensive toolset for effective workout planning, tracking, and achievement management, enhancing their fitness journey with structured and customizable workout routines.
 
-## Technologies Used
+## ⚙️ Technologies Used
 
 - **Frontend**: Next.js, TailwindCSS, React Hook Form
 - **Backend**: MongoDB, Clerk for Authentication
@@ -45,7 +51,7 @@ Ensure you have the following software installed:
 1. [Node.js](https://nodejs.org/) (recommended version 14.x or later)
 2. [npm](https://www.npmjs.com/) (usually installed with Node.js)
 
-## Installation Steps
+## 🤸 Installation Steps
 
 1. **Clone the repository:**
 
@@ -98,14 +104,14 @@ Ensure you have the following software installed:
 
        npm run lint
 
-## Available Scripts
+## 👉 Available Scripts
 
 - **`npm run dev`** - Runs the application in development mode.
 - **`npm run build`** - Builds the application for production.
 - **`npm start`** - Starts the built application.
 - **`npm run lint`** - Checks the code for errors and standard compliance.
 
-## Dependencies
+## 👉 Dependencies
 
 The project uses various libraries, including:
 
@@ -115,7 +121,7 @@ The project uses various libraries, including:
 - **State Management:** Zustand
 - **Others:** Clerk, MongoDB, Mongoose, SWR
 
-## Development Dependencies
+## 👉 Development Dependencies
 
 The project also uses development tools such as:
 
@@ -125,13 +131,13 @@ The project also uses development tools such as:
 
 These instructions should help you correctly install and run the FlexFlow project on your local machine.
 
-## Contributing
+## 👉 Contributing
 Contributions are welcome! If you'd like to contribute to FlexFlow, please fork the repository and create a pull request.
 
-## License
+## 👉 License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Acknowledgements
+## 👉 Acknowledgements
 - Thanks to the open source community for their valuable contributions.
 - Inspiration and initial setup guidance from similar fitness tracking applications.
 
