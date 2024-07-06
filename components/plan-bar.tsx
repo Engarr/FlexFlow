@@ -38,8 +38,7 @@ export const PlanBar = ({
   const isDisabled = trainingId ? true : false;
 
   return (
-    <div className='bg-card p-3 rounded-md flex lg:justify-between max-lg:flex-col items-center max-lg:gap-2 shadow-lg'>
-      {/* // TO DO: MODIFY OVERFLOW */}
+    <div className='bg-card p-3 rounded-md flex lg:justify-between max-lg:flex-col items-center max-lg:gap-2 shadow-lg flex-wrap gap-2'>
       <div className=''>
         <p className=' lg:text-xl truncate'>{planName}</p>
       </div>

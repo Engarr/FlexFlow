@@ -15,7 +15,6 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Loader } from 'lucide-react';
 
-
 const Header = () => {
   return (
     <header className='w-full max-w-[90%] lg:max-w-screen-2xl z-50 h-20 border-b-2 border-neutral-600 px-4 lg:px-20 fixed left-1/2 -translate-x-1/2'>
@@ -31,7 +30,7 @@ const Header = () => {
         </ClerkLoading>
         <ClerkLoaded>
           <SignedIn>
-            <div className='border-lime-400 border-2  rounded-full hover:border-lime-400/60 duration-300'>
+            <div className=' hover:border-lime-400/60 duration-300'>
               <UserButton afterSignOutUrl='/' />
             </div>
           </SignedIn>

@@ -54,7 +54,16 @@ const TrainingForm = ({
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const trainingTime = formatDateTime(date);
+    if (!date) {
+      toast({
+        title: 'Error',
+        description: 'Date is not defined',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    const trainingTime = formatDateTime(new Date(date));
 
     const newTrainingData = {
       ...values,
@@ -65,6 +74,7 @@ const TrainingForm = ({
       time: trainingTime.time,
       userId: userId,
     };
+
     let action = null;
     if (trainingId && date) {
       action = editTraining(values, userId, trainingId, date);
