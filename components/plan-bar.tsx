@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { FilePenLine, Info, Play, Trash } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { useRemove } from '@/utils/remove-plan-handler';
+import { useRemove } from '@/utils/remove-handler';
 
 import { DeletBtn } from './delete-btn';
 
@@ -39,8 +39,9 @@ export const PlanBar = ({
 
   return (
     <div className='bg-card p-3 rounded-md flex lg:justify-between max-lg:flex-col items-center max-lg:gap-2 shadow-lg'>
-      <div>
-        <p className=' lg:text-xl'>{planName}</p>
+      {/* // TO DO: MODIFY OVERFLOW */}
+      <div className=''>
+        <p className=' lg:text-xl truncate'>{planName}</p>
       </div>
       <div className='flex gap-2 '>
         <Link href={startButtonLink}>

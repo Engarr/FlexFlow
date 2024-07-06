@@ -5,24 +5,21 @@ import ErrorComponent from '@/components/error-component';
 import TrainingForm from '@/components/training-form/training-form';
 import SectionTitle from '@/components/section-title';
 import LoaderComponent from '@/components/loader-component';
-import { fetchPlanById } from '@/server/get-db-data-functions';
+import { fetchPlanById } from '@/server/db/get-db-data-functions';
 import { formatDateTime } from '@/utils/date-transform';
 
 import { transformExercisesArr } from '../../plans/yours-training-plans/edit/[planId]/_utils';
-
 
 const Page = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
   const { userId } = auth();
 
   const planValuses = await fetchPlanById(id);
-  
+
   if (!planValuses || !userId) {
     return <ErrorComponent message='Failed To Fetch Plans Details' />;
   }
-
   const newExercisesArr = await transformExercisesArr(planValuses.exercisesArr);
-  const trainingTime = formatDateTime(new Date());
 
   return (
     <>
@@ -36,7 +33,6 @@ const Page = async ({ params }: { params: { id: string } }) => {
         <TrainingForm
           exercisesArr={newExercisesArr}
           planName={planValuses.planName}
-          trainingTime={trainingTime}
           userId={userId}
         />
       </Suspense>

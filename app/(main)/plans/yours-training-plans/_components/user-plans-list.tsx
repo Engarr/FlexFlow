@@ -5,7 +5,7 @@ import ErrorComponent from '@/components/error-component';
 import { PlanBar } from '@/components/plan-bar';
 import SectionTitle from '@/components/section-title';
 import { Button } from '@/components/ui/button';
-import { fetchUserPlans } from '@/server/get-db-data-functions';
+import { fetchUserPlans } from '@/server/db/get-db-data-functions';
 
 type UserPlanListType = {
   userId: string;
@@ -20,7 +20,7 @@ const UserPlansList = async ({ userId }: UserPlanListType) => {
       </div>
     );
   }
-  
+
   return (
     <div className='max-lg:px-2'>
       <div className='flex w-full justify-between lg:items-start max-lg:flex-col items-center'>

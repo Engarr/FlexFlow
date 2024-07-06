@@ -1,5 +1,6 @@
 'use client';
-import React from 'react';
+
+import React, { useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { z } from 'zod';
@@ -7,19 +8,32 @@ import { z } from 'zod';
 import { formSchema, formSchemaType } from '@/lib/form-schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '@/components/ui/use-toast';
-import { addNewPlanToHistory } from '@/server/actions/actions';
+import {
+  addNewTrainingToHistory,
+  editTraining,
+} from '@/server/actions/actions';
 import { FormTrainingType } from '@/types/form-types';
 
 import FormWrapper from '../form/form-wrapper';
+import { DatePicker } from '../data-picker';
+import { formatDateTime } from '@/utils/date-transform';
+import { useQueryClient } from '@tanstack/react-query';
+import useStore from '@/context/store';
 
 const TrainingForm = ({
   planName,
   exercisesArr,
   userId,
-  trainingTime,
+  trainingId,
+  initialDate,
 }: FormTrainingType & { userId: string }) => {
+  const { actualDay } = useStore();
+
+  const [date, setDate] = useState<Date | undefined>(initialDate || new Date());
+
   const { toast } = useToast();
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const form = useForm<formSchemaType>({
     resolver: zodResolver(formSchema),
@@ -38,7 +52,10 @@ const TrainingForm = ({
     control: form.control,
     name: 'exercisesArr',
   });
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    const trainingTime = formatDateTime(date);
+
     const newTrainingData = {
       ...values,
       planName: values.planName,
@@ -48,15 +65,26 @@ const TrainingForm = ({
       time: trainingTime.time,
       userId: userId,
     };
+    let action = null;
+    if (trainingId && date) {
+      action = editTraining(values, userId, trainingId, date);
+    } else {
+      action = addNewTrainingToHistory(newTrainingData);
+    }
 
-    const res = await addNewPlanToHistory(newTrainingData);
+    const res = await action;
     if (res?.success) {
       toast({
         title: 'Success!',
         description: res.success,
       });
+      if (trainingId) {
+        queryClient.invalidateQueries({
+          queryKey: ['trainingsHistory', actualDay.date],
+        });
+      }
       form.reset();
-      router.push('/home');
+      router.back();
     }
     if (res?.error) {
       toast({
@@ -67,14 +95,8 @@ const TrainingForm = ({
     }
   }
   return (
-    <>
-      <div className='flex gap-2 underline underline-offset-2 decoration-text-secondary decoration-2'>
-        <p className='text-lg'>
-          Training data:{' '}
-          <span className='font-semibold'>{trainingTime.date}</span>
-        </p>
-      </div>
-
+    <div className='px-0 lg:px-2'>
+      <DatePicker date={date} setDate={setDate} />
       <FormWrapper
         append={append}
         fields={fields}
@@ -83,7 +105,7 @@ const TrainingForm = ({
         remove={remove}
         isTraining={true}
       />
-    </>
+    </div>
   );
 };
 

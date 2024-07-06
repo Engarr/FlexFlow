@@ -11,7 +11,7 @@ import {
   useQuery,
 } from '@tanstack/react-query';
 import { UserInfoType } from '@/types/type';
-import { fetchUserInfo } from '@/server/fetch-from-api-functions';
+import { fetchUserInfo } from '@/server/db/fetch-from-api-functions';
 import { useFavoriteExerciseToggle } from '@/utils/toggle-to-favorites-exercise-handler';
 
 import { Button } from './ui/button';
@@ -21,7 +21,6 @@ type ToggleFavoriteExerciseBtnType = {
 };
 
 const ToggleFavoriteExerciseBtn = ({ id }: ToggleFavoriteExerciseBtnType) => {
-  
   const { userId } = useAuth();
   if (!userId) {
     redirect('/');
@@ -36,7 +35,6 @@ const ToggleFavoriteExerciseBtn = ({ id }: ToggleFavoriteExerciseBtnType) => {
 
   const {
     data: userInfo,
-    isLoading,
     isError,
   }: UseQueryResult<UserInfoType> = useQuery(queryOptions);
 

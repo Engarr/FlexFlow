@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation';
 import DetailContainer from '@/components/detail-container';
 import ErrorComponent from '@/components/error-component';
 import LoaderComponent from '@/components/loader-component';
-import { fetchTrainingDetails } from '@/server/get-db-data-functions';
+import { fetchTrainingDetails } from '@/server/db/get-db-data-functions';
 
 const DetailsTrainingBox = async ({
   id,

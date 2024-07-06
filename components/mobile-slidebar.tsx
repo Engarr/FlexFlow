@@ -22,7 +22,7 @@ const MobileSlidebar = () => {
         </SheetTrigger>
         <AppOptions style='lg:hidden' />
       </div>
-      <SheetContent className=' p-0 z-[100] ' side='left'>
+      <SheetContent className=' p-0  ' side='left'>
         <Sidebar mobileNavHandler={onOpenHandler} />
       </SheetContent>
     </Sheet>

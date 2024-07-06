@@ -37,13 +37,13 @@ const Sidebar = ({ className, mobileNavHandler }: Props) => {
             ))}
           </div>
         </div>
-        <div>
+        <div className='hidden lg:block'>
           <ClerkLoading>
             <Loader className='animate-spin' />
           </ClerkLoading>
           <ClerkLoaded>
             <SignedIn>
-              <div className='border-lime-400 border-2  rounded-full hover:border-lime-400/60 duration-300'>
+              <div className='border-2  rounded-full hover:border-lime-400/60 duration-300 mb-5'>
                 <UserButton afterSignOutUrl='/' />
               </div>
             </SignedIn>

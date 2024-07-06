@@ -9,7 +9,6 @@ import { TrainingDataType } from '@/types/type';
 import Training from '@/model/training-model';
 import { formatDateTime } from '@/utils/date-transform';
 import User from '@/model/user-schema';
-import { useQueryClient } from '@tanstack/react-query';
 
 export async function addNewPlan(
   values: z.infer<typeof formSchema> & { creator: string }
@@ -66,7 +65,7 @@ export async function deleteTrainingHistory(
     return { success: 'Training has been deleted' };
   }
 }
-export async function addNewPlanToHistory(formData: TrainingDataType) {
+export async function addNewTrainingToHistory(formData: TrainingDataType) {
   await connectMongoDB();
   const training = await Training.create(formData);
   if (!training) {
@@ -80,7 +79,8 @@ export async function editTraining(
   values: z.infer<typeof formSchema>,
   userId: string,
   trainingId: string,
-  date: Date
+  date: Date,
+ 
 ) {
   const newDate = formatDateTime(date);
   const newValue = {
@@ -96,11 +96,10 @@ export async function editTraining(
     return { error: 'Authorization error' };
   } else {
     await Training.findByIdAndUpdate(trainingId, newValue);
-    revalidatePath('/plans/yours-training-plans');
-    return { success: 'Plan has been updated' };
+    
+    return { success: 'Training has been updated' };
   }
 }
-
 
 export async function toggleExerciseToFavorites(
   exerciseId: string,

@@ -4,7 +4,7 @@ import { Metadata } from 'next';
 import SectionTitle from '@/components/section-title';
 import LoaderComponent from '@/components/loader-component';
 import ErrorComponent from '@/components/error-component';
-import { getExerciseCategory } from '@/server/get-db-data-functions';
+import { getExerciseCategory } from '@/server/db/get-db-data-functions';
 
 import ExerciseCard from './exercise-card';
 

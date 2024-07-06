@@ -4,10 +4,10 @@ import { redirect } from 'next/navigation';
 
 import ErrorComponent from '@/components/error-component';
 import SectionTitle from '@/components/section-title';
-import PlanForm from '@/components/form/plan-form';
 import LoaderComponent from '@/components/loader-component';
-import { fetchTrainingDetails } from '@/server/get-db-data-functions';
+import { fetchTrainingDetails } from '@/server/db/get-db-data-functions';
 import { transformExercisesArr } from '@/app/(main)/plans/yours-training-plans/edit/[planId]/_utils';
+import TrainingForm from '@/components/training-form/training-form';
 
 const Page = async ({ params }: { params: { trainingId: string } }) => {
   const { trainingId } = params;
@@ -16,7 +16,6 @@ const Page = async ({ params }: { params: { trainingId: string } }) => {
   if (!userId) {
     redirect('/');
   }
-
   const trainingDetails = await fetchTrainingDetails(trainingId, userId);
 
   if (!trainingDetails && trainingDetails === null) {
@@ -32,16 +31,17 @@ const Page = async ({ params }: { params: { trainingId: string } }) => {
 
   return (
     <div>
-      <Suspense fallback={<LoaderComponent />}>
-        <SectionTitle>
-          Edit Training history ID:
-          <span className='text-text-secondary'>{trainingId}</span>
-        </SectionTitle>
-        <PlanForm
+      <SectionTitle>
+        Edit Training history ID:
+        <span className='text-text-secondary pl-2'>{trainingId}</span>
+      </SectionTitle>
+      <Suspense key={trainingId} fallback={<LoaderComponent />}>
+        <TrainingForm
           planName={trainingDetails.planName}
-          exercisesArr={newExercisesArr && newExercisesArr}
+          exercisesArr={newExercisesArr}
           trainingId={trainingId}
           initialDate={initialDate}
+          userId={userId}
         />
       </Suspense>
     </div>

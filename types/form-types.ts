@@ -16,17 +16,12 @@ export type FormType = {
   creator?: string;
   exercisesArr?: exerciseType[];
   planId?: string;
-  trainingId?: string;
-  initialDate?: Date;
 };
-type TrainingDatatype = {
-  date: string;
-  time: string;
-  dayOfTheWeek: string;
-};
+
 export type FormTrainingType = {
   planName?: string;
   exercisesArr?: exerciseType[];
   planId?: string;
-  trainingTime: TrainingDatatype;
+  trainingId?: string;
+  initialDate?: Date;
 };

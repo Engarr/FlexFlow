@@ -6,8 +6,7 @@ import LoaderComponent from '@/components/loader-component';
 import SectionTitle from '@/components/section-title';
 import { PlanBar } from '@/components/plan-bar';
 import { Button } from '@/components/ui/button';
-import { fetchPlans } from '@/server/get-db-data-functions';
-
+import { fetchPlans } from '@/server/db/get-db-data-functions';
 
 async function AppPlans() {
   const appPlans = await fetchPlans();

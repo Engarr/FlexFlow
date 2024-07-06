@@ -25,8 +25,8 @@ export default function ThemeSwitch({ style }: PropsType) {
   };
   return (
     <div className={cn('flex items-center space-x-2', style)}>
-      <Switch id='theme-mode' onCheckedChange={switchTheme} />
       <Label htmlFor='theme-mode'>{resolvedTheme} mode</Label>
+      <Switch id='theme-mode' onCheckedChange={switchTheme} />
     </div>
   );
 }

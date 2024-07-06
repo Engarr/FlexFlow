@@ -10,7 +10,7 @@ import ErrorComponent from '@/components/error-component';
 import {
   getCategoryByName,
   getCategoryExerciseList,
-} from '@/server/get-db-data-functions';
+} from '@/server/db/get-db-data-functions';
 
 import ExercisesListItem from './exercises-list-item';
 
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const ExercisesList = async ({ slug }: { slug: string }) => {
   const { userId } = auth();
-  
+
   if (!userId) {
     return;
   }

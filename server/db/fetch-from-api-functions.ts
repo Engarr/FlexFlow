@@ -7,6 +7,7 @@ export async function fetchTrainingsHistory(day: string) {
   }
   return response.json();
 }
+
 export async function fetchUserInfo(userId: string) {
   const response = await fetch(`/api/user-info?userId=${userId}`, {
     cache: 'no-cache',

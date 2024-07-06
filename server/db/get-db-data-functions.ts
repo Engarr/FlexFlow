@@ -5,13 +5,12 @@ import Exercise from '@/model/exercise-model';
 
 import Plan from '@/model/plan-model';
 import Training from '@/model/training-model';
-import User from '@/model/user-schema';
+
 import {
   ExerciseCategorieType,
   ExerciseType,
   PlanDataType,
   TrainingDataType,
-  UserInfoType,
   UserPlanType,
 } from '@/types/type';
 import mongoose from 'mongoose';
@@ -54,7 +53,9 @@ export async function fetchTrainingDetails(trainingId: string, userId: string) {
   if (!mongoose.Types.ObjectId.isValid(trainingId)) {
     return null;
   }
+
   const training = await Training.findOne({ _id: trainingId, userId: userId });
+
   return training as TrainingDataType;
 }
 

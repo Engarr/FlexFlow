@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+
 import { useForm, useFieldArray } from 'react-hook-form';
 import { z } from 'zod';
 import { useAuth } from '@clerk/nextjs';
@@ -7,29 +7,15 @@ import { redirect, useRouter } from 'next/navigation';
 
 import { formSchema, formSchemaType } from '@/lib/form-schema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  addNewPlan,
-  editTraining,
-  editUserPlan,
-} from '@/server/actions/actions';
+import { addNewPlan, editUserPlan } from '@/server/actions/actions';
 import { useToast } from '@/components/ui/use-toast';
 import { FormType } from '@/types/form-types';
 
 import FormWrapper from './form-wrapper';
-import { DatePicker } from '../data-picker';
 
 // import useBeforeUnload from '@/lib/use-before-unload';
 
-const PlanForm = ({
-  planName,
-  creator,
-  exercisesArr,
-  planId,
-  trainingId,
-  initialDate,
-}: FormType) => {
-  const [date, setDate] = useState<Date | undefined>(initialDate);
-
+const PlanForm = ({ planName, creator, exercisesArr, planId }: FormType) => {
   const router = useRouter();
   const { userId } = useAuth();
   if (!userId) {
@@ -66,8 +52,6 @@ const PlanForm = ({
     const onSubmitFunction =
       planId && creator
         ? editUserPlan(planDataWithUserId, creator, planId)
-        : trainingId && userId && date
-        ? editTraining(values, userId, trainingId, date)
         : addNewPlan(planDataWithUserId);
 
     const res = await onSubmitFunction;
@@ -90,8 +74,6 @@ const PlanForm = ({
 
   return (
     <>
-      {trainingId && <DatePicker date={date} setDate={setDate} />}
-
       <FormWrapper
         append={append}
         fields={fields}

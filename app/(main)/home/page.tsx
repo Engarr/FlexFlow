@@ -18,9 +18,9 @@ const WelcomeUser = async () => {
   const { firstName } = response;
 
   return (
-    <div className='mb-10'>
+    <div className='mb-10 px-2'>
       <SectionTitle style='mb-0 '>Hello, {firstName}!</SectionTitle>
-      <div className='px-2 xl:px-0'>
+      <div className=''>
         <p>
           Remember, every workout is a step towards a healthier and stronger
           you.

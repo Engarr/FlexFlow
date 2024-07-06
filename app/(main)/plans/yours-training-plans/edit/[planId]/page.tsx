@@ -7,7 +7,7 @@ import ErrorComponent from '@/components/error-component';
 import PlanForm from '@/components/form/plan-form';
 import LoaderComponent from '@/components/loader-component';
 import SectionTitle from '@/components/section-title';
-import { fetchPlanById } from '@/server/get-db-data-functions';
+import { fetchPlanById } from '@/server/db/get-db-data-functions';
 
 import { transformExercisesArr } from './_utils';
 

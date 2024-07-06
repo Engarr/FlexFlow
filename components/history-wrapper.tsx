@@ -12,7 +12,7 @@ import SectionTitle from '@/components/section-title';
 import TrainingHistoryBox from '@/components/training-history-box';
 import ErrorComponent from '@/components/error-component';
 import { TrainingDataType } from '@/types/type';
-import { fetchTrainingsHistory } from '@/server/fetch-from-api-functions';
+import { fetchTrainingsHistory } from '@/server/db/fetch-from-api-functions';
 
 const HistoryWrapper = () => {
   const { selectedDate, actualDay, changeDay } = useStore();

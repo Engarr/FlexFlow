@@ -8,9 +8,9 @@ import {
 } from '@/components/ui/popover';
 
 import { Button } from './ui/button';
-import {  Settings } from 'lucide-react';
+import { Loader, Settings } from 'lucide-react';
 import ThemeSwitch from './theme-switch';
-
+import { ClerkLoaded, ClerkLoading, SignedIn, UserButton } from '@clerk/nextjs';
 
 type PropsType = {
   style?: string;
@@ -28,12 +28,25 @@ const AppOptions = ({ style }: PropsType) => {
               </div>
             </Button>
           </PopoverTrigger>
-          <PopoverContent className='mx-4'>
-            <ThemeSwitch />
+          <PopoverContent className='mx-4 gap-2 flex flex-col w-auto lg:items-end'>
+            <div>
+              <ClerkLoading>
+                <Loader className='animate-spin' />
+              </ClerkLoading>
+              <ClerkLoaded>
+                <SignedIn>
+                  <div className=''>
+                    <UserButton afterSignOutUrl='/' showName />
+                  </div>
+                </SignedIn>
+              </ClerkLoaded>
+            </div>
+            <div>
+              <ThemeSwitch />
+            </div>
           </PopoverContent>
         </Popover>
       </div>
-     
     </>
   );
 };

@@ -9,7 +9,7 @@ import AccordionWrapper from '@/components/accordion-wrapper';
 import LoaderComponent from '@/components/loader-component';
 import SectionTitle from '@/components/section-title';
 import ToggleFavoriteExerciseBtn from '@/components/toggle-favorite-exercise-btn';
-import { getExercise } from '@/server/get-db-data-functions';
+import { getExercise } from '@/server/db/get-db-data-functions';
 
 type Props = {
   params: { exercise: string };

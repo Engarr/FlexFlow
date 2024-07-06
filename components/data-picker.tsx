@@ -4,7 +4,6 @@ import { Dispatch, SetStateAction } from 'react';
 import { format } from 'date-fns';
 import { CalendarSearch } from 'lucide-react';
 
-
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
@@ -14,7 +13,6 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 
-
 type DataPickerPropsType = {
   date: Date | undefined;
   setDate: Dispatch<SetStateAction<Date | undefined>>;
@@ -22,7 +20,7 @@ type DataPickerPropsType = {
 export function DatePicker({ date, setDate }: DataPickerPropsType) {
   return (
     <Popover>
-      <span className='px-2 lg:px-0'>Training Data:</span>
+      <span className=''>Training Data:</span>
       <PopoverTrigger asChild>
         <Button
           variant='primaryOutline'

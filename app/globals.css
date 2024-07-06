@@ -101,7 +101,6 @@ body,
 }
 
 ::-webkit-scrollbar-track {
-
   border-radius: 10px;
 }
 
@@ -113,4 +112,20 @@ body,
 ::-webkit-scrollbar-thumb:hover {
   transition: 3s;
   background: #555;
+}
+.cl-avatarBox {
+  border: solid #a3e635;
+  border-width: 2px;
+}
+
+.cl-userButtonOuterIdentifier {
+  color: var(--text);
+}
+@media (max-width: 1024px) {
+  .cl-userPreviewTextContainer {
+    margin-left: 10px;
+  }
+  .cl-avatarBox {
+    margin-left: 10px;
+  }
 }
