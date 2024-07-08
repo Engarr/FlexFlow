@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { z } from 'zod';
@@ -63,7 +63,7 @@ const TrainingForm = ({
       return;
     }
 
-    const trainingTime = formatDateTime(new Date(date));
+    const trainingTime = formatDateTime(date);
 
     const newTrainingData = {
       ...values,
@@ -77,7 +77,7 @@ const TrainingForm = ({
 
     let action = null;
     if (trainingId && date) {
-      action = editTraining(values, userId, trainingId, date);
+      action = editTraining(newTrainingData, userId, trainingId);
     } else {
       action = addNewTrainingToHistory(newTrainingData);
     }

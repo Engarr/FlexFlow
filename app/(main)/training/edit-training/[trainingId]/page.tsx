@@ -24,7 +24,7 @@ const Page = async ({ params }: { params: { trainingId: string } }) => {
   const newExercisesArr = await transformExercisesArr(
     trainingDetails.exercisesArr
   );
-
+  
   const dateStr = trainingDetails.date;
   const timeStr = trainingDetails.time;
   const initialDate = new Date(`${dateStr} ${timeStr}`);

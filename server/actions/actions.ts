@@ -76,27 +76,18 @@ export async function addNewTrainingToHistory(formData: TrainingDataType) {
 }
 
 export async function editTraining(
-  values: z.infer<typeof formSchema>,
+  newTrainingData: TrainingDataType,
   userId: string,
-  trainingId: string,
-  date: Date,
- 
+  trainingId: string
 ) {
-  const newDate = formatDateTime(date);
-  const newValue = {
-    ...values,
-    date: newDate.date,
-    dayOfTheWeek: newDate.dayOfTheWeek,
-    time: newDate.time,
-  };
   await connectMongoDB();
   const training = await Training.findOne({ _id: trainingId });
 
   if (training.userId !== userId) {
     return { error: 'Authorization error' };
   } else {
-    await Training.findByIdAndUpdate(trainingId, newValue);
-    
+    await Training.findByIdAndUpdate(trainingId, newTrainingData);
+
     return { success: 'Training has been updated' };
   }
 }

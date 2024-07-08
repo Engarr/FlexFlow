@@ -35,7 +35,16 @@ export function DatePicker({ date, setDate }: DataPickerPropsType) {
       <PopoverContent className='w-full ' align='center'>
         <Calendar
           selected={date}
-          onDayClick={setDate}
+          onDayClick={(selectedDate) => {
+            const newDate = new Date(selectedDate);
+            const currentTime = new Date();
+            newDate.setHours(
+              currentTime.getHours(),
+              currentTime.getMinutes(),
+              currentTime.getSeconds()
+            );
+            setDate(newDate);
+          }}
           disabled={(date) =>
             date > new Date() || date < new Date('1900-01-01')
           }
